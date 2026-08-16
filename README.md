@@ -77,7 +77,7 @@ Two things it will not discuss: the price of anything, and his own life. Not bec
 
 Every guardrail in this repo is that refusal wearing a different hat. It is also why the cards look the way they do: the phosphor and the block masthead are a rendering of a real object in the story, not a style choice.
 
-**[Read it in full](FRAME.md)** — about four minutes, and the shortest way to understand why the rest of this is shaped the way it is.
+**[Read it in full](FRAME.md).** About four minutes, and the shortest way to understand why the rest of this is shaped the way it is.
 
 <br clear="all">
 
