@@ -28,8 +28,13 @@ Card JSON gains an optional `figures`:
         {"label": "Requested",   "value": 474},
         {"label": "Record peak", "value": 95, "approx": true}
       ],
-      "note": "~90% of requests are data centres"
+      "subtitle": "Texas, August 2026",
+      "note": "~90% of requests are data centres",
+      "source": "ERCOT via Utility Dive, retrieved 2026-08-16"
     }
+
+`source` is required. A chart with no attribution is the one place the cited
+numbers rule would quietly break.
 """
 import argparse
 import json
@@ -69,8 +74,16 @@ def bar_lines(fig):
     top = max(b["value"] for b in bars) or 1
 
     out = []
-    for ln in wrap(fig["title"].upper(), PANEL_COLS)[:2]:
+    # Eyebrow. Does two jobs: tells a cold viewer what kind of thing this panel
+    # is, and marks it as coming from the cited half of the readout. In an
+    # engine built on a seam, which side a number sits on is not decoration.
+    out.append((fig.get("eyebrow", "VERIFIED · ABOVE THE SEAM")[:PANEL_COLS],
+                PINK, True))
+    for ln in wrap(fig["title"].upper(), PANEL_COLS)[:3]:
         out.append((ln, HEAD, True))
+    if fig.get("subtitle"):
+        for ln in wrap(fig["subtitle"], PANEL_COLS)[:2]:
+            out.append((ln, GREEN, False))
     out.append(("", GREEN, False))
     for b in bars:
         val = b["value"]
@@ -87,6 +100,14 @@ def bar_lines(fig):
         out.append((shown, HEAD, True))
         out.append(("", GREEN, False))
     for ln in wrap(fig.get("note", ""), PANEL_COLS)[:3]:
+        out.append((ln, GREEN, False))
+    if not fig.get("source"):
+        raise SystemExit(
+            "The data panel has no `source`. Every number this engine shows is "
+            "cited; a chart without an attribution is the one place that rule "
+            "would quietly break.")
+    out.append(("", GREEN, False))
+    for ln in wrap("Source: " + fig["source"], PANEL_COLS)[:3]:
         out.append((ln, DIM, False))
     return out
 

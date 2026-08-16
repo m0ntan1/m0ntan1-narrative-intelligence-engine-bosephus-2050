@@ -284,6 +284,10 @@ The panel takes an optional `figures` block on the card and scales the bars to t
 
 Pick the comparison that *is* the thesis. If the panel needs three bars to make a point, it is the wrong point.
 
+**The panel must name itself.** A viewer arriving cold from a link preview sees bars and a unit and nothing else, so the panel carries an eyebrow, a title, a subtitle placing it in space and time, and a source. `source` is required and the renderer refuses without it: a chart with no attribution is the one place this engine's cited-numbers rule would quietly break.
+
+The eyebrow defaults to `VERIFIED · ABOVE THE SEAM` and is worth keeping. It tells a cold viewer what kind of thing they are looking at, and it marks the panel as belonging to the retrieved half of the readout. In an engine built on a seam, which side a number sits on is not decoration.
+
 For chat surfaces, `tools/render_ansi.py` emits the Discord-ready fenced block from the same card JSON and the same line builder, so the text cut and the PNG cut cannot drift and the seam cannot come out green:
 
 ```

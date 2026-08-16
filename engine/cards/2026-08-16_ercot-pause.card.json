@@ -16,7 +16,9 @@
   ],
   "disclaimer": "Constructed. Not a forecast, not advice.",
   "figures": {
-    "title": "Requests vs record peak",
+    "eyebrow": "VERIFIED · ABOVE THE SEAM",
+    "title": "ERCOT large-load queue against record peak",
+    "subtitle": "Texas grid, August 2026",
     "unit": "GW",
     "bars": [
       {
@@ -29,6 +31,7 @@
         "approx": true
       }
     ],
-    "note": "~90% of requests are data centres. Filing is close to free."
+    "note": "~90% of requests are data centres. Filing is close to free.",
+    "source": "ERCOT via Utility Dive, retrieved 2026-08-16"
   }
 }
