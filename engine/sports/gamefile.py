@@ -100,7 +100,7 @@ def kmh_to_mph(k):
     return None if k is None else round(k * 0.621371, 1)
 
 
-def air_density(temp_c, dew_c, press_inhg):
+def air_density(temp_c, dew_c, press_inhg, elev_m=None, obs=None):
     """Air density and a carry index. DERIVED, never presented as retrieved.
 
     Ball carry rises as air thins. Hot, humid, low pressure air is thinner than
@@ -108,17 +108,35 @@ def air_density(temp_c, dew_c, press_inhg):
     August and a fly out in April. Index is relative to standard sea level
     density, so above 1.00 means the ball carries further than standard.
     """
-    if temp_c is None or press_inhg is None:
+    if temp_c is None:
         return None
     t_k = temp_c + 273.15
-    # NWS returns gridpoint pressure with an empty unit string. Values near 30
-    # are inches of mercury, values near 101000 are pascals. Sniff rather than
-    # assume, because a silent unit error here would quietly poison every carry
-    # number the engine ever reports.
-    p_pa = press_inhg if press_inhg > 10000 else press_inhg * 3386.39
-    if not (80000 < p_pa < 110000):
-        warn("pressure {} resolves to {:.0f} Pa, outside plausible surface "
-             "range. Carry index omitted.".format(press_inhg, p_pa))
+
+    # Pressure is NOT published by every NWS forecast office. PBZ carries it,
+    # LOT and MTR return an empty series. So there is a fallback chain, and the
+    # source is always reported, because a carry index that silently switches
+    # inputs is worse than one that admits what it used.
+    p_pa, p_src = None, None
+    if press_inhg is not None:
+        # Empty unit string on this field. Values near 30 are inches of mercury,
+        # values near 101000 are pascals. Sniff rather than assume.
+        cand = press_inhg if press_inhg > 10000 else press_inhg * 3386.39
+        if 80000 < cand < 110000:
+            p_pa, p_src = cand, "NWS gridpoint"
+    if p_pa is None and obs:
+        for k in ("barometric_pressure_pa", "sea_level_pressure_pa"):
+            if obs.get(k) and 80000 < obs[k] < 110000:
+                p_pa, p_src = obs[k], "nearest station observation"
+                break
+    if p_pa is None and elev_m is not None:
+        # Barometric formula off the standard atmosphere. Elevation is what
+        # actually moves density at altitude, which is the whole Coors Field
+        # effect, so an elevation-derived estimate is far better than nothing.
+        p_pa = 101325.0 * (1 - 2.25577e-5 * float(elev_m)) ** 5.25588
+        p_src = "estimated from venue elevation {:.0f} m, standard atmosphere".format(
+            float(elev_m))
+    if p_pa is None:
+        warn("no usable pressure from any source, carry index omitted")
         return None
     if dew_c is not None:
         # Magnus, saturation vapour pressure at the dewpoint
@@ -129,9 +147,12 @@ def air_density(temp_c, dew_c, press_inhg):
     return {
         "air_density_kg_m3": round(rho, 4),
         "carry_index": round(1.225 / rho, 3),
-        "note": "Derived from the cited temperature, dewpoint and pressure "
-                "above. Not a retrieved forecast value. Above 1.00 means the "
-                "ball carries further than standard sea level.",
+        "pressure_pa": round(p_pa, 1),
+        "pressure_source": p_src,
+        "note": "Derived from the cited temperature and dewpoint plus the "
+                "pressure source named above. Not a retrieved forecast value. "
+                "Above 1.00 means the ball carries further than standard sea "
+                "level.",
     }
 
 
@@ -169,6 +190,8 @@ def latest_observation(stations_url):
         "gust_mph": kmh_to_mph(val("windGust")),
         "wind_from_deg": val("windDirection"),
         "text": o.get("textDescription"),
+        "barometric_pressure_pa": val("barometricPressure"),
+        "sea_level_pressure_pa": val("seaLevelPressure"),
         "note": "Observed, not forecast. Use to ground the read and to grade it "
                 "afterwards.",
     }
@@ -271,7 +294,10 @@ def conditions(lat, lon, when_iso, roof):
     # inputs above rather than read off a forecast. Air density drives how far a
     # ball carries, which is the one weather fact in baseball with real physics
     # behind it rather than vibes.
-    out["derived"] = air_density(temp_c, dew_c, press)
+    obs_now = latest_observation(stations_url)
+    out["derived"] = air_density(temp_c, dew_c, press,
+                                 elev_m=(g.get("elevation") or {}).get("value"),
+                                 obs=obs_now)
 
     # Watches and warnings are a discrete delay risk that no forecast text states.
     out["alerts"] = alerts(lat, lon)
@@ -279,7 +305,7 @@ def conditions(lat, lon, when_iso, roof):
     # Actual observed conditions, but only when the game is close enough for them
     # to mean anything. For a game four days out this is noise.
     hours_out = (target - datetime.now(timezone.utc)).total_seconds() / 3600
-    out["observed"] = latest_observation(stations_url) if hours_out <= 6 else None
+    out["observed"] = obs_now if hours_out <= 6 else None
 
     return out
 

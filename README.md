@@ -194,6 +194,19 @@ Read it for the seam and for what sits on either side of it. Note that the marke
 
 ## Rights
 
-No license is granted. All rights reserved by MØNTAN1 LLC, Rick Thomas. The Bosephus persona, the spec prose, and the artwork are not public domain and are not open source. If you want to use any of it, ask.
+**Code is Apache 2.0.** The renderers, `gamefile.py`, `grade.py` and everything
+else executable in this repository. Use it, build on it, ship it commercially.
+Keep the `NOTICE` file with it, which is how credit travels.
+
+**The brand and the content are not.** Reserved in full by MØNTAN1 LLC:
+
+- The B0SEPHUS G. ALTAMONT persona and character
+- The specification prose in `SPEC.md` and all documentation prose
+- The masthead artwork, card artwork, and all images
+- The marks MØNTAN1, MONTANI and B0SEPHUS
+
+Apache 2.0 section 6 grants no trademark rights, which is deliberate. Build your
+own engine with these tools and give it your own name. If you want to use the
+persona or the artwork, ask.
 
 Built in West Virginia. Educate. Disintermediate. Innovate. Build.
