@@ -1,0 +1,88 @@
+FROZEN ART. Copy verbatim. Never redraw, never improvise, never "improve".
+Only the two DATA STRIP lines change between runs. Inner width is 64 columns.
+Every line of the block, including the strip, is exactly 66 characters wide.
+
+--- FULL MASTHEAD (default) ---------------------------------------
+
+╔════════════════════════════════════════════════════════════════╗
+║ ·        ▄▄▄▄▄▄▄▄▄▄▄▄                    ˙                 ·   ║
+║      ▄██████████████████▄      ▄▀▀▄ ▄▀▀▄ █▀▀▀ ▄▀▀▄             ║
+║    ████████████████████████      ▄▀ █  █ ▀▀▀▄ █  █             ║
+║    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀    █▄▄▄ ▀▄▄▀ ▀▄▄▀ ▀▄▄▀             ║
+║     ██████████████████████                                     ║
+║      ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀      B 0 S E P H U S                 ║
+║        ████████████████        G .  A L T A M O N T            ║
+║ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ ║
+║   \      \      \      \     |     /      /      /      /      ║
+╠════════════════════════════════════════════════════════════════╣
+║  PRESENT LINE  YYYY-MM-DD   ▸   MODE  XXXXXXXX   ▸  CANON vNN  ║
+║  ARTIFACT  YYYY-MM-DD_slug   ▸   TELLS  N   ▸  NIA // EB       ║
+╚════════════════════════════════════════════════════════════════╝
+
+--- SLIM MASTHEAD (REVISIT mode, and any artifact under 400 words) -
+
+╔════════════════════════════════════════════════════════════════╗
+║  \  \  \  |  /  /  /    B 0 S E P H U S   ·   2 0 5 0          ║
+║  PRESENT LINE  YYYY-MM-DD   ▸   MODE  REVISIT   ▸  CANON vNN   ║
+╚════════════════════════════════════════════════════════════════╝
+
+--- CHAT CUT, 48 col (Discord, Signal, anywhere narrow) ------------
+
+Every line 48 wide. Use this cut for ANY chat surface. The 64-column
+full masthead wraps and shatters on phones. In Discord, wrap it in an
+```ansi fence and prefix each line with ESC[1;32m for the green
+phosphor look, ESC[2;32m for body text. Signal needs its monospace
+formatting applied by hand, and even then only this cut survives.
+
+╔══════════════════════════════════════════════╗
+║        ▄▄▄▄▄▄▄▄        ▄▀▀▄ ▄▀▀▄ █▀▀▀ ▄▀▀▄   ║
+║     ▄████████████▄       ▄▀ █  █ ▀▀▀▄ █  █   ║
+║    ████████████████    █▄▄▄ ▀▄▄▀ ▀▄▄▀ ▀▄▄▀   ║
+║    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀                          ║
+║     ██████████████     B 0 S E P H U S       ║
+║      ▀▀▀▀▀▀▀▀▀▀▀▀      G .  A L T A M O N T  ║
+║ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ ║
+║  \    \    \   |   /    /    /               ║
+╠══════════════════════════════════════════════╣
+║ YYYY-MM-DD ▸ XXXXXXX ▸ CANON vNN ▸ TELLS N   ║
+╚══════════════════════════════════════════════╝
+
+Seam rule, 48 col cut:
+
+▞▚▞▚▞▚▞▚ YYYY-MM-DD · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚
+
+--- ASCII FALLBACK (7-bit only, for email, plaintext) --------------
+
++================================================================+
+|   \    \    \    \   |   /    /    /    /     B0SEPHUS 2050    |
+|  ____________________________________________________________  |
+|  PRESENT LINE YYYY-MM-DD | MODE XXXXXXXX | CANON vNN           |
+|  ARTIFACT YYYY-MM-DD_slug | TELLS N | B0SEPHUS G. ALTAMONT     |
++================================================================+
+
+--- BLOCK RULES ---------------------------------------------------
+
+█▓▒░ THE ARTICLE ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+█▓▒░ I REMEMBER THIS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+█▓▒░ THE RECORD ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+█▓▒░ WHAT HAPPENED NEXT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+█▓▒░ THE PIVOT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+█▓▒░ THE FORKS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+█▓▒░ THE TELLS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+█▓▒░ BOSEPHUS SAYS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+█▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+--- THE SEAM RULE (goes between THE RECORD and WHAT HAPPENED NEXT) -
+
+▞▚▞▚▞▚▞▚▞ PRESENT LINE YYYY-MM-DD · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚▞▚
+
+--- FOOTER BAR (last line of the artifact) -------------------------
+
+          ▂▃▄▅▆▇█ B0SEPHUS G. ALTAMONT · 2050 █▇▆▅▄▃▂
+
+--- STRIP PADDING RULE --------------------------------------------
+
+Build each data strip line as two leading spaces, then the fields
+joined by "   ▸   ", then pad with spaces to 64 columns. If a field
+set runs past 64, drop the trailing field rather than wrapping.
+Never let a strip line break the frame.
