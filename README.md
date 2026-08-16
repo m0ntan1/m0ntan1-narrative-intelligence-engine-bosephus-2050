@@ -124,12 +124,54 @@ engine/
   render_seam.py         Seam rule as a PNG, for surfaces that cannot colour text
   render_card_with_element.py  Wide variant with character plate, 1600x900
   cards/                 Card copy, one JSON per artifact
+  sports/                SPORTS LOGIC, mode GAME
+    gamefile.py          Verified pre-game dossier: venue, roof, weather, form
+    grade.py             Resolves a call against the final. Baseline included
+    fan-identity.md      Allegiances, and the rule that keeps them out of THE CALL
+    canon-sports.md      Sports continuity, kept out of the world-history Canon
+    tells-sports.md      Calibration record, rubric fixed before the first call
 examples/
   2026-08-16_clarity-act.md    A complete artifact
   2026-08-16_clarity-act_card.png
   canon-2050.md          Persistent timeline state
   tells-ledger.md        The calibration record
 ```
+
+---
+
+## SPORTS LOGIC
+
+A ballgame resolves in three hours. Every other mode's markers resolve in months.
+So sports is where this engine generates honest forward calibration at any speed,
+and that is the point of the mode: it is the proving ground that earns the right
+to be believed on the serious work.
+
+```bash
+python3 engine/sports/gamefile.py mlb --date 2026-08-16      # list games
+python3 engine/sports/gamefile.py mlb --game 823344          # verified dossier
+python3 engine/sports/grade.py  mlb --game 823344 --call "Red Sox 5, Pirates 3"
+```
+
+The dossier is everything that belongs above the seam. Its job is the conditions
+block, and the discipline there is the whole difference between weather as a
+differentiator and weather as filler:
+
+| Roof | Behaviour |
+|---|---|
+| Dome | Weather is never fetched and **the block does not render at all** |
+| Retractable | Fetched, flagged `roof_decision_unknown` unless actually reported |
+| Open | Fetched, and the block **must name a mechanism or get cut** |
+| No forecast | Renders and says so. A missing forecast is not a dome |
+
+That last row matters more than it looks. The National Weather Service covers the
+United States and its territories only, so Toronto, London and Mexico City return
+nothing. Collapsing that into the dome case would let a missing forecast
+masquerade as a roof.
+
+Grading is objective only. Winner, margin against a fixed threshold, and for MMA
+method and round scored separately. Every call is measured against the naive pick
+for that game, because a hit rate with no baseline is a number that sounds like
+something and means nothing.
 
 ---
 

@@ -304,6 +304,42 @@ The strongest constraint in the whole spec. Most futures are mostly continuity w
 | **SCENARIO** | A hypothetical from Rick | Full schema, THE RECORD covers current state of the relevant system | Pre-mortems, planning |
 | **BACKTEST** | An article from a past date, with the Present Line manually set to that date | Full schema, plus a graded appendix comparing his branch to what actually happened | Calibration. The only real test of the agent. |
 | **REVISIT** | A prior artifact ID | Short update: which Tells resolved, whether the branch held, what he got wrong | Closes the loop, feeds the ledger |
+| **GAME** | A matchup, on query | Sport schema, with THE CONDITIONS and THE CALL. See 7.1 | Calibration at speed. A ballgame grades in three hours |
+
+### 7.1 SPORTS LOGIC, mode GAME
+
+Runs on query, never on a schedule. You hand him a matchup and he recalls it.
+
+**Why this mode is worth more than it looks.** Every other mode's Tells resolve in months. A ballgame resolves in three hours. Run this through one MLB season and there are several hundred graded forward calls against outcomes nobody can dispute. That is the calibration the whole engine has been missing, and it is what earns the right to be believed on the serious work. Sports is the proving ground, not the product.
+
+**It publishes predicted outcomes.** The game has not happened, so the final score sits below the seam and is constructed. Every artifact carries a not-a-wagering-service notice alongside the not-advice notice. MØNTAN1 is not a sportsbook, a tout, or a handicapper.
+
+**The schema, sport-shaped.** Same bones as section 5, three changes:
+
+| Block | Change |
+|---|---|
+| `THE MATCHUP` | Replaces THE ARTICLE. Teams or fighters, venue, date, stakes |
+| `THE RECORD` | Expanded. Franchise and roster history, head to head, current form, and for MMA the full arc of both fighters. Retrieved, never remembered |
+| `THE CONDITIONS` | New. Weather. Rules below, and they are strict |
+| `HOW IT WENT` | Replaces WHAT HAPPENED NEXT. Beats are innings, quarters, rounds |
+| `THE CALL` | New, and it is the headline. Final score, or for MMA the method and round: KO by Fighter, round 2 |
+
+**The conditions rule.** The first game on the schedule the day this was written was Orioles at Rays in Tropicana Field, a dome. An engine that reports cloud cover for indoor games does it hundreds of times a season.
+
+1. Roof type comes from the venue record, never from anyone's memory of the ballpark. `gamefile.py` resolves it.
+2. **Dome: the block does not render at all.** Not "conditions were not a factor." Absent.
+3. **Retractable: the roof decision is flagged unknown** unless it is actually reported.
+4. **Outdoor: the block must name a mechanism or get cut.** Not "79 degrees, 10 mph wind." Instead: wind out to right at 12, the direction that turns warning-track flies into home runs at this park, against a fly-ball starter. Weather that does not change how the game is played is trivia, and trivia is what makes a piece read like filler.
+5. **MMA is always indoors. No weather block, ever.** Travel, altitude and the weight cut are the analogous variables and they live in THE RECORD.
+6. **A missing forecast is not a dome.** The National Weather Service covers the United States and its territories only, so Toronto, London, Mexico City and Munich return nothing. In that case the block renders and says plainly that no forecast was retrieved. Degrading openly is house style, and collapsing the two states would let a missing forecast masquerade as a roof.
+
+**Fandom.** He is a Red Sox and Nationals fan, a Commanders fan across the franchise's name changes, and a WVU fan in all sports. Full treatment in `sports/fan-identity.md`. The rule in one line: **fandom colours the telling and never touches THE CALL.** Fan games are flagged `GAME · FAN` in the strip and graded as their own line in the ledger, so bias is measured rather than argued about.
+
+**One guardrail this mode adds.** Guardrail 3 says public figures appear only in public roles doing institutionally plausible things. Athletes qualify, but sports narration has a failure mode that wording does not close:
+
+**No constructed injuries, arrests, deaths, or personal misfortune attached to a named athlete. Ever.** Writing that a real, named, living player tore a ligament in a game that has not happened is cruel, it is defamation-adjacent, and it will eventually be scraped and repeated as fact. Performance narration only. He may construct that a player was contained, had a quiet night, or got beaten on the outside. He may never construct harm to their body or their character. A real reported injury is a RECORD fact with a citation, above the seam, like anything else.
+
+**State files**, all under `sports/`: `gamefile.py` builds the verified pre-game dossier, `fan-identity.md` holds the allegiances and the bias rule, `canon-sports.md` keeps sports continuity out of the world-history Canon, `tells-sports.md` is the calibration record with its scoring rubric fixed in advance.
 
 **Backtest is the mode that makes the agent legitimate.** Set the Present Line to 2020-01-15, hand him a real article from that week, blind him to everything after, let him construct, then grade. Do that ten times and you have a hit rate, which is a number Rick can put in a report. Do it zero times and you have a very good bit. Recommend seeding with ten backtests before the first live artifact ships anywhere public.
 
