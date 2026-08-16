@@ -176,14 +176,28 @@ def readout_id(spec):
 
 
 def strip(spec):
-    """Bottom masthead row. Never a Tell count, never a Canon version."""
-    s = " {} ▸ {} ▸ READOUT {}".format(
+    """Bottom masthead row. Never a Tell count, never a Canon version.
+
+    `strip_override` exists for cards that are not readouts. A project sharing
+    card has no present line and no mode, and stamping it with a fake one would
+    be the card lying about what it is.
+    """
+    s = spec.get("strip_override") or " {} ▸ {} ▸ READOUT {}".format(
         spec["present_line"], spec["mode"].upper(), readout_id(spec))
+    if len(s) > 46:
+        raise SystemExit("strip is {} chars, max 46: {!r}".format(len(s), s))
     return "║" + s.ljust(46)[:46] + "║"
 
 
-def seam(date):
-    txt = " {} · CONSTRUCTED BELOW ".format(date)
+def seam(date, override=None):
+    """The hazard band. `override` is for cards that are not readouts.
+
+    The band means exactly one thing: everything below it was constructed. A
+    project card has nothing constructed below it, so stamping it CONSTRUCTED
+    BELOW would be the card lying with its own signature mechanic. Non-readouts
+    supply their own label and the band stays honest.
+    """
+    txt = " {} ".format(override) if override else " {} · CONSTRUCTED BELOW ".format(date)
     pad = COLS - len(txt)
     l, r = pad // 2, pad - pad // 2
     tape = lambda n: ("▞▚" * (n // 2 + 1))[:n]
@@ -218,7 +232,7 @@ def build_lines(spec, portrait=False):
     for t in wrap(spec["dek"]):
         lines.append((t, GREEN, False))
     lines.append(("", GREEN, False))
-    lines.append((seam(spec["present_line"]), PINK, True))
+    lines.append((seam(spec["present_line"], override=spec.get("seam_override")), PINK, True))
     lines.append(("", GREEN, False))
     for t in wrap(spec["quote"]):
         lines.append((t, GREEN, False))

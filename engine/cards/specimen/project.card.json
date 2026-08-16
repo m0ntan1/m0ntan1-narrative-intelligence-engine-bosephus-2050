@@ -1,0 +1,19 @@
+{
+  "present_line": "2026",
+  "mode": "PROJECT",
+  "strip_override": " NARRATIVE INTELLIGENCE ENGINE · OPEN",
+  "title": [
+    "Bosephus 2050"
+  ],
+  "dek": [
+    "Not an agent. A machine that builds a narrative on a cited record, keeps a visible seam between the two halves, and leaves falsifiable markers so it can be graded."
+  ],
+  "quote": [
+    "PIVOT DETECTION. The catalyst a branch hangs on: named, dated, and specific enough that you could go and stand where it happens and watch it fire. Graded binary. Anyone can post a score."
+  ],
+  "cta": [
+    "> github.com/m0ntan1"
+  ],
+  "disclaimer": "MØNTAN1 LLC · Built in West Virginia",
+  "seam_override": "PIVOT DETECTION"
+}

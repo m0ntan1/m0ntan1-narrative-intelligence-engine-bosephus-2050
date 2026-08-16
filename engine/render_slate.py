@@ -55,7 +55,7 @@ def build(spec):
     for ln in wrap(spec["title"].upper()):
         lines.append((ln, HEAD, True))
     lines.append(("", GREEN, False))
-    lines.append((seam(spec["present_line"]), PINK, True))
+    lines.append((seam(spec["present_line"], override=spec.get("seam_override")), PINK, True))
     lines.append(("", GREEN, False))
     lines.extend(rows_to_lines(spec))
     lines.append(("", GREEN, False))

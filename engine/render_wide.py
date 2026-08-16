@@ -121,7 +121,7 @@ def build(spec):
     for ln in wrap(spec["title"]):
         lines.append((ln.upper(), HEAD, True))
     lines.append(("", GREEN, False))
-    lines.append((seam(spec["present_line"]), PINK, True))
+    lines.append((seam(spec["present_line"], override=spec.get("seam_override")), PINK, True))
     lines.append(("", GREEN, False))
     for ln in wrap(spec["quote"]):
         lines.append((ln, GREEN, False))

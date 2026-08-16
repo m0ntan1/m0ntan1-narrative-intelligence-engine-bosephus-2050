@@ -150,6 +150,19 @@ for mod in ("render_card", "render_slate", "render_wide", "render_hero"):
           (not blanks) or pastes,
           "blanks the sun and never composites, leaving an empty masthead")
 
+# --- 10. the seam must not claim CONSTRUCTED BELOW on a non-readout ------
+check("seam default still claims CONSTRUCTED BELOW",
+      "CONSTRUCTED BELOW" in rc.seam("2026-08-16"))
+check("seam override drops the constructed claim",
+      "CONSTRUCTED" not in rc.seam("2026", override="PIVOT DETECTION"))
+check("overridden seam is still 48 columns",
+      len(rc.seam("2026", override="PIVOT DETECTION")) == 48)
+try:
+    rc.strip({"strip_override": "X" * 60})
+    check("strip refuses an over-long override", False, "padded past the frame")
+except SystemExit as e:
+    check("strip refuses an over-long override", "max 46" in str(e))
+
 print()
 print("FAILURES:", len(fails))
 sys.exit(1 if fails else 0)

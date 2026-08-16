@@ -151,6 +151,10 @@ Fixed art, chrome sun over a grid, 64 columns inside the frame. It goes at the v
 ╚════════════════════════════════════════════════════════════════╝
 ```
 
+**Cards that are not readouts.** A project sharing card has no present line, no mode and nothing constructed on it, so two fields exist to stop it lying about what it is. `strip_override` replaces the bottom masthead row, since stamping a fake date and readout id would be false. `seam_override` replaces the hazard band's label, because that band means exactly one thing, everything below it was constructed, and a sharing card has nothing constructed below it. Using the band decoratively would spend the one piece of visual vocabulary the engine cannot afford to weaken.
+
+Both refuse rather than truncate: an override past 46 columns raises.
+
 **The portrait plate, PNG only.** On rendered cards the block-character sun is blanked and a green ASCII portrait of him is composited into exactly that footprint, tinted to the masthead colour and screened so it reads as phosphor on the same ground rather than a photograph stuck on top. It lives at `Elements/` and the renderers find it by path.
 
 This is opt-in and must stay opt-in. `masthead_lines()` defaults to the drawn sun, and only the PNG renderers pass `portrait=True`. Text surfaces share that function, so a blanked sun with no image over it is an empty box, and the Discord ANSI block would ship with a hole in the masthead. `tools/test_renderers.py` guards both directions.
