@@ -1,4 +1,5 @@
 # MØNTAN1 Narrative Intelligence Engine
+## Bosephus 2050
 
 ![Bosephus 2050](docs/assets/social-card.png)
 
@@ -6,7 +7,7 @@ A **Narrative Intelligence engine** is not an agent, a bot, or a report generato
 
 The distinction is the whole product, and it is also the entire compliance posture. Call the thing an agent and a reader will take its output as a forecast, which is the one thing it must never be.
 
-This repo holds the reference implementation, **Bosephus 2050**, along with the tooling that makes its output travel.
+This repo is **Bosephus 2050**, the first engine built on the pattern. One repo per engine, sharing the `m0ntan1-narrative-intelligence-engine-*` prefix, so each engine keeps its own spec, art, state and calibration record rather than sharing a framework it would have to fight.
 
 ---
 
