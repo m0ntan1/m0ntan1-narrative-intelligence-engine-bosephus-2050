@@ -151,6 +151,12 @@ Fixed art, chrome sun over a grid, 64 columns inside the frame. It goes at the v
 ╚════════════════════════════════════════════════════════════════╝
 ```
 
+**The portrait plate, PNG only.** On rendered cards the block-character sun is blanked and a green ASCII portrait of him is composited into exactly that footprint, tinted to the masthead colour and screened so it reads as phosphor on the same ground rather than a photograph stuck on top. It lives at `Elements/` and the renderers find it by path.
+
+This is opt-in and must stay opt-in. `masthead_lines()` defaults to the drawn sun, and only the PNG renderers pass `portrait=True`. Text surfaces share that function, so a blanked sun with no image over it is an empty box, and the Discord ANSI block would ship with a hole in the masthead. `tools/test_renderers.py` guards both directions.
+
+The wide variant keeps the drawn sun deliberately: it already carries a full character plate beside the terminal, and two faces on one card is one too many.
+
 Strip fields, in order and never reordered: Present Line date, mode, Canon version, artifact ID, Tell count, department tag (`NIA // EB`, Narrative Intelligence, Electric Blue). Build each strip line as two leading spaces, fields joined by `   ▸   `, padded with spaces to 64 columns. If a field set overruns, drop the trailing field rather than wrapping. A strip line that breaks the frame is a failed render and gets rebuilt.
 
 **BACKTEST mode strips differently.** The Present Line field carries the backdated line and the mode field reads `BACKTEST · BLIND`, so no reader ever mistakes a calibration run for a live artifact:

@@ -82,6 +82,18 @@ check("render_card_with_element checks overflow",
       hasattr(rw, "MAX_LINES") or need <= rw.H,
       "%d px of text into a %d px panel, no check" % (need, rw.H))
 
+# --- 6. the portrait must never blank the sun on text surfaces -----------
+check("text masthead keeps the drawn sun",
+      "████" in "".join(rc.masthead_lines()),
+      "default blanked the sun, text output would show an empty box")
+check("portrait=True does blank it for PNG",
+      "████" not in "".join(rc.masthead_lines(portrait=True)))
+import render_ansi as ra
+check("Discord ANSI keeps the drawn sun",
+      "████" in ra.render(spec()))
+check("masthead stays 48 columns with the sun blanked",
+      all(len(l) == 48 for l in rc.masthead_lines(portrait=True)))
+
 print()
 print("FAILURES:", len(fails))
 sys.exit(1 if fails else 0)

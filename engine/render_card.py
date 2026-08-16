@@ -19,7 +19,7 @@ import json
 import os
 import sys
 import textwrap
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageFilter
 
 W_OUT, H_OUT = 1200, 1500          # 4:5, the tallest aspect X shows uncropped
 S = 2                               # supersample
@@ -79,6 +79,83 @@ MASTHEAD = [
 ]
 
 
+# ---------------------------------------------------------------- portrait
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+# vault layout puts Elements beside tools/; repo layout puts it inside engine/
+PORTRAIT = next((p for p in (
+    os.path.join(_HERE, "Elements", "X"),
+    os.path.join(os.path.dirname(_HERE), "Elements", "X"),
+) if os.path.isdir(os.path.dirname(p))), os.path.join(_HERE, "Elements", "X"))
+PORTRAIT = os.path.join(
+    os.path.dirname(PORTRAIT),
+    "nano-banana-2_Professional_graphic_design_2D_illustration_Make_this_an_ASCII_Hex_color_8DFFB4_-0.jpg")
+
+# The masthead's left half is a block-character sun. On a PNG we can do better,
+# so the portrait is composited into exactly that footprint. Text surfaces keep
+# the drawn sun, because Discord and plaintext cannot carry an image and the
+# masthead has to stay one object across all of them.
+PORTRAIT_COLS = (1, 23)     # inside the frame, left of the 2050 wordmark
+PORTRAIT_ROWS = (1, 7)      # the sun rows, stopping above the horizon
+
+
+def masthead_lines(portrait=False):
+    """Masthead art, with the drawn sun blanked when a plate will cover it.
+
+    Off by default, because text surfaces share this function and a blanked sun
+    with no image over it is an empty box. Only the PNG renderers that actually
+    composite the plate pass portrait=True.
+
+    The sun glyphs and the portrait occupy the same cells, so drawing both puts
+    block characters across his face. Blanking is done here rather than by
+    editing masthead.txt, because that file is the canonical text cut and still
+    needs its sun for Discord and plaintext.
+    """
+    if not portrait or not os.path.exists(PORTRAIT):
+        return MASTHEAD
+    c0, c1 = PORTRAIT_COLS
+    out = []
+    for i, line in enumerate(MASTHEAD):
+        if PORTRAIT_ROWS[0] <= i < PORTRAIT_ROWS[1]:
+            line = line[:c0] + " " * (c1 - c0) + line[c1:]
+        out.append(line)
+    return out
+
+
+def paste_portrait(base, x0, y0, char_w, lh, tint=(141, 255, 180)):
+    """Composite the character plate over the sun region of the masthead.
+
+    Uses the plate's own luminance as alpha, so its near-black surround drops
+    out and only the drawn figure lights up. Screened rather than pasted, so it
+    reads as phosphor on the same ground as the type instead of a photograph
+    stuck on top of it.
+    """
+    if not os.path.exists(PORTRAIT):
+        return base
+
+    c0, c1 = PORTRAIT_COLS
+    r0, r1 = PORTRAIT_ROWS
+    box_w = int((c1 - c0) * char_w)
+    box_h = int((r1 - r0) * lh)
+    side = min(box_w, box_h)
+    px = int(x0 + c0 * char_w + (box_w - side) / 2)
+    py = int(y0 + r0 * lh + (box_h - side) / 2)
+
+    plate = Image.open(PORTRAIT).convert("L").resize((side, side), Image.LANCZOS)
+
+    # radial feather so the square edge never shows
+    mask = Image.new("L", (side, side), 0)
+    ImageDraw.Draw(mask).ellipse([0, 0, side - 1, side - 1], fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(side * 0.03))
+
+    lum = ImageChops.multiply(plate, mask)
+    tinted = Image.new("RGB", (side, side), tint)
+    layer = Image.new("RGB", base.size, (0, 0, 0))
+    layer.paste(tinted, (px, py), lum)
+    layer = ImageChops.add(layer, layer.filter(ImageFilter.GaussianBlur(side * 0.02)))
+    return ImageChops.screen(base, layer)
+
+
 def readout_id(spec):
     """Short identifier for one readout. Never a version number.
 
@@ -126,8 +203,8 @@ def wrap(block):
     return out
 
 
-def build_lines(spec):
-    lines = [(m, MASTC, True) for m in MASTHEAD]
+def build_lines(spec, portrait=False):
+    lines = [(m, MASTC, True) for m in masthead_lines(portrait)]
     lines.append(("╠══════════════════════════════════════════════╣", MASTC, True))
     lines.append((strip(spec), MASTC, True))
     lines.append(("╚══════════════════════════════════════════════╝", MASTC, True))
@@ -175,7 +252,7 @@ def fit(n_lines):
 
 
 def render(spec, out_path):
-    lines = build_lines(spec)
+    lines = build_lines(spec, portrait=True)
     fs, lh = fit(len(lines))
     reg = ImageFont.truetype(F_REG, fs)
     bold = ImageFont.truetype(F_BOLD, fs)
@@ -187,10 +264,12 @@ def render(spec, out_path):
     bloom = bloom.resize((W, H), Image.LANCZOS).filter(ImageFilter.GaussianBlur(60))
     base.paste(Image.new("RGB", (W, H), (10, 34, 20)), (0, 0), bloom)
 
-    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(layer)
     y = (H - len(lines) * lh) // 2
     x = (W - bold.getlength("0" * COLS)) / 2
+    base = paste_portrait(base, x, y, bold.getlength("0"), lh)
+
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
     for text, colour, is_bold in lines:
         if text:
             d.text((x, y), text, font=(bold if is_bold else reg), fill=colour + (255,))

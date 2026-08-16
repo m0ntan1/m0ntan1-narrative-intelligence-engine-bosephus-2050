@@ -17,8 +17,8 @@ import json
 import sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-from render_card import (F_REG, F_BOLD, MASTHEAD, strip, seam, wrap, MIN_FS,
-                         GREEN, MASTC, HEAD, PINK, DIM, CYAN)
+from render_card import (F_REG, F_BOLD, masthead_lines, paste_portrait, strip,
+                         seam, wrap, MIN_FS, GREEN, MASTC, HEAD, PINK, DIM, CYAN)
 
 S = 2
 W_OUT, H_OUT = 1600, 1400
@@ -45,7 +45,7 @@ def rows_to_lines(spec):
 
 
 def build(spec):
-    lines = [(m, MASTC, True) for m in MASTHEAD]
+    lines = [(m, MASTC, True) for m in masthead_lines(portrait=True)]
     lines.append(("╠══════════════════════════════════════════════╣", MASTC, True))
     lines.append((strip(spec), MASTC, True))
     lines.append(("╚══════════════════════════════════════════════╝", MASTC, True))
@@ -111,10 +111,12 @@ def render(spec, element_path, out_path):
     art.paste(Image.new("RGB", (ART_W, H), (4, 5, 10)), (0, 0), fade.resize((ART_W, H)))
     base.paste(art, (TERM_W, 0))
 
-    layer = Image.new("RGBA", (TERM_W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(layer)
     y = (H - len(lines) * lh) // 2
     x = (TERM_W - bold.getlength("0" * COLS)) / 2
+    base = paste_portrait(base, x, y, bold.getlength("0"), lh)
+
+    layer = Image.new("RGBA", (TERM_W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
     for text, colour, is_bold in lines:
         if text:
             d.text((x, y), text, font=(bold if is_bold else reg), fill=colour + (255,))
