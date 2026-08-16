@@ -111,6 +111,15 @@ def seam(date):
 
 
 def wrap(block):
+    """Wrap to 46 columns.
+
+    Accepts a string or a list of strings. A bare string used to be iterated
+    character by character, so a 40 character disclaimer became 40 lines and
+    the card silently rendered as garbage. Normalise instead of trusting the
+    author to always reach for a list.
+    """
+    if isinstance(block, str):
+        block = [block]
     out = []
     for para in block:
         out.extend(textwrap.wrap(para, WRAP) or [""])
@@ -143,16 +152,26 @@ def build_lines(spec):
     return lines
 
 
+MIN_FS = 56          # supersampled; 28px in the 1200x1500 output
+
 def fit(n_lines):
-    """Largest size where 48 cols fit the width and n lines fit the height."""
-    for size in range(140, 12, -1):
+    """Largest size where 48 cols fit the width and n lines fit the height.
+
+    Floors at MIN_FS and refuses below it. Without a floor this silently
+    produced microtype for over-long copy, which is the failure the spec
+    forbids: the fix for copy that will not fit is shorter copy, never
+    smaller type.
+    """
+    for size in range(140, MIN_FS - 1, -1):
         f = ImageFont.truetype(F_BOLD, size)
         if f.getlength("0" * COLS) > W - 2 * PAD:
             continue
         if n_lines * round(size * 1.20) > H - 2 * PAD:
             continue
         return size, round(size * 1.20)
-    raise SystemExit("card content too long to fit, shorten the summary")
+    raise SystemExit(
+        "Card copy will not fit at a readable size ({} lines). Shorten the "
+        "quote or the dek. Do not lower MIN_FS.".format(n_lines))
 
 
 def render(spec, out_path):
