@@ -29,10 +29,18 @@ Every line of the block, including the strip, is exactly 66 characters wide.
 --- CHAT CUT, 48 col (Discord, Signal, anywhere narrow) ------------
 
 Every line 48 wide. Use this cut for ANY chat surface. The 64-column
-full masthead wraps and shatters on phones. In Discord, wrap it in an
-```ansi fence and prefix each line with ESC[1;32m for the green
-phosphor look, ESC[2;32m for body text. Signal needs its monospace
+full masthead wraps and shatters on phones. Signal needs its monospace
 formatting applied by hand, and even then only this cut survives.
+
+In Discord, wrap it in an ```ansi fence and prefix EVERY line:
+
+  ESC[1;32m   masthead, bright green
+  ESC[2;32m   body copy, dim green
+  ESC[1;35m   THE SEAM LINE, always. Never green.
+
+The seam is neon pink on every surface that can carry colour, no
+exceptions. Magenta is the closest Discord's fixed ANSI palette gets.
+A green seam is a failed render even when every character is right.
 
 ╔══════════════════════════════════════════════╗
 ║        ▄▄▄▄▄▄▄▄        ▄▀▀▄ ▄▀▀▄ █▀▀▀ ▄▀▀▄   ║

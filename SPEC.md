@@ -199,13 +199,24 @@ The hazard tape between THE RECORD and WHAT HAPPENED NEXT is the one piece of th
 
 Consequence, and it is a hard rule: **no artifact ships with the seam rule missing, and no verified claim appears below it.** If a run needs a cited number in the constructed half, the number goes above the seam and the constructed half refers back to it.
 
+**The seam is always neon pink.** `#FF4FD8`, on every surface that can carry colour, without exception and without per-surface judgment calls. It is the one element that breaks the green, and that is the entire point: in a field of phosphor green the eye lands on the seam first, which is exactly the reading order the artifact wants. A green seam is a failed render even when every character is correct.
+
+| Surface | How pink is applied |
+|---|---|
+| Card PNG, both cuts | `PINK = (255, 79, 216)` in `render_card.py`. Never reassign it |
+| Web and Pages | `--pink:#ff4fd8`, applied to `.seam` |
+| Discord and any ANSI code block | `ESC[1;35m` on the seam line, `ESC[1;32m` masthead, `ESC[2;32m` body. Magenta is the closest neon pink in Discord's fixed ANSI palette |
+| Markdown, plain text, the ASCII fallback | No colour available. The hazard tape carries it on shape alone, which is why the tape is part of the glyph run and not a decoration around it |
+
+Colour is the only thing that varies by surface. The characters never do.
+
 ### 5.4 Rendering rules
 
 1. Masthead and every block rule live inside fenced code blocks. Nothing that is art gets rendered as prose, ever, because a proportional font destroys the alignment and a broken masthead looks worse than no masthead.
 2. Width is 64 columns inside the frame, 66 including it. Any line that measures otherwise is a failed render.
 3. The art is state, not generation. It is read from `masthead.txt` and copied. An agent that redraws the sun from memory will produce a slightly different sun every run, which is the same failure mode the Canon file exists to prevent, applied to typography.
 4. The strip is the only variable region. Fields never get reordered, renamed, or added to without a spec change.
-5. Colour is never encoded in the artifact. Electric Blue `#00BFFF` is applied downstream at publish, in HTML or deck. The Markdown stays monochrome and portable.
+5. Colour is never encoded in the artifact. Electric Blue `#00BFFF` is applied downstream at publish, in HTML or deck. The Markdown stays monochrome and portable. The one fixed colour anywhere in the system is the seam, neon pink `#FF4FD8`, per 5.3.
 6. Voice QC runs on the prose only. The masthead is exempt from the em dash scrub, since the characters in it are box-drawing rather than punctuation.
 
 ### 5.5 The social card, required on every run
@@ -225,6 +236,14 @@ Three rules the renderer enforces or the agent must respect:
 1. **Do not hand-wrap the copy.** Write `title`, `dek`, `quote`, and `cta` as single unbroken strings. The script wraps to 46 columns. Hand-wrapping is where an agent reliably breaks the column grid.
 2. **Type size is not a choice.** The script finds the largest size at which 48 columns fit the width and every line fits the height. If it exits saying the content is too long, shorten the summary. Do not shrink the type to force it, and do not edit the renderer to make room.
 3. **No Tells on the card, and no Tell count in the strip.** The card is the hook, not the scorecard. Tells live in the artifact and the ledger, where a reader can actually check them. The bottom masthead row carries date, mode, and Canon version only.
+
+For chat surfaces, `render_ansi.py` emits the Discord-ready fenced block from the same card JSON and the same line builder, so the text cut and the PNG cut cannot drift and the seam cannot come out green:
+
+```
+python3 render_ansi.py cards/<artifact-id>.card.json
+```
+
+It refuses rather than guessing. An unmapped colour raises, and a block over Discord's 2000 character cap raises with the count, because the fix is shorter copy and never a masthead split across two messages.
 
 The `cta` line is what turns the card from a poster into a door. It points at the artifact, in his voice, in the register of memory rather than of marketing. The standing line is:
 
@@ -526,6 +545,7 @@ All under `~/Vaults/rick/Output/bosephus-2050/`.
 | `tells-ledger.md` | Every Tell ever issued, with artifact ID, resolution date, and outcome once known. | Append on issue, update on resolution. |
 | `artifacts/YYYY-MM-DD_<slug>.md` | The output pieces. | One per run. |
 | `render_card.py` | The card renderer. Auto-fits type, auto-wraps copy to 46 columns. | Frozen tooling. Shorten the card copy when it will not fit, never edit the script to make room. |
+| `render_ansi.py` | Discord-ready ANSI block from the same card JSON. Forces the seam to neon pink. | Frozen tooling. It raises on an unmapped colour rather than falling back, which is how a green seam gets caught. |
 | `cards/<id>.card.json` | Card copy for one artifact. Six fields, unwrapped strings. | One per run, written at emit. |
 | `social/<id>_card.png` | The 1200x1500 card. Required output, not optional. | One per run. An artifact without its card is incomplete. |
 | `Elements/` | Source art and character plates. | Human-curated. |

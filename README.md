@@ -76,6 +76,20 @@ Two things are deliberately not adjustable:
 - **Do not hand-wrap the copy.** Write each field as one unbroken string. The renderer wraps to 46 columns. Hand-wrapping is exactly where an author breaks the column grid.
 - **Type size is not a choice.** The renderer picks the largest size at which 48 columns fit the width and every line fits the height. If it refuses, shorten the copy. Do not shrink the type and do not edit the script to make room.
 
+For chat surfaces, `render_ansi.py` emits a Discord-ready fenced block from the
+same JSON and the same line builder, so the text cut and the PNG cut cannot drift:
+
+```bash
+python3 engine/render_ansi.py engine/cards/2026-08-16_clarity-act.card.json
+```
+
+**The seam is always neon pink,** `#FF4FD8`, on every surface that can carry
+colour. It is the one element that breaks the green, and that is the point: in a
+field of phosphor green the eye lands on the seam first, which is the reading
+order the artifact wants. The ANSI emitter raises on an unmapped colour rather
+than falling back to green, because a silent fallback is exactly how a seam goes
+green without anyone noticing.
+
 `render_card_with_element.py` is a wide 1600x900 variant with a character plate beside the terminal. It shares the masthead and wrap logic with the canonical renderer so the two cannot drift.
 
 ---
@@ -87,6 +101,7 @@ SPEC.md                  The full Bosephus 2050 spec, including the system promp
 engine/
   masthead.txt           Frozen art. Three cuts: 64 col, 48 col chat, 7-bit ASCII
   render_card.py         Canonical card emit, 1200x1500, terminal only
+  render_ansi.py         Discord ANSI block, seam forced to neon pink
   render_card_with_element.py  Wide variant with character plate, 1600x900
   cards/                 Card copy, one JSON per artifact
 examples/
