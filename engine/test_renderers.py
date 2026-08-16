@@ -8,6 +8,7 @@
 3. Copy must never be silently truncated to fit a column.
 """
 import json, os, sys, tempfile
+from PIL import ImageFont
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 LONG = ("Four hundred and seventy four gigawatts against a record peak under one "
@@ -92,6 +93,17 @@ check("Discord ANSI keeps the drawn sun",
       "████" in ra.render(spec()))
 check("masthead stays 48 columns with the sun blanked",
       all(len(l) == 48 for l in rc.masthead_lines(portrait=True)))
+
+# --- 7. wide cut refuses copy it cannot hold -----------------------------
+import render_wide as rww
+try:
+    rww.fit(80, rww.TERM_W - 2 * rww.PAD, rww.H - 2 * rww.PAD)
+    check("render_wide refuses over-long copy", False, "fitted 80 lines")
+except SystemExit as e:
+    check("render_wide refuses over-long copy", "shorten" in str(e).lower())
+
+check("render_wide terminal panel is wide enough for 48 cols",
+      rww.TERM_W - 2 * rww.PAD >= ImageFont.truetype(rc.F_BOLD, rc.MIN_FS).getlength("0" * 48))
 
 print()
 print("FAILURES:", len(fails))
