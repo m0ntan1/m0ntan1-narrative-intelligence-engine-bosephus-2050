@@ -17,7 +17,7 @@ import json
 import sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-from render_card import (F_REG, F_BOLD, MASTHEAD, strip, seam,
+from render_card import (F_REG, F_BOLD, MASTHEAD, strip, seam, wrap, MIN_FS,
                          GREEN, MASTC, HEAD, PINK, DIM, CYAN)
 
 S = 2
@@ -34,7 +34,12 @@ def rows_to_lines(spec):
     out = []
     for r in spec["rows"]:
         mark = "*" if r.get("fan") else ("^" if r.get("against_baseline") else " ")
-        line = "{:<28}{:>17} {}".format(r["matchup"][:28], r["call"][:17], mark)
+        if len(r["matchup"]) > 28 or len(r["call"]) > 17:
+            raise SystemExit(
+                "Row will not fit: matchup max 28 chars, call max 17. Got "
+                "{!r} / {!r}. Shorten it; do not let the card cut it silently."
+                .format(r["matchup"], r["call"]))
+        line = "{:<28}{:>17} {}".format(r["matchup"], r["call"], mark)
         out.append((line, HEAD if r.get("fan") else GREEN, bool(r.get("fan"))))
     return out
 
@@ -45,31 +50,37 @@ def build(spec):
     lines.append((strip(spec), MASTC, True))
     lines.append(("╚══════════════════════════════════════════════╝", MASTC, True))
     lines.append(("", GREEN, False))
-    lines.append((spec["title"].upper()[:46], HEAD, True))
+    for ln in wrap(spec["title"].upper()):
+        lines.append((ln, HEAD, True))
     lines.append(("", GREEN, False))
     lines.append((seam(spec["present_line"]), PINK, True))
     lines.append(("", GREEN, False))
     lines.extend(rows_to_lines(spec))
     lines.append(("", GREEN, False))
-    for n in spec.get("notes", []):
-        lines.append((n[:46], GREEN, False))
+    for n in wrap(spec.get("notes", [])):
+        lines.append((n, GREEN, False))
     lines.append(("", GREEN, False))
-    lines.append((spec["cta"][:46], HEAD, True))
+    for ln in wrap(spec["cta"]):
+        lines.append((ln, HEAD, True))
     lines.append(("", GREEN, False))
-    lines.append((spec.get("disclaimer", "Constructed. Not a forecast, not advice.")[:46],
-                  DIM, False))
+    for ln in wrap(spec.get("disclaimer", "Constructed. Not a forecast, not advice.")):
+        lines.append((ln, DIM, False))
     return lines
 
 
 def fit(n, avail_w, avail_h):
-    for size in range(120, 10, -1):
+    """Same floor as the canonical card. Duplicating this logic is how the two
+    renderers drifted in the first place, so MIN_FS is imported, not restated."""
+    for size in range(120, MIN_FS - 1, -1):
         f = ImageFont.truetype(F_BOLD, size)
         if f.getlength("0" * COLS) > avail_w:
             continue
         if n * round(size * 1.20) > avail_h:
             continue
         return size, round(size * 1.20)
-    raise SystemExit("slate too long to fit, trim rows or notes")
+    raise SystemExit(
+        "Slate will not fit at a readable size ({} lines). Trim rows or notes. "
+        "Do not lower MIN_FS.".format(n))
 
 
 def render(spec, element_path, out_path):

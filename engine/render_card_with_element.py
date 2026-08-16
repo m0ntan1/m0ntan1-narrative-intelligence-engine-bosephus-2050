@@ -32,8 +32,17 @@ FS = 22 * S
 LH = 26 * S
 
 
+MAX_LINES = (H - 2 * 30 * S) // LH      # what the 720px terminal panel holds
+
+
 def render(spec, element_path, out_path):
     lines = build_lines(spec)
+    if len(lines) > MAX_LINES:
+        raise SystemExit(
+            "Copy overflows the terminal panel: {} lines into room for {}. "
+            "This variant uses a fixed type size because the panel is only 720 "
+            "of 1600 columns, so the fix is shorter copy. Shorten the quote or "
+            "the dek.".format(len(lines), MAX_LINES))
     reg = ImageFont.truetype(F_REG, FS)
     bold = ImageFont.truetype(F_BOLD, FS)
 

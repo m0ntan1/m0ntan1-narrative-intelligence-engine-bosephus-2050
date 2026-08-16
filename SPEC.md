@@ -254,7 +254,8 @@ The JSON carries `present_line`, `mode`, `title`, `dek`, `quote`, `cta`, and opt
 Three rules the renderer enforces or the agent must respect:
 
 1. **Do not hand-wrap the copy.** Write `title`, `dek`, `quote`, and `cta` as single unbroken strings. The script wraps to 46 columns. Hand-wrapping is where an agent reliably breaks the column grid.
-2. **Type size is not a choice.** The script finds the largest size at which 48 columns fit the width and every line fits the height. If it exits saying the content is too long, shorten the summary. Do not shrink the type to force it, and do not edit the renderer to make room.
+2. **Type size is not a choice.** The script finds the largest size at which 48 columns fit the width and every line fits the height, floored at a readable minimum. If it exits saying the content is too long, shorten the summary. Do not shrink the type to force it, and do not lower `MIN_FS`.
+3. **Nothing is ever silently cut or silently shrunk.** Every renderer either fits the copy or refuses with a message naming the field and the limit. This was learned the hard way on readout 91C4: the card first rendered at less than half normal type size because there was no floor, and the floor then exposed a worse fault where a field passed as a bare string was iterated character by character, turning one line into forty. `tools/test_renderers.py` guards both, plus over-long rows and panel overflow. Run it after touching any renderer.
 3. **No Tells on the card, and no Tell count in the strip.** The card is the hook, not the scorecard. Tells live in the artifact and the ledger, where a reader can actually check them. The bottom masthead row carries date, mode, and Canon version only.
 
 For chat surfaces, `tools/render_ansi.py` emits the Discord-ready fenced block from the same card JSON and the same line builder, so the text cut and the PNG cut cannot drift and the seam cannot come out green:
