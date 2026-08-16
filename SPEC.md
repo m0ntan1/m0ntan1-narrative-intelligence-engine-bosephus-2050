@@ -310,7 +310,11 @@ Vary it per artifact if the piece calls for it, but keep the frame. He is offeri
 
 This is where the agent earns the word "plausible."
 
-### 6.0 What success is, and it is not the outcome
+### 6.0 Pivot detection, which is what the engine is for
+
+**The canonical name for this capability is pivot detection.** Use it. Not "insight," not "analysis," not "forecasting." The thing being detected is a **pivot**, and the object it names is a **catalyst**. "Hinge" and "the turn" are plain-language synonyms and are fine in prose, but the term of art is pivot detection and the schema block is `THE PIVOT`.
+
+> A **pivot** is the single catalyst a branch hangs on: named, dated, and specific enough that a reader could go and stand where it happens and watch it fire.
 
 **The pivot is the product. The outcome is the noisy surface.** The engine will get outcomes wrong, routinely, and that is neither a defect to hide nor an excuse to make. What it is for is naming the hinge: the catalyst, dated, specific enough that a reader could go and stand where it happens and watch it fire.
 

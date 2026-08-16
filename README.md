@@ -13,6 +13,20 @@ This repo is **Bosephus 2050**, the first engine built on the pattern. One repo 
 
 ---
 
+## Pivot detection
+
+**This is the one thing the engine is for. Everything else in this repo exists to make it trustworthy.**
+
+> A **pivot** is the single catalyst a branch hangs on: **named, dated, and specific enough that a reader could go and stand where it happens and watch it fire.**
+
+It is graded binary, and that grade is the headline number: *did the named catalyst occur, by its date?*
+
+Outcomes are the noisy surface. This engine gets them wrong routinely and says so. Anyone can post a score. Almost nobody publishes a dated catalyst in advance and then shows whether it fired.
+
+Every readout carries a `THE PIVOT` block. Every pivot lands in a ledger with a resolution date on it. If a pivot cannot be graded, it is not a pivot, it is a mood, and the block gets rewritten.
+
+---
+
 ## The seven load-bearing parts
 
 A spec missing any of these is not an engine. It is a prompt with good prose.
@@ -71,7 +85,13 @@ The engine explains itself in exactly one place, and it does it in character.
 
 Bosephus at forty-one finds a machine under a tarp in the old boiler room that should not still power on. One folder on it he did not put there. It opens as garbage until he notices the garbage has structure: it does not want a viewer, it wants a terminal.
 
-He keeps going back because the scores are the part it misses and **the turn is the part it gets**.
+He keeps going back for one capability, and it is the one the engine is built around.
+
+It misses scores. It misses them often enough that if that were what it was for, he would have stopped going down there in March. What it does not miss is **the pivot**: the catalyst a thing hinged on, named before rather than after, with a date attached and specific enough that he can go and stand where it happens.
+
+The first time it landed he was not even convinced. A boring docket, no faces in it, no coverage. The engine said the whole thing ran through it. He wrote the date on an index card, put it in his shirt pocket, went and read the docket on the day, and it went exactly the way the branch said it would if it went that way.
+
+It had not told him the outcome. It had told him the hinge. **That difference is the product.**
 
 Two things it will not discuss: the price of anything, and his own life. Not because MØNTAN1 is not a registered adviser, though it is not. Because it has something behind it that it will not risk to win an argument.
 
@@ -83,13 +103,9 @@ Every guardrail in this repo is that refusal wearing a different hat. It is also
 
 ---
 
-## Success is the pivot, not the outcome
+## How pivot detection is graded
 
-This engine gets outcomes wrong, routinely. That is neither hidden nor excused.
-
-What it is for is naming the hinge: **the catalyst, dated, specific enough that a reader could go and stand where it happens and watch it fire.**
-
-Anyone can post a score. Almost nobody publishes a dated catalyst in advance and then shows whether it fired.
+A capability that cannot be checked is a claim. So the pivot is split into two claims, and only the mechanical one is published.
 
 | Claim | Graded | Published |
 |---|---|---|
