@@ -19,7 +19,7 @@ A spec missing any of these is not an engine. It is a prompt with good prose.
 |---|---|---|
 | 1 | **A fixed vantage point** used as the reasoning device, not as decoration | The voice is the analytic method. B0SEPHUS G. ALTAMONT writes from 2050, so everything between now and then is settled history he is recounting rather than a future he is guessing at |
 | 2 | **A hard dated seam** between what is retrieved and cited and what is constructed | Rendered as a typographic object, not left as a prose obligation. A reviewer checks compliance at a glance instead of reading for it |
-| 3 | **Persistent state** across runs | Without it, invocation one gives you a 2050 where the dollar broke in 2031 and invocation two gives you one where it never did. State is the difference between a character and a bit |
+| 3 | **Persistent identity, not a persistent timeline** | Who the narrator is never moves. What he recalls is redrawn every run. See the photograph, below |
 | 4 | **Falsifiable near-term markers** written to a ledger | The part everyone skips, because it is the only part that can make the engine look bad later. Skip it and you have no way to know whether the thing is any good |
 | 5 | **A fixed output schema** | Stops the voice wandering into fiction with no analytic spine |
 | 6 | **Frozen presentation art** and a required card emit | Markdown does not survive a paste into a chat client. The card is the only form that travels |
@@ -60,6 +60,52 @@ Everything above it was retrieved and carries a source. Everything below it was 
 Recall is implemented as retrieval, never as memory. The engine's past is accurate because it looks things up, not because a model remembers them.
 
 ---
+
+## The photograph
+
+Early drafts of this engine held a Canon file: a set of settled beats every run
+had to honour, so the constructed future stayed consistent across artifacts.
+That was a mistake, and an expensive one. Canon made every artifact a hostage to
+every other artifact. One constructed beat contradicted by reality poisons
+everything downstream that honoured it, and the blast radius compounds with
+every run.
+
+It was replaced by the photograph.
+
+The world is re-instantiated at query time. Every run retrieves the real record
+as it stands on the day and constructs forward from that, and only that. A later
+recollection that differs from an earlier one is not an error to suppress. The
+negative has not fixed. People at the edges of the frame come and go depending
+on what happened last week, and the thing in the middle of the frame does not
+move.
+
+**What stays invariant** is identity, not timeline: the persona, and the locked
+constraints that are physics and arithmetic rather than construction. Halvings,
+demography, build times, fiscal compounding. A future violating those is broken
+in any thread.
+
+**Continuity moves to reality.** Under Canon, runs were consistent with each
+other. Now they are consistent with the record, checked by a ledger. That is the
+better spine, and it is the one that can be graded.
+
+Every artifact carries a `READOUT` identifier rather than a version number,
+because a version implies succession and readouts have none.
+
+## Success is the pivot, not the outcome
+
+This engine gets outcomes wrong, routinely. That is neither hidden nor excused.
+What it is for is naming the hinge: the catalyst, dated, specific enough that a
+reader could go and stand where it happens and watch it fire.
+
+Anyone can post a score. Almost nobody publishes a dated catalyst in advance and
+then shows whether it fired. So the pivot is graded as two claims, and the first
+is the headline:
+
+| Claim | Graded | Published |
+|---|---|---|
+| Did the named catalyst occur, by its date? | Binary, mechanical | **Headline** |
+| Was it load-bearing? | Judged, standard fixed in advance | Internal |
+| The outcome or score | Mechanical | Secondary line |
 
 ## Quickstart
 

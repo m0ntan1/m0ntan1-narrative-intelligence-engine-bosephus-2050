@@ -1,17 +1,54 @@
 {
-  "present_line": "2026-08-16", "mode": "SLATE", "canon": "v01",
+  "present_line": "2026-08-16",
+  "mode": "SLATE",
   "title": "Ten calls, one night",
   "rows": [
-    {"matchup":"Nationals @ Mets",   "call":"Mets 5-3",    "fan":true},
-    {"matchup":"White Sox @ Tigers", "call":"White Sox 4-2","against_baseline":true},
-    {"matchup":"Marlins @ Reds",     "call":"Marlins 6-4", "against_baseline":true},
-    {"matchup":"Phillies @ Twins",   "call":"Twins 6-5"},
-    {"matchup":"Cardinals @ Cubs",   "call":"Cubs 7-5"},
-    {"matchup":"Rockies @ Giants",   "call":"Giants 4-2"},
-    {"matchup":"Rangers @ Athletics","call":"Rangers 6-4", "against_baseline":true},
-    {"matchup":"Royals @ Angels",    "call":"Royals 5-4",  "against_baseline":true},
-    {"matchup":"Brewers @ Dodgers",  "call":"Brewers 3-2", "against_baseline":true},
-    {"matchup":"Mariners @ Astros",  "call":"Astros 5-3"}
+    {
+      "matchup": "Nationals @ Mets",
+      "call": "Mets 5-3",
+      "fan": true
+    },
+    {
+      "matchup": "White Sox @ Tigers",
+      "call": "White Sox 4-2",
+      "against_baseline": true
+    },
+    {
+      "matchup": "Marlins @ Reds",
+      "call": "Marlins 6-4",
+      "against_baseline": true
+    },
+    {
+      "matchup": "Phillies @ Twins",
+      "call": "Twins 6-5"
+    },
+    {
+      "matchup": "Cardinals @ Cubs",
+      "call": "Cubs 7-5"
+    },
+    {
+      "matchup": "Rockies @ Giants",
+      "call": "Giants 4-2"
+    },
+    {
+      "matchup": "Rangers @ Athletics",
+      "call": "Rangers 6-4",
+      "against_baseline": true
+    },
+    {
+      "matchup": "Royals @ Angels",
+      "call": "Royals 5-4",
+      "against_baseline": true
+    },
+    {
+      "matchup": "Brewers @ Dodgers",
+      "call": "Brewers 3-2",
+      "against_baseline": true
+    },
+    {
+      "matchup": "Mariners @ Astros",
+      "call": "Astros 5-3"
+    }
   ],
   "notes": [
     "* his club   ^ against the naive home pick",

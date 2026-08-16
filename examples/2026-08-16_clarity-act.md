@@ -4,7 +4,7 @@ artifact_id: 2026-08-16_clarity-act
 agent: Bosephus 2050
 mode: ARTICLE
 present_line: 2026-08-16
-canon: v01
+readout: drawn fresh
 tells: 5
 byline: B0SEPHUS G. ALTAMONT
 ---
@@ -209,9 +209,13 @@ answer and the answer was that this mattered to intermediaries and not
 to the thing itself. Educate. Disintermediate. Innovate. Build.
 
 █▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Present Line 2026-08-16. Canon v01. Locked Calendar not present at
+Present Line 2026-08-16. One readout. Locked Calendar not present at
 run time, halving dates applied from spec section 6.2. Six cited hard
 numbers in THE RECORD, minimum is three.
+
+One telling of one thread. Ask again and the decade may come back
+different. Nothing here binds the next telling, and nothing in the next
+telling corrects this one.
 
 Constructed content. Everything after 2026-08-16 is one plausible
 branch, written in retrospective voice as a reasoning device. It is

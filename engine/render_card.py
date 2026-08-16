@@ -14,6 +14,7 @@ between artifacts without anyone hand-tuning a point size.
 Body copy is auto-wrapped to 46 columns. Do not hand-wrap it in the JSON.
 """
 import glob
+import hashlib
 import json
 import os
 import sys
@@ -78,10 +79,26 @@ MASTHEAD = [
 ]
 
 
+def readout_id(spec):
+    """Short identifier for one readout. Never a version number.
+
+    A version implies succession and readouts have none: each is drawn fresh
+    from the world as it stood the day it was asked. Derived from the artifact
+    so it is reproducible, and stable for a given date and title.
+    """
+    if spec.get("readout"):
+        return spec["readout"]
+    title = spec.get("title", "")
+    if isinstance(title, list):          # artifact cards wrap copy in lists,
+        title = " ".join(title)          # slate cards use plain strings
+    seed = (spec.get("present_line", "") + title).encode("utf-8")
+    return hashlib.sha1(seed).hexdigest()[:4].upper()
+
+
 def strip(spec):
-    """Bottom masthead row. Fields only, never a Tell count."""
-    s = " {} ▸ {} ▸ CANON {}".format(
-        spec["present_line"], spec["mode"].upper(), spec["canon"])
+    """Bottom masthead row. Never a Tell count, never a Canon version."""
+    s = " {} ▸ {} ▸ READOUT {}".format(
+        spec["present_line"], spec["mode"].upper(), readout_id(spec))
     return "║" + s.ljust(46)[:46] + "║"
 
 

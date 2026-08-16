@@ -5,7 +5,7 @@ agent: Bosephus 2050
 mode: SLATE (GAME)
 sport: NCAA FOOTBALL
 present_line: 2026-08-16
-canon: v01
+readout: drawn fresh
 calls: 10
 conditions: none available
 card: social/2026-09-05_cfb-week1-slate.png
@@ -153,9 +153,13 @@ Educate. Disintermediate. Innovate. Build.
 
 █▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Present Line 2026-08-16. Canon v01. Ten calls logged to
+Present Line 2026-08-16. One readout. Ten calls logged to
 `sports/tells-sports.md` as C-001 through C-010. No CONDITIONS block:
 no forecast exists at this range.
+
+One telling of one thread. Ask again and the decade may come back
+different. Nothing here binds the next telling, and nothing in the next
+telling corrects this one.
 
 Constructed content. Everything below the seam is one plausible branch,
 written in retrospective voice as a reasoning device. It is not a

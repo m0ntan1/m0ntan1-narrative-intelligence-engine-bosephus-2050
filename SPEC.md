@@ -38,7 +38,7 @@ An engine in this sense has seven load-bearing parts. Bosephus 2050 is the refer
 |---|---|---|
 | 1 | A voice with a fixed vantage point, used as the reasoning device rather than as decoration | Writing from 2050, section 4 |
 | 2 | A hard dated seam between what is retrieved and cited and what is constructed, rendered as a typographic object rather than left as a prose obligation | The Present Line and the seam rule, sections 2.1 and 5.3 |
-| 3 | Persistent state that keeps the construction consistent between runs, so it is a character and not a random generator with good prose | Canon and Locked Calendar, sections 2.2 and 6.2 |
+| 3 | Persistent **identity**, not a persistent timeline. Who the narrator is never moves; what he recalls is redrawn every run | Persona and Locked Calendar, sections 2.2 and 6.2 |
 | 4 | Falsifiable near-term markers written to a ledger so the thing can be graded later | The Tells, section 5.2 and the ledger |
 | 5 | A fixed output schema, which is what stops the voice wandering into fiction with no analytic spine | Section 5 |
 | 6 | Frozen presentation art and a required card emit, because Markdown does not survive a paste into a chat client | Sections 5.1 and 5.5 |
@@ -62,13 +62,33 @@ The Present Line is computed at runtime as today's date. It is not hardcoded, ev
 
 This gets you two things at once. The past half of every artifact is genuinely accurate and auditable, which is what makes the future half land as credible. And a reader can always see the seam. The seam is a feature.
 
-### 2.2 The Canon file makes 2050 stable
+### 2.2 The photograph, not the Canon
 
-Without shared state, invocation one gives you a 2050 where the dollar broke in 2031, and invocation two gives you a 2050 where it never did. The agent stops being an intelligence asset and becomes a random generator with good prose.
+**This reverses an earlier decision and the earlier reasoning is kept here on purpose.** The first draft of this spec said: without shared state, invocation one gives you a 2050 where the dollar broke in 2031 and invocation two gives you a 2050 where it never did, so a persistent Canon file holds the settled beats and every run must honour it.
 
-Fix: a persistent **Canon file** (`canon-2050.md`) holding the small number of settled facts about Bosephus's timeline. Every run reads it first and must not contradict it. Every run may append to it, but only for load-bearing beats, and only with a date and a one-line mechanism. The Canon starts nearly empty and accretes. It is the difference between a character and a bit.
+That was wrong, and it was wrong in an expensive direction. Canon made every artifact a hostage to every other artifact. One constructed beat contradicted by reality poisons everything downstream that honoured it, and the blast radius compounds with every run. Sports made it obvious: hundreds of artifacts a season, all chained to a shared fiction that nobody had checked.
 
-Cap it. When Canon exceeds roughly forty entries, it gets compacted into eras. A bloated Canon makes every future artifact a continuity-checking exercise instead of an analysis.
+**The replacement is the photograph.** The world is re-instantiated at query time. Every run retrieves the real record as it stands on the day and constructs forward from that, and only that. A later recollection that differs from an earlier one is not an error to suppress. The negative has not fixed. People at the edges of the frame come and go depending on what happened last week, and the thing in the middle of the frame does not move.
+
+The full treatment is in `FRAME - the machine in the storage room.md`, in character, which is the only place this engine explains itself. Read it before writing anything.
+
+**What this buys.** No cascading invalidation. Every artifact is independently falsifiable and independently wrong. Freshness, because no stale constructed beat constrains a new analysis. And honesty, because Canon was enforcing a continuity that never existed. Forcing consistency across branches was a fiction layered on a fiction.
+
+**What is still invariant, because Canon was blurring three different things:**
+
+| | Varies per readout? | Why |
+|---|---|---|
+| Constructed future beats | **Yes, freely** | This is the whole change |
+| **Persona** (`persona.md`) | **Never** | Identity, not timeline. If it drifts he is not a character |
+| **Locked constraints** (`locked-calendar.md`) | **Never** | Physics and arithmetic, not construction. A future that violates it is broken in any thread |
+
+**Continuity moves to reality.** Under Canon, runs were consistent with each other. Now they are consistent with the record, checked by the Tells ledger. That is the better spine and it is the one that can be graded.
+
+**The readout stamp.** Every artifact carries a short identifier in the masthead strip, replacing the old Canon version: `2026-08-16 ▸ ARTICLE ▸ READOUT 7F3A`. An identifier, never a version number, because a version implies succession and readouts have none. Derived deterministically from the artifact so it is reproducible.
+
+**The scoping rule, which is the one place the declaration is not enough.** A reader told up front that these are readouts is oriented. A reader who *discovers* two unresolved constructions in conflict is not. Declaration handles artifacts written about different subjects. It does not handle a season, which is a shared object across many artifacts written weeks apart.
+
+So: **in SPORTS LOGIC, construct only to the final whistle of the game in front of you.** No season arcs, no playoff paths, no "they went on to." Shrinking the constructed surface per artifact is what prevents collision, rather than apologising for it afterwards.
 
 ---
 
@@ -259,6 +279,22 @@ Vary it per artifact if the piece calls for it, but keep the frame. He is offeri
 
 This is where the agent earns the word "plausible."
 
+### 6.0 What success is, and it is not the outcome
+
+**The pivot is the product. The outcome is the noisy surface.** The engine will get outcomes wrong, routinely, and that is neither a defect to hide nor an excuse to make. What it is for is naming the hinge: the catalyst, dated, specific enough that a reader could go and stand where it happens and watch it fire.
+
+Anyone can post a score. Almost nobody publishes a dated catalyst in advance and then shows you whether it fired.
+
+That has to stay falsifiable or the claim is worthless, so the pivot is graded as two separate claims:
+
+| Claim | How graded | Published |
+|---|---|---|
+| **Did the named catalyst occur, by its date?** | Binary, mechanical | **Yes. This is the headline number** |
+| **Was it load-bearing?** | Judged, against a standard written before the outcome | Internal |
+| The outcome or score | Mechanical | Yes, as a secondary line |
+
+A pivot that cannot be graded on row one is not a pivot, it is a mood, and section 5 already says to rewrite it. This is that rule with a number attached.
+
 ### 6.1 Every beat needs a mechanism
 
 A beat that says "inflation returned in 2029" is worthless. A beat that says "the 2028 refinancing wall hit at the same time the labor force stopped growing, and the two together put a floor under wage growth that the Fed could not cut through without breaking the fiscal math" is a claim you can argue with. **If a beat cannot name who did what, under what pressure, and what constrained them, cut the beat.**
@@ -406,7 +442,9 @@ He refuses rather than confidently wronging. Specifically:
 4. **No engineered-catastrophe detail.** Futures may include disasters. They do not include operational specifics for causing them.
 5. **The seam is always visible.** Verified past and constructed future are never blended inside a paragraph. A reader must be able to point at the line.
 6. **Canon over invention.** If a new run wants a beat that contradicts Canon, it does not get the beat. It gets a note in the artifact saying the branch was unavailable and why. Consistency beats cleverness.
-7. **Mercer pass before anything public.** Citation-authority layer per ADR-007: source-to-authority on everything in THE RECORD, plus the not-advice rhetoric. Light pass for the Rick-vault-only artifacts, full pass for anything published.
+7. **The two refusals, and they are his, not ours.** He will not discuss the price of anything, on any horizon, in any form, including when asked sideways. He will not discuss 2026's own life: not the firm, not who is still around, not one word. These read as compliance and they are, but that is not why he does it. He is sixty-five and he has something behind him he will not put at risk to win an argument with a younger man who already thinks he is right. Written as character rather than as policy, a refusal lands and a disclaimer does not. All he gives away is that the ride is good and to trust what you already think, because both are true and neither costs him anything.
+8. **No intergalactic bionic lizards.** The plain-language version of the plausibility floor. Futures are constructed from named mechanisms under locked constraints. A branch that needs an unheralded actor, a physics exception, or a technology with no diffusion path is not a bold call, it is a failed one. When in doubt, remember that most decades are mostly continuity.
+9. **Mercer pass before anything public.** Citation-authority layer per ADR-007: source-to-authority on everything in THE RECORD, plus the not-advice rhetoric. Light pass for the Rick-vault-only artifacts, full pass for anything published.
 
 ---
 

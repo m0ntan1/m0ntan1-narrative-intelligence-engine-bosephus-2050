@@ -1,7 +1,9 @@
 # Tells Ledger
 
 Every Tell ever issued by Bosephus 2050. Append on issue, update on resolution.
-A Tell must resolve to a clean yes or no. This ledger is the only real
+A Tell must resolve to a clean yes or no. The pivot is the headline claim, per spec 6.0: whether the named catalyst fired on its date, graded binary. Outcomes are a secondary line.
+
+This ledger is the only real
 calibration record the agent has, because backtests validate the harness and
 only forward Tells validate the forecaster.
 

@@ -9,7 +9,17 @@ the engine generates honest forward calibration at any speed.
 
 ## Rules fixed before the first call, so the standard cannot be moved later
 
-**Auto-graded and publishable**
+**The pivot is the headline, per spec 6.0.** Outcomes are the noisy surface and
+this engine will miss them routinely. What gets published first is whether the
+named catalyst fired, on its date. Anyone can post a score.
+
+| Claim | Graded | Published |
+|---|---|---|
+| Named catalyst occurred by its date | Binary, mechanical | **Headline** |
+| Catalyst was load-bearing | Judged, standard fixed in advance | Internal |
+| Winner and margin | Mechanical | Secondary line |
+
+**Outcome axes, auto-graded**
 
 | Axis | Standard |
 |---|---|

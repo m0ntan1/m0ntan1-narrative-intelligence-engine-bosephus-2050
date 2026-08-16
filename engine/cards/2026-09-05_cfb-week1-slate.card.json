@@ -1,17 +1,53 @@
 {
-  "present_line": "2026-08-16", "mode": "SLATE", "canon": "v01",
+  "present_line": "2026-08-16",
+  "mode": "SLATE",
   "title": "Week one, called from twelve days out",
   "rows": [
-    {"matchup":"Coastal Car. @ W Virginia","call":"WVU 27-20",  "fan":true},
-    {"matchup":"Miami @ Stanford",         "call":"Miami 38-13","against_baseline":true},
-    {"matchup":"Tulane @ Duke",            "call":"Tulane 28-24","against_baseline":true},
-    {"matchup":"W Kentucky @ Nevada",      "call":"WKU 31-21",  "against_baseline":true},
-    {"matchup":"Wyoming @ Colorado St",    "call":"Wyoming 24-17","against_baseline":true},
-    {"matchup":"North Texas @ Indiana",    "call":"Indiana 34-20"},
-    {"matchup":"Boise St @ Oregon",        "call":"Oregon 35-17"},
-    {"matchup":"Clemson @ LSU",            "call":"LSU 27-24"},
-    {"matchup":"Wisconsin @ Notre Dame",   "call":"Notre Dame 31-13"},
-    {"matchup":"Wash St @ Washington",     "call":"Washington 30-23"}
+    {
+      "matchup": "Coastal Car. @ W Virginia",
+      "call": "WVU 27-20",
+      "fan": true
+    },
+    {
+      "matchup": "Miami @ Stanford",
+      "call": "Miami 38-13",
+      "against_baseline": true
+    },
+    {
+      "matchup": "Tulane @ Duke",
+      "call": "Tulane 28-24",
+      "against_baseline": true
+    },
+    {
+      "matchup": "W Kentucky @ Nevada",
+      "call": "WKU 31-21",
+      "against_baseline": true
+    },
+    {
+      "matchup": "Wyoming @ Colorado St",
+      "call": "Wyoming 24-17",
+      "against_baseline": true
+    },
+    {
+      "matchup": "North Texas @ Indiana",
+      "call": "Indiana 34-20"
+    },
+    {
+      "matchup": "Boise St @ Oregon",
+      "call": "Oregon 35-17"
+    },
+    {
+      "matchup": "Clemson @ LSU",
+      "call": "LSU 27-24"
+    },
+    {
+      "matchup": "Wisconsin @ Notre Dame",
+      "call": "Notre Dame 31-13"
+    },
+    {
+      "matchup": "Wash St @ Washington",
+      "call": "Washington 30-23"
+    }
   ],
   "notes": [
     "* his club   ^ against the naive home pick",
