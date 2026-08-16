@@ -33,8 +33,26 @@ Full treatment in [SPEC.md](SPEC.md).
 
 This is the piece worth stealing even if you never build anything else here. Between the cited half and the constructed half of every artifact sits a dated rule:
 
+![The seam rule, neon pink hazard tape reading PRESENT LINE 2026-08-16 CONSTRUCTED BELOW](docs/assets/seam.png)
+
+<details>
+<summary>Plain text, for copying</summary>
+
 ```
 ▞▚▞▚▞▚▞▚▞ PRESENT LINE 2026-08-16 · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚▞▚
+```
+
+</details>
+
+The seam is neon pink `#FF4FD8` on every surface that can carry colour, which is
+why it is an image here. GitHub markdown cannot colour text: ANSI escapes print
+raw, `style` attributes are sanitised out, and the diff-highlight trick reaches
+only red and green. An image is the only way the rule appears in the README the
+way it appears everywhere else. `engine/render_seam.py` generates it from the
+same palette and font as the cards, at either documented width.
+
+```bash
+python3 engine/render_seam.py 2026-08-16 docs/assets/seam.png 64
 ```
 
 Everything above it was retrieved and carries a source. Everything below it was constructed and carries none, because there is nothing to source. The rule is mandatory, no cited claim may appear beneath it, and its absence is a failed artifact rather than a style lapse.
@@ -103,6 +121,7 @@ engine/
   masthead.txt           Frozen art. Three cuts: 64 col, 48 col chat, 7-bit ASCII
   render_card.py         Canonical card emit, 1200x1500, terminal only
   render_ansi.py         Discord ANSI block, seam forced to neon pink
+  render_seam.py         Seam rule as a PNG, for surfaces that cannot colour text
   render_card_with_element.py  Wide variant with character plate, 1600x900
   cards/                 Card copy, one JSON per artifact
 examples/
