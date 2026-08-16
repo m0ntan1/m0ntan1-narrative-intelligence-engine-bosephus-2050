@@ -175,6 +175,17 @@ The weather discipline is the part worth stealing. Roof type comes from the venu
 | Open | Fetched, and the block **must name a mechanism or get cut** |
 | No forecast | Fails silently. NWS covers the US only |
 
+**Pivot detection works here too, and it is graded harder.** A sports pivot is a conditional mechanism the box score can settle: *Makhachev wins inside two rounds if he lands a takedown in the first; Garry has no answer off his back.* The condition and the branch are then graded separately.
+
+| Condition fired | Branch followed | Verdict |
+|---|---|---|
+| Yes | Yes | **CONFIRMED** |
+| Yes | No | **REFUTED.** The named hinge was not the hinge |
+| No | Yes | **REFUTED.** The hinge was irrelevant |
+| No | No | **CONFIRMED**, by contrapositive |
+
+Rows two and three are the point. A slate can go eight for ten on winners and still have every hinge refuted, and that is worth more than the eight.
+
 Grading is objective only, and always against the naive pick. A hit rate with no baseline is a number that sounds like something and means nothing.
 
 Detail in **[SPEC.md](SPEC.md)**. Open calls in **[tells-sports.md](engine/sports/tells-sports.md)**.

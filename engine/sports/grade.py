@@ -111,6 +111,68 @@ def parse_call(text, final):
             else {"home": nums[0], "away": nums[1]})
 
 
+# --------------------------------------------------------------- the pivot
+
+PIVOT_VERDICT = {
+    (True, True):   ("CONFIRMED", "condition fired and the branch followed"),
+    (True, False):  ("REFUTED", "condition fired and the branch did not follow: "
+                                "the named hinge was not the hinge"),
+    (False, True):  ("REFUTED", "condition did not fire and the branch followed "
+                                "anyway: the hinge was irrelevant"),
+    (False, False): ("CONFIRMED", "condition did not fire and the branch did not "
+                                  "follow, which is the contrapositive"),
+}
+
+
+def grade_pivot(condition_met, branch_followed):
+    """Grade a conditional hinge on both halves, not just the outcome.
+
+    A sports pivot is a claim of the form "A wins if B", where B is observable
+    in the box score. Checking only whether A won grades the call, not the
+    reasoning. Both cells have to be read together:
+
+        fired + followed          confirmed
+        fired + did not follow    refuted, the hinge was not the hinge
+        did not fire + followed   refuted, the hinge was irrelevant
+        did not fire + neither    confirmed, by contrapositive
+
+    Rows two and three are the ones worth having. They are the only way to
+    catch a pivot that happened to be attached to a correct outcome, which is
+    otherwise indistinguishable from insight.
+    """
+    verdict, why = PIVOT_VERDICT[(bool(condition_met), bool(branch_followed))]
+    return {"condition_met": bool(condition_met),
+            "branch_followed": bool(branch_followed),
+            "pivot_verdict": verdict, "reason": why}
+
+
+def mlb_observables(game_pk):
+    """Box-score facts a hinge is usually written against, for resolving one."""
+    d = get("{}.1/game/{}/feed/live".format(MLB, game_pk))
+    box = get("{}/game/{}/boxscore".format(MLB, game_pk))
+    out = {}
+    for side in ("away", "home"):
+        t = box["teams"][side]
+        pitchers = t.get("pitchers", [])
+        starter = t["players"].get("ID%d" % pitchers[0]) if pitchers else None
+        bat = t["teamStats"]["batting"]
+        pit = t["teamStats"]["pitching"]
+        out[side] = {
+            "team": d["gameData"]["teams"][side]["name"],
+            "runs": bat.get("runs"), "hits": bat.get("hits"),
+            "strikeouts_by_batters": bat.get("strikeOuts"),
+            "left_on_base": bat.get("leftOnBase"),
+            "starter": starter["person"]["fullName"] if starter else None,
+            "starter_ip": starter["stats"]["pitching"].get("inningsPitched") if starter else None,
+            "starter_er": starter["stats"]["pitching"].get("earnedRuns") if starter else None,
+            "starter_pitches": starter["stats"]["pitching"].get("numberOfPitches") if starter else None,
+            "pitchers_used": len(pitchers),
+            "team_ip": pit.get("inningsPitched"),
+            "home_runs": bat.get("homeRuns"),
+        }
+    return out
+
+
 def grade(sport, final, call):
     actual_winner = "home" if final["home"] > final["away"] else "away"
     called_winner = "home" if call["home"] > call["away"] else "away"
@@ -139,7 +201,22 @@ def main():
     ap.add_argument("--game", required=True)
     ap.add_argument("--call")
     ap.add_argument("--call-json")
+    ap.add_argument("--pivot-fired", choices=["yes", "no"],
+                    help="did the named condition occur")
+    ap.add_argument("--pivot-followed", choices=["yes", "no"],
+                    help="did the predicted branch follow")
+    ap.add_argument("--observables", action="store_true",
+                    help="print the box-score facts a hinge is written against")
     a = ap.parse_args()
+
+    if a.observables:
+        if a.sport != "mlb":
+            raise SystemExit("observables are MLB only for now. MMA bout stats "
+                             "exist on the ESPN core API but the shape is "
+                             "unverified until a card has actually been fought.")
+        json.dump(mlb_observables(a.game), sys.stdout, indent=2)
+        sys.stdout.write("\n")
+        raise SystemExit(0)
 
     final = mlb_final(a.game) if a.sport == "mlb" else espn_final(a.sport, a.game)
     if a.call_json:
@@ -150,6 +227,8 @@ def main():
         raise SystemExit("give --call or --call-json")
 
     r = grade(a.sport, final, call)
+    if a.pivot_fired and a.pivot_followed:
+        r["pivot"] = grade_pivot(a.pivot_fired == "yes", a.pivot_followed == "yes")
     print(json.dumps(r, indent=2))
     print("\nledger row:", file=sys.stderr)
     print("| {} | {} | {} | winner {} | margin {} | baseline {} |".format(

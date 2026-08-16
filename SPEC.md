@@ -414,6 +414,38 @@ Plus **one derived value, labelled as derived**: air density and a carry index c
 5. **MMA is always indoors. No weather block, ever.** Travel, altitude and the weight cut are the analogous variables and they live in THE RECORD.
 6. **A missing forecast fails silently.** The National Weather Service covers the United States and its territories only, so Toronto, London, Mexico City and Munich return nothing. When no forecast can be retrieved the block simply does not render, exactly as for a dome. A paragraph explaining that our data source was unreachable is worse reading than no weather paragraph, and the reader did not ask for a status report on our plumbing. The reason is still logged to stderr, so a run stays debuggable and a dome can be told from a coverage gap in the logs.
 
+**THE PIVOT in GAME mode, and this is the part that was missing.** The first two slates put a *methodological* assumption in the pivot block, that calls were made on the starting pitcher first. That is a pivot about our process, not about the game, and it is not a hinge. It graded nothing.
+
+A sports pivot is a **conditional mechanism**, and it must be written in a form the box score can settle:
+
+> **X happens if Y**, where Y is a named, observable, thresholded thing.
+
+| Bad | Good |
+|---|---|
+| "The pivot is that we weight pitching over lineups" | "Cincinnati loses if Lodolo does not see the sixth. Their pen has thrown 11 innings in three days" |
+| "Makhachev is the better fighter" | "Makhachev wins inside two rounds if he lands a takedown in the first. Garry has no answer off his back and no path to a decision on the mat" |
+| "Whoever executes better wins" | "Garry wins on the cards if he keeps it at range and counters when Makhachev shoots. He needs takedown defence above roughly 60 percent" |
+
+Those examples are the shape. Name the fighter or the player, name the specific thing that has to happen, and give it a threshold or a window.
+
+**Grading is a two by two, not a coin.** The condition and the branch are graded separately, because checking only who won grades the call and not the reasoning:
+
+| Condition fired | Branch followed | Verdict |
+|---|---|---|
+| Yes | Yes | **CONFIRMED** |
+| Yes | No | **REFUTED.** The named hinge was not the hinge |
+| No | Yes | **REFUTED.** The hinge was irrelevant, the outcome came another way |
+| No | No | **CONFIRMED**, by contrapositive |
+
+Rows two and three are the reason to do this at all. They are the only way to catch a pivot that was merely attached to a correct outcome, which is otherwise indistinguishable from insight. A slate can go eight for ten on winners and still have every hinge refuted, and that is a finding worth more than the eight.
+
+```
+python3 sports/grade.py mlb --game <id> --observables    # box-score facts a hinge is written against
+python3 sports/grade.py mlb --game <id> --call "..." --pivot-fired yes --pivot-followed no
+```
+
+`--observables` returns starter innings, earned runs, pitch count, arms used, hits, runs and men left on base, which is what most baseball hinges are written against. MLB only for now: MMA bout statistics exist on the ESPN core API and `boxscoreAvailable` is set, but the shape is unverified until a card has actually been fought, so MMA conditions are resolved by hand and marked as such.
+
 **Fandom.** He is a Red Sox and Nationals fan, a Commanders fan across the franchise's name changes, and a WVU fan in all sports. Full treatment in `sports/fan-identity.md`. The rule in one line: **fandom colours the telling and never touches THE CALL.** Fan games are flagged `GAME · FAN` in the strip and graded as their own line in the ledger, so bias is measured rather than argued about.
 
 **One guardrail this mode adds.** Guardrail 3 says public figures appear only in public roles doing institutionally plausible things. Athletes qualify, but sports narration has a failure mode that wording does not close:

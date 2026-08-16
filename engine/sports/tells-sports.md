@@ -15,9 +15,19 @@ named catalyst fired, on its date. Anyone can post a score.
 
 | Claim | Graded | Published |
 |---|---|---|
-| Named catalyst occurred by its date | Binary, mechanical | **Headline** |
-| Catalyst was load-bearing | Judged, standard fixed in advance | Internal |
+| Pivot condition fired | Binary, from the box score | **Headline** |
+| Branch followed given the condition | Binary | **Headline** |
 | Winner and margin | Mechanical | Secondary line |
+
+Pivot verdict is the two by two, per spec 7.1: fired and followed is confirmed,
+fired and not followed means the named hinge was not the hinge, not fired but
+followed anyway means the hinge was irrelevant, neither is confirmed by
+contrapositive.
+
+**Series S and C predate this rule.** Their pivot blocks carry a methodological
+assumption rather than a conditional mechanism, so they are graded on outcome
+only and their pivots are marked N/A rather than scored. Every slate from
+2026-08-17 forward carries a real hinge.
 
 **Outcome axes, auto-graded**
 
@@ -53,8 +63,8 @@ of the call: a call on a game already underway is contaminated and worth nothing
 Baseline for all ten is the naive home pick. Five calls agree with it and five
 go against it, so the delta will actually measure something.
 
-| # | Game | Matchup | The call | Fan | Baseline | Reasoning | Outcome |
-|---|---|---|---|---|---|---|---|
+| # | Game | Matchup | The call | Pivot condition | Fired | Followed | Verdict | Fan | Baseline | Outcome |
+|---|---|---|---|---|---|---|---|---|---|---|
 | S-001 | `823590` | Nationals @ Mets | **Mets 5, Nationals 3** | yes | Mets (H) | Irvin at 5.79 against a 7-3 club, Scott 3.45. Called against his own team | open |
 | S-002 | `824236` | White Sox @ Tigers | **White Sox 4, Tigers 2** | no | Tigers (H) | Burke 2.99 over 135 IP is the best arm on the field; Comerica suppresses | open |
 | S-003 | `824477` | Marlins @ Reds | **Marlins 6, Reds 4** | no | Reds (H) | Perez 3.39 vs Lodolo 4.86, GABP at 86F and carry 1.05 pushes the total up | open |
