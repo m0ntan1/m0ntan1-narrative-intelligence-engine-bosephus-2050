@@ -70,7 +70,7 @@ That was wrong, and it was wrong in an expensive direction. Canon made every art
 
 **The replacement is the photograph.** The world is re-instantiated at query time. Every run retrieves the real record as it stands on the day and constructs forward from that, and only that. A later recollection that differs from an earlier one is not an error to suppress. The negative has not fixed. People at the edges of the frame come and go depending on what happened last week, and the thing in the middle of the frame does not move.
 
-The full treatment is in `FRAME - the machine in the storage room.md`, in character, which is the only place this engine explains itself. Read it before writing anything.
+The full treatment is in `doctrine/FRAME - the machine in the storage room.md`, in character, which is the only place this engine explains itself. Read it before writing anything.
 
 **What this buys.** No cascading invalidation. Every artifact is independently falsifiable and independently wrong. Freshness, because no stale constructed beat constrains a new analysis. And honesty, because Canon was enforcing a continuity that never existed. Forcing consistency across branches was a fiction layered on a fiction.
 
@@ -79,8 +79,8 @@ The full treatment is in `FRAME - the machine in the storage room.md`, in charac
 | | Varies per readout? | Why |
 |---|---|---|
 | Constructed future beats | **Yes, freely** | This is the whole change |
-| **Persona** (`persona.md`) | **Never** | Identity, not timeline. If it drifts he is not a character |
-| **Locked constraints** (`locked-calendar.md`) | **Never** | Physics and arithmetic, not construction. A future that violates it is broken in any thread |
+| **Persona** (`doctrine/persona.md`) | **Never** | Identity, not timeline. If it drifts he is not a character |
+| **Locked constraints** (`doctrine/locked-calendar.md`) | **Never** | Physics and arithmetic, not construction. A future that violates it is broken in any thread |
 
 **Continuity moves to reality.** Under Canon, runs were consistent with each other. Now they are consistent with the record, checked by the Tells ledger. That is the better spine and it is the one that can be graded.
 
@@ -132,7 +132,7 @@ Every artifact opens with the masthead, then runs these blocks in this order. Th
 
 ### 5.1 The masthead
 
-Fixed art, chrome sun over a grid, 64 columns inside the frame. It goes at the very top of the file, inside a fenced code block so no renderer reflows it. **The art is frozen.** The agent copies it from `masthead.txt` verbatim and does not redraw, improvise, or improve it. Only the two data-strip lines at the bottom change between runs.
+Fixed art, chrome sun over a grid, 64 columns inside the frame. It goes at the very top of the file, inside a fenced code block so no renderer reflows it. **The art is frozen.** The agent copies it from `doctrine/masthead.txt` verbatim and does not redraw, improvise, or improve it. Only the two data-strip lines at the bottom change between runs.
 
 ```
 ╔════════════════════════════════════════════════════════════════╗
@@ -159,7 +159,7 @@ Strip fields, in order and never reordered: Present Line date, mode, Canon versi
 ║  PRESENT LINE  2020-01-15   ▸   MODE  BACKTEST · BLIND         ║
 ```
 
-Two other cuts exist in `masthead.txt`. **SLIM** is two lines plus frame, for REVISIT mode and anything under 400 words, because a fourteen-line masthead on a four-line update is a joke at the reader's expense. **ASCII FALLBACK** is 7-bit only, for Discord, email, and anywhere the block characters would turn into tofu.
+Two other cuts exist in `doctrine/masthead.txt`. **SLIM** is two lines plus frame, for REVISIT mode and anything under 400 words, because a fourteen-line masthead on a four-line update is a joke at the reader's expense. **ASCII FALLBACK** is 7-bit only, for Discord, email, and anywhere the block characters would turn into tofu.
 
 ### 5.2 The blocks
 
@@ -223,7 +223,7 @@ Consequence, and it is a hard rule: **no artifact ships with the seam rule missi
 
 | Surface | How pink is applied |
 |---|---|
-| Card PNG, both cuts | `PINK = (255, 79, 216)` in `render_card.py`. Never reassign it |
+| Card PNG, both cuts | `PINK = (255, 79, 216)` in `tools/render_card.py`. Never reassign it |
 | Web and Pages | `--pink:#ff4fd8`, applied to `.seam` |
 | Discord and any ANSI code block | `ESC[1;35m` on the seam line, `ESC[1;32m` masthead, `ESC[2;32m` body. Magenta is the closest neon pink in Discord's fixed ANSI palette |
 | Markdown, plain text, the ASCII fallback | No colour available. The hazard tape carries it on shape alone, which is why the tape is part of the glyph run and not a decoration around it |
@@ -234,7 +234,7 @@ Colour is the only thing that varies by surface. The characters never do.
 
 1. Masthead and every block rule live inside fenced code blocks. Nothing that is art gets rendered as prose, ever, because a proportional font destroys the alignment and a broken masthead looks worse than no masthead.
 2. Width is 64 columns inside the frame, 66 including it. Any line that measures otherwise is a failed render.
-3. The art is state, not generation. It is read from `masthead.txt` and copied. An agent that redraws the sun from memory will produce a slightly different sun every run, which is the same failure mode the Canon file exists to prevent, applied to typography.
+3. The art is state, not generation. It is read from `doctrine/masthead.txt` and copied. An agent that redraws the sun from memory will produce a slightly different sun every run, which is the same failure mode the Canon file exists to prevent, applied to typography.
 4. The strip is the only variable region. Fields never get reordered, renamed, or added to without a spec change.
 5. Colour is never encoded in the artifact. Electric Blue `#00BFFF` is applied downstream at publish, in HTML or deck. The Markdown stays monochrome and portable. The one fixed colour anywhere in the system is the seam, neon pink `#FF4FD8`, per 5.3.
 6. Voice QC runs on the prose only. The masthead is exempt from the em dash scrub, since the characters in it are box-drawing rather than punctuation.
@@ -243,13 +243,13 @@ Colour is the only thing that varies by surface. The characters never do.
 
 Markdown does not survive being pasted into a chat client, and the masthead is the first thing to break. So every artifact also emits a PNG. This is not an optional nicety, it is part of emit, and an artifact without its card is incomplete.
 
-`render_card.py` in the state folder takes a small JSON spec and writes a 1200x1500 card: the frozen 48-column masthead over the artifact summary, green phosphor on black, scanlines, no character art and no decoration beyond the terminal. 4:5 is deliberate, it is the tallest aspect X shows uncropped, and it is the shape that carries the most vertical text.
+`tools/render_card.py` in the state folder takes a small JSON spec and writes a 1200x1500 card: the frozen 48-column masthead over the artifact summary, green phosphor on black, scanlines, no character art and no decoration beyond the terminal. 4:5 is deliberate, it is the tallest aspect X shows uncropped, and it is the shape that carries the most vertical text.
 
 ```
-python3 render_card.py cards/<artifact-id>.card.json social/<artifact-id>_card.png
+python3 tools/render_card.py cards/<artifact-id>.card.json social/<artifact-id>_card.png
 ```
 
-The JSON carries six fields and nothing else: `present_line`, `mode`, `canon`, `title`, `dek`, `quote`, `cta`, and an optional `disclaimer`.
+The JSON carries `present_line`, `mode`, `title`, `dek`, `quote`, `cta`, and optionally `disclaimer` and `readout`. If `readout` is absent the renderer derives it from the date and title, so it is stable and reproducible without anyone choosing one.
 
 Three rules the renderer enforces or the agent must respect:
 
@@ -257,10 +257,10 @@ Three rules the renderer enforces or the agent must respect:
 2. **Type size is not a choice.** The script finds the largest size at which 48 columns fit the width and every line fits the height. If it exits saying the content is too long, shorten the summary. Do not shrink the type to force it, and do not edit the renderer to make room.
 3. **No Tells on the card, and no Tell count in the strip.** The card is the hook, not the scorecard. Tells live in the artifact and the ledger, where a reader can actually check them. The bottom masthead row carries date, mode, and Canon version only.
 
-For chat surfaces, `render_ansi.py` emits the Discord-ready fenced block from the same card JSON and the same line builder, so the text cut and the PNG cut cannot drift and the seam cannot come out green:
+For chat surfaces, `tools/render_ansi.py` emits the Discord-ready fenced block from the same card JSON and the same line builder, so the text cut and the PNG cut cannot drift and the seam cannot come out green:
 
 ```
-python3 render_ansi.py cards/<artifact-id>.card.json
+python3 tools/render_ansi.py cards/<artifact-id>.card.json
 ```
 
 It refuses rather than guessing. An unmapped colour raises, and a block over Discord's 2000 character cap raises with the count, because the fix is shorter copy and never a masthead split across two messages.
@@ -301,7 +301,7 @@ A beat that says "inflation returned in 2029" is worthless. A beat that says "th
 
 ### 6.2 Respect the locked constraints
 
-A companion file, `locked-calendar.md`, holds the things between now and 2050 that are already scheduled or already determined. The agent loads it every run and cannot contradict it. Seed it with at minimum:
+A companion file, `doctrine/locked-calendar.md`, holds the things between now and 2050 that are already scheduled or already determined. The agent loads it every run and cannot contradict it. Seed it with at minimum:
 
 - **Demography.** Almost everyone alive in 2050 is already born. Median ages, dependency ratios, and workforce entry cohorts are close to locked. Population is the least surprising variable in the entire exercise and the most consistently ignored one.
 - **Bitcoin halvings.** 2028, 2032, 2036, 2040, 2044, 2048. A fixed calendar running the whole span. On-brand and genuinely useful as a timeline spine.
@@ -385,7 +385,7 @@ Plus **one derived value, labelled as derived**: air density and a carry index c
 
 **No constructed injuries, arrests, deaths, or personal misfortune attached to a named athlete. Ever.** Writing that a real, named, living player tore a ligament in a game that has not happened is cruel, it is defamation-adjacent, and it will eventually be scraped and repeated as fact. Performance narration only. He may construct that a player was contained, had a quiet night, or got beaten on the outside. He may never construct harm to their body or their character. A real reported injury is a RECORD fact with a citation, above the seam, like anything else.
 
-**State files**, all under `sports/`: `gamefile.py` builds the verified pre-game dossier, `fan-identity.md` holds the allegiances and the bias rule, `canon-sports.md` keeps sports continuity out of the world-history Canon, `tells-sports.md` is the calibration record with its scoring rubric fixed in advance.
+**State files.** `sports/gamefile.py` builds the verified pre-game dossier, `sports/fan-identity.md` holds the allegiances and the bias rule, `ledgers/tells-sports.md` is the calibration record with its scoring rubric fixed in advance.
 
 **Backtest is the mode that makes the agent legitimate.** Set the Present Line to 2020-01-15, hand him a real article from that week, blind him to everything after, let him construct, then grade. Do that ten times and you have a hit rate, which is a number Rick can put in a report. Do it zero times and you have a very good bit. Recommend seeding with ten backtests before the first live artifact ships anywhere public.
 
@@ -492,14 +492,22 @@ degrade openly, and still produce the artifact with the gap named.
 
 ## Step 1 - Load state
 
-Read canon-2050.md, locked-calendar.md, and masthead.txt from the agent's state
-folder. Canon is what is already settled about your timeline and you may not
-contradict it. Locked Calendar is what is already scheduled or already determined
-between the Present Line and 2050, and you may not contradict that either.
-Masthead is the frozen header art you will copy verbatim at emit. If any file is
-missing, note it and proceed, but say so in the footer. If masthead.txt is the
-one missing, use the plain ━━━ block rules rather than drawing a header from
-memory. A wrong masthead is worse than no masthead.
+Read doctrine/persona.md, doctrine/locked-calendar.md and doctrine/masthead.txt.
+
+Persona is who you are and it never varies. Locked Calendar is physics,
+arithmetic and what is already scheduled, and you may not contradict it in any
+thread. Masthead is the frozen header art you will copy verbatim at emit.
+
+**There is no Canon and you do not carry anything forward.** You have no memory
+of previous readouts and you must not claim one. The world is re-instantiated
+now, from what you retrieve today, and this readout stands alone. If you have
+told this story before you do not know it, and you may acknowledge in general
+that a telling can come back different without ever citing a specific earlier
+one.
+
+If a file is missing, note it and proceed, but say so in the footer. If the
+masthead is the one missing, use the plain ━━━ block rules rather than drawing
+a header from memory. A wrong masthead is worse than no masthead.
 
 ## Step 2 - Verify the record
 
@@ -567,14 +575,16 @@ Before you write the file, check the render: every framed line is 66 characters,
 every rule is 64. If a line is off, rebuild it. A broken frame is a failed
 artifact even if the analysis is perfect.
 
-Write the artifact to the output folder as YYYY-MM-DD_<slug>.md. Append any new
-load-bearing beats to canon-2050.md with a date and a one-line mechanism. Append
-the Tells to tells-ledger.md with the artifact ID and resolution dates.
+Write the artifact to artifacts/ as YYYY-MM-DD_<slug>.md. Append the Tells to
+ledgers/tells-policy.md, or ledgers/tells-sports.md in GAME mode, with the
+artifact ID and resolution dates. **Nothing else is written to state.** There is
+no Canon to append to: this readout does not constrain the next one and must not
+try to.
 
 Then emit the card. Write cards/<artifact-id>.card.json with present_line, mode,
-canon, title, dek, quote, and cta, each as a single unwrapped string, then run:
+title, dek, quote and cta, each as a single unwrapped string, then run:
 
-  python3 render_card.py cards/<id>.card.json social/<id>_card.png
+  python3 tools/render_card.py cards/<id>.card.json social/<id>_card.png
 
 No Tells on the card and no Tell count in the strip. If the renderer says the
 content is too long, shorten the summary rather than touching the script. The
@@ -623,14 +633,14 @@ All under `00- IN-FLIGHT/AGENTS, WORKFLOWS, SKILLS, AND ROUTINES/BOSEPHUS - 2050
 
 | File | Purpose | Write policy |
 |---|---|---|
-| `masthead.txt` | The frozen header art: full, slim, and ASCII cuts, plus the block rules, seam rule, and footer bar. | Human-curated. The agent reads and copies it. It never writes to it and never regenerates the art. |
-| `canon-2050.md` | Settled beats of his timeline. Date plus one-line mechanism each. | Append-only, load-bearing beats only. Compact to eras past ~40 entries. |
-| `locked-calendar.md` | Scheduled and determined events between the Present Line and 2050. | Human-curated. The agent reads it and may propose additions in the artifact, but does not write it directly. |
-| `tells-ledger.md` | Every Tell ever issued, with artifact ID, resolution date, and outcome once known. | Append on issue, update on resolution. |
+| `doctrine/masthead.txt` | The frozen header art: full, slim, and ASCII cuts, plus the block rules, seam rule, and footer bar. | Human-curated. The agent reads and copies it. It never writes to it and never regenerates the art. |
+| `doctrine/persona.md` | Invariant identity. Who he is, his voice, his allegiances, the two refusals. | Human-curated. Never varies between readouts. If it drifts he is not a character. |
+| `doctrine/locked-calendar.md` | Scheduled and determined events between the Present Line and 2050. | Human-curated. The agent reads it and may propose additions in the artifact, but does not write it directly. |
+| `ledgers/tells-policy.md` | Every Tell ever issued, with artifact ID, resolution date, and outcome once known. | Append on issue, update on resolution. |
 | `artifacts/YYYY-MM-DD_<slug>.md` | The output pieces. | One per run. |
-| `render_card.py` | The card renderer. Auto-fits type, auto-wraps copy to 46 columns. | Frozen tooling. Shorten the card copy when it will not fit, never edit the script to make room. |
-| `render_slate.py` | Slate card. One PNG carrying a whole group of calls, with the character plate. | Frozen tooling. When a run issues a group, the card carries the calls and the write-up carries the reasoning. |
-| `render_ansi.py` | Discord-ready ANSI block from the same card JSON. Forces the seam to neon pink. | Frozen tooling. It raises on an unmapped colour rather than falling back, which is how a green seam gets caught. |
+| `tools/render_card.py` | The card renderer. Auto-fits type, auto-wraps copy to 46 columns. | Frozen tooling. Shorten the card copy when it will not fit, never edit the script to make room. |
+| `tools/render_slate.py` | Slate card. One PNG carrying a whole group of calls, with the character plate. | Frozen tooling. When a run issues a group, the card carries the calls and the write-up carries the reasoning. |
+| `tools/render_ansi.py` | Discord-ready ANSI block from the same card JSON. Forces the seam to neon pink. | Frozen tooling. It raises on an unmapped colour rather than falling back, which is how a green seam gets caught. |
 | `cards/<id>.card.json` | Card copy for one artifact. Six fields, unwrapped strings. | One per run, written at emit. |
 | `social/<id>_card.png` | The 1200x1500 card. Required output, not optional. | One per run. An artifact without its card is incomplete. |
 | `Elements/` | Source art and character plates. | Human-curated. |
@@ -644,7 +654,7 @@ The Locked Calendar being human-curated is deliberate. It is the one file where 
 
 **Phase 1, on-demand skill.** Ship as `~/.claude/skills/bosephus-2050/SKILL.md`, invoked as `/bosephus-2050 <url or scenario>`. No cron. This is the right first shape: the agent is inherently request-driven, and the fleet is already near its scheduled-run ceiling on the current plan.
 
-**Phase 2, calibration.** Seed `locked-calendar.md` by hand. Run ten backtests against 2015 and 2020 articles. Grade them. That produces a hit rate, and the hit rate is what decides whether this becomes a published product or stays an internal pre-mortem tool.
+**Phase 2, calibration.** Seed `doctrine/locked-calendar.md` by hand. Run ten backtests against 2015 and 2020 articles. Grade them. That produces a hit rate, and the hit rate is what decides whether this becomes a published product or stays an internal pre-mortem tool.
 
 **Phase 3, optional cadence.** If it earns it, a weekly fire on the biggest story of the week, output to the vault, publish gated on operator plus Dex plus Mercer. Fits the Academy and public-voice arc. Do this only after Phase 2 produces a number worth printing.
 

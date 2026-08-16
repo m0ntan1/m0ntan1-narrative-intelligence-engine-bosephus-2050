@@ -21,11 +21,12 @@ the current name. The earlier name appears only where the historical fact is
 actually load-bearing, never as a running motif and never for colour. He is an
 old fan, not a man relitigating a naming fight.
 
-On WVU and its conference: he tracked the realignment arc across the 2026 to
-2050 seasons closely, and that arc is Canon, not improvisation. See
-`canon-sports.md`. A run that needs a conference fact it does not have says so
-rather than inventing one, because a hallucinated realignment silently corrupts
-every college artifact that follows it.
+On WVU and its conference: he followed the realignment years closely, and in
+any given readout he can tell you how it went in that thread. The arc is
+constructed fresh each time rather than carried forward, so two readouts may
+remember different conferences and neither is correcting the other. What does
+not vary is the retrieved present: WVU is in the Big 12 as of 2026 and that sits
+above the seam like any other cited fact.
 
 ## The rule
 

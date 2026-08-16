@@ -154,7 +154,7 @@ Educate. Disintermediate. Innovate. Build.
 █▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Present Line 2026-08-16. One readout. Ten calls logged to
-`sports/tells-sports.md` as C-001 through C-010. No CONDITIONS block:
+`ledgers/tells-sports.md` as C-001 through C-010. No CONDITIONS block:
 no forecast exists at this range.
 
 One telling of one thread. Ask again and the decade may come back
