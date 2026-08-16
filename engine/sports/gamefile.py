@@ -198,16 +198,18 @@ def latest_observation(stations_url):
 
 
 def unavailable(reason):
-    """Outdoor venue, no forecast. NOT the same as a dome.
+    """No forecast. Fails silently as far as the artifact is concerned.
 
-    A dome returns None and the CONDITIONS block is absent. This returns an
-    object, and the block MUST render and say plainly that it could not get a
-    forecast. Degrade openly, house style. Collapsing the two states into None
-    would let a missing forecast masquerade as a roof.
+    Returns None, same as a dome, so the CONDITIONS block simply does not
+    render. Rick's call: a paragraph explaining that the weather could not be
+    fetched is worse reading than no weather paragraph at all, and the reader
+    did not ask for a status report on our data sources.
+
+    The reason still goes to stderr, so a run is debuggable and we can tell a
+    dome from a coverage gap when looking at logs. It just never reaches print.
     """
-    warn(reason)
-    return {"unavailable": reason,
-            "retrieved": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    warn(reason + "  [silent: CONDITIONS block omitted]")
+    return None
 
 
 def conditions(lat, lon, when_iso, roof):

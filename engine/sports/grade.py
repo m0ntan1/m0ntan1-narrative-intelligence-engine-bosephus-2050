@@ -53,8 +53,20 @@ def parse_call(text, final):
     nums = [int(n) for n in re.findall(r"\b(\d{1,2})\b", text)]
     if len(nums) < 2:
         raise SystemExit("could not read two scores out of: {!r}".format(text))
-    away_first = text.lower().find(final["away_name"].split()[-1].lower())
-    home_first = text.lower().find(final["home_name"].split()[-1].lower())
+    def locate(full):
+        """Full club name first, then the last word. Last word alone is
+        ambiguous: Red Sox and White Sox both reduce to 'sox', as do the two
+        Chicago clubs' nicknames in other sports."""
+        low = text.lower()
+        i = low.find(full.lower())
+        if i != -1:
+            return i
+        nick = full.split()[-1].lower()
+        # only trust the nickname if it appears exactly once
+        return i if low.count(nick) != 1 else low.find(nick)
+
+    away_first = locate(final["away_name"])
+    home_first = locate(final["home_name"])
     if away_first == -1 or home_first == -1:
         print("  ! team names not both found in the call, assuming away first",
               file=sys.stderr)
