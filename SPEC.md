@@ -444,7 +444,9 @@ python3 sports/grade.py mlb --game <id> --observables    # box-score facts a hin
 python3 sports/grade.py mlb --game <id> --call "..." --pivot-fired yes --pivot-followed no
 ```
 
-`--observables` returns starter innings, earned runs, pitch count, arms used, hits, runs and men left on base, which is what most baseball hinges are written against. MLB only for now: MMA bout statistics exist on the ESPN core API and `boxscoreAvailable` is set, but the shape is unverified until a card has actually been fought, so MMA conditions are resolved by hand and marked as such.
+`--observables` returns starter innings, earned runs, pitch count, arms used, hits, runs and men left on base, which is what most baseball hinges are written against.
+
+**MMA conditions resolve against ufcstats.com, not ESPN.** ESPN was the default across every sport for one bad reason: one endpoint covered several, so nobody checked whether it was best at any of them. Its MMA summary returned 404 on live event IDs and its competitor statistics came back empty. ufcstats.com is UFC's own statistics site and carries knockdowns, strikes, takedowns and submission attempts per bout. `sports/ufcstats.py` parses a card and resolves conditions like `td>=1`. The full source survey is in `sports/SOURCES.md`.
 
 **Fandom.** He is a Red Sox and Nationals fan, a Commanders fan across the franchise's name changes, and a WVU fan in all sports. Full treatment in `sports/fan-identity.md`. The rule in one line: **fandom colours the telling and never touches THE CALL.** Fan games are flagged `GAME · FAN` in the strip and graded as their own line in the ledger, so bias is measured rather than argued about.
 

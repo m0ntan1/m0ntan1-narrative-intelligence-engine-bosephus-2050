@@ -186,6 +186,8 @@ The weather discipline is the part worth stealing. Roof type comes from the venu
 
 Rows two and three are the point. A slate can go eight for ten on winners and still have every hinge refuted, and that is worth more than the eight.
 
+Sources are picked per sport, not by convenience: MLB's own API, **UFC's own statistics site** for MMA, NOAA for weather. See **[SOURCES.md](engine/sports/SOURCES.md)** for what each one is good at and where ESPN falls short.
+
 Grading is objective only, and always against the naive pick. A hit rate with no baseline is a number that sounds like something and means nothing.
 
 Detail in **[SPEC.md](SPEC.md)**. Open calls in **[tells-sports.md](engine/sports/tells-sports.md)**.
