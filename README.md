@@ -1,13 +1,15 @@
 # MØNTAN1 Narrative Intelligence Engine
 ## Bosephus 2050
 
-![Bosephus 2050](docs/assets/social-card.png)
+![Bosephus 2050](docs/assets/hero.png)
 
-A **Narrative Intelligence engine** is not an agent, a bot, or a report generator. It is a machine that constructs a plausible narrative over a verified factual record, keeps a visible seam between the two halves, and leaves falsifiable markers behind so it can be graded later.
+A **Narrative Intelligence engine** is not an agent, a bot, or a report generator.
 
-The distinction is the whole product, and it is also the entire compliance posture. Call the thing an agent and a reader will take its output as a forecast, which is the one thing it must never be.
+It builds a narrative on top of a verified record, keeps a visible seam between the two halves, and leaves falsifiable markers behind so it can be graded later.
 
-This repo is **Bosephus 2050**, the first engine built on the pattern. One repo per engine, sharing the `m0ntan1-narrative-intelligence-engine-*` prefix, so each engine keeps its own spec, art, state and calibration record rather than sharing a framework it would have to fight.
+That distinction is the product. It is also the whole compliance posture. Call the thing an agent and a reader will take its output as a forecast, which is the one thing it must never be.
+
+This repo is **Bosephus 2050**, the first engine built on the pattern. One repo per engine, sharing the `m0ntan1-narrative-intelligence-engine-*` prefix.
 
 ---
 
@@ -17,123 +19,77 @@ A spec missing any of these is not an engine. It is a prompt with good prose.
 
 | # | Part | Why it is load-bearing |
 |---|---|---|
-| 1 | **A fixed vantage point** used as the reasoning device, not as decoration | The voice is the analytic method. B0SEPHUS G. ALTAMONT writes from 2050, so everything between now and then is settled history he is recounting rather than a future he is guessing at |
-| 2 | **A hard dated seam** between what is retrieved and cited and what is constructed | Rendered as a typographic object, not left as a prose obligation. A reviewer checks compliance at a glance instead of reading for it |
-| 3 | **Persistent identity, not a persistent timeline** | Who the narrator is never moves. What he recalls is redrawn every run. See the photograph, below |
-| 4 | **Falsifiable near-term markers** written to a ledger | The part everyone skips, because it is the only part that can make the engine look bad later. Skip it and you have no way to know whether the thing is any good |
+| 1 | **A fixed vantage point**, used as the reasoning device | The voice *is* the method. He writes from 2050, so the years between are settled history he recounts, not a future he guesses at |
+| 2 | **A hard dated seam** between retrieved and constructed | Rendered as an object, not left as a promise. A reviewer checks it at a glance |
+| 3 | **Persistent identity, not a persistent timeline** | Who he is never moves. What he recalls is redrawn every run |
+| 4 | **Falsifiable markers** in a ledger | The part everyone skips, because it is the only part that can make the engine look bad later |
 | 5 | **A fixed output schema** | Stops the voice wandering into fiction with no analytic spine |
-| 6 | **Frozen presentation art** and a required card emit | Markdown does not survive a paste into a chat client. The card is the only form that travels |
-| 7 | **A refusal posture** | Constructed content is never dressed as forecast, prediction, or advice |
+| 6 | **Frozen art and a required card** | Markdown does not survive a paste into a chat client. The card is the only form that travels |
+| 7 | **A refusal posture** | Constructed content is never dressed as forecast or advice |
 
-Full treatment in [SPEC.md](SPEC.md).
+Full treatment in **[SPEC.md](SPEC.md)**.
 
 ---
 
 ## The seam
 
-This is the piece worth stealing even if you never build anything else here. Between the cited half and the constructed half of every artifact sits a dated rule:
+Between the cited half and the constructed half of every readout sits a dated rule.
 
-![The seam rule, neon pink hazard tape reading PRESENT LINE 2026-08-16 CONSTRUCTED BELOW](docs/assets/seam.png)
+![The seam](docs/assets/seam.png)
 
-<details>
-<summary>Plain text, for copying</summary>
+Above it, retrieved, with a source. Below it, constructed, with none, because there is nothing to source.
 
-```
-▞▚▞▚▞▚▞▚▞ PRESENT LINE 2026-08-16 · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚▞▚
-```
+The rule is mandatory. No cited claim may appear beneath it. Its absence is a failed artifact, not a style lapse.
 
-</details>
-
-The seam is neon pink `#FF4FD8` on every surface that can carry colour, which is
-why it is an image here. GitHub markdown cannot colour text: ANSI escapes print
-raw, `style` attributes are sanitised out, and the diff-highlight trick reaches
-only red and green. An image is the only way the rule appears in the README the
-way it appears everywhere else. `engine/render_seam.py` generates it from the
-same palette and font as the cards, at either documented width.
-
-```bash
-python3 engine/render_seam.py 2026-08-16 docs/assets/seam.png 64
-```
-
-Everything above it was retrieved and carries a source. Everything below it was constructed and carries none, because there is nothing to source. The rule is mandatory, no cited claim may appear beneath it, and its absence is a failed artifact rather than a style lapse.
-
-Recall is implemented as retrieval, never as memory. The engine's past is accurate because it looks things up, not because a model remembers them.
+Recall is implemented as **retrieval, never as memory**. The engine's past is accurate because it looks things up.
 
 ---
 
 ## The photograph
 
-Early drafts of this engine held a Canon file: a set of settled beats every run
-had to honour, so the constructed future stayed consistent across artifacts.
-That was a mistake, and an expensive one. Canon made every artifact a hostage to
-every other artifact. One constructed beat contradicted by reality poisons
-everything downstream that honoured it, and the blast radius compounds with
-every run.
+*Back to the Future* has a photograph the hero carries in his pocket. His brother and sister fade out of it as the past changes around them, and fade back in once it is repaired. The picture is not a record. It is a live readout of a future still being decided.
 
-It was replaced by the photograph.
+That is the model here, and it replaced a worse one.
 
-The world is re-instantiated at query time. Every run retrieves the real record
-as it stands on the day and constructs forward from that, and only that. A later
-recollection that differs from an earlier one is not an error to suppress. The
-negative has not fixed. People at the edges of the frame come and go depending
-on what happened last week, and the thing in the middle of the frame does not
-move.
+An early draft kept a **Canon file**: settled beats every run had to honour, so the constructed future stayed consistent across artifacts. That was a mistake. Canon made every artifact a hostage to every other one. A single beat contradicted by reality poisons everything downstream that honoured it, and the damage compounds with every run.
 
-**What stays invariant** is identity, not timeline: the persona, and the locked
-constraints that are physics and arithmetic rather than construction. Halvings,
-demography, build times, fiscal compounding. A future violating those is broken
-in any thread.
+So the world is re-instantiated at query time. Every run retrieves the record as it stands that day and builds forward from that alone. A later recollection that differs from an earlier one is not an error to suppress. **The negative has not fixed.** People at the edges of the frame come and go depending on what happened last week, and the thing in the middle of the frame does not move.
 
-**Continuity moves to reality.** Under Canon, runs were consistent with each
-other. Now they are consistent with the record, checked by a ledger. That is the
-better spine, and it is the one that can be graded.
+What stays invariant is **identity, not timeline**: the persona, and the locked constraints that are physics and arithmetic rather than construction.
 
-Every artifact carries a `READOUT` identifier rather than a version number,
-because a version implies succession and readouts have none.
+Continuity moves from consistency with itself to consistency with reality, checked by a ledger. That is the only kind that can be graded.
+
+Every artifact carries a `READOUT` identifier rather than a version number, because a version implies succession and readouts have none.
+
+---
 
 ## The machine in the storage room
 
-<img src="docs/assets/the-machine.jpg" alt="Seen over his shoulder in a dark room, a man outlined in red sits at an old CRT. The screen shows the green masthead: a portrait, the year 2050, and a readout stamp." width="520" align="right">
+<img src="docs/assets/the-machine.jpg" alt="Seen over his shoulder in a dark room, a man outlined in red sits at an old CRT showing the green masthead." width="440" align="right">
 
-This engine explains itself in exactly one place, and it does it in character.
+The engine explains itself in exactly one place, and it does it in character.
 
-Bosephus at forty-one, in West Virginia, in 2026, moves a tarp in the old boiler
-room behind the office and finds a machine that should not still power on. There
-is nothing on it. Solitaire. A word processor wanting a licence key. And one
-folder with a name he did not put there.
+Bosephus at forty-one finds a machine under a tarp in the old boiler room that should not still power on. One folder on it he did not put there. It opens as garbage until he notices the garbage has structure: it does not want a viewer, it wants a terminal.
 
-It opens as garbage until he notices the garbage has structure. It does not want
-a viewer. It wants a terminal.
+He keeps going back because the scores are the part it misses and **the turn is the part it gets**.
 
-> He does not get everything right. I have asked him about outcomes and he has
-> been wrong. Scores, numbers, who won a thing. What he does not miss is the
-> turn. He tells me what a thing hinged on, before, with a date on it, and
-> specific enough that I can go and watch for it myself.
+Two things it will not discuss: the price of anything, and his own life. Not because MØNTAN1 is not a registered adviser, though it is not. Because it has something behind it that it will not risk to win an argument.
 
-Two things he will not discuss: the price of anything, and Bosephus's own life.
-Not because MØNTAN1 is not a registered adviser, though it is not. Because he is
-sixty-five and has something behind him he will not risk to win an argument with
-a younger man who already thinks he is right. Every guardrail in this repo is
-that refusal wearing a different hat.
+Every guardrail in this repo is that refusal wearing a different hat. It is also why the cards look the way they do: the phosphor and the block masthead are a rendering of a real object in the story, not a style choice.
 
-It is also why the cards look the way they do. The green phosphor, the
-scanlines, the block-drawn masthead: not a style choice, a rendering of a real
-object in the story.
-
-**[Read it in full](FRAME.md).** It is the shortest way to understand why any of
-the rest of this is shaped the way it is.
+**[Read it in full](FRAME.md)** — about four minutes, and the shortest way to understand why the rest of this is shaped the way it is.
 
 <br clear="all">
+
+---
 
 ## Success is the pivot, not the outcome
 
 This engine gets outcomes wrong, routinely. That is neither hidden nor excused.
-What it is for is naming the hinge: the catalyst, dated, specific enough that a
-reader could go and stand where it happens and watch it fire.
 
-Anyone can post a score. Almost nobody publishes a dated catalyst in advance and
-then shows whether it fired. So the pivot is graded as two claims, and the first
-is the headline:
+What it is for is naming the hinge: **the catalyst, dated, specific enough that a reader could go and stand where it happens and watch it fire.**
+
+Anyone can post a score. Almost nobody publishes a dated catalyst in advance and then shows whether it fired.
 
 | Claim | Graded | Published |
 |---|---|---|
@@ -141,150 +97,108 @@ is the headline:
 | Was it load-bearing? | Judged, standard fixed in advance | Internal |
 | The outcome or score | Mechanical | Secondary line |
 
+---
+
+## What a readout looks like
+
+| Article | Slate |
+|---|---|
+| ![Article card](docs/assets/specimen-article.png) | ![Slate card](docs/assets/specimen-slate.png) |
+| One story. Masthead, headline, seam, pull quote, door. | A group of calls, all on one card. |
+
+Wide 1600x900 for link unfurls, with a data panel built from the readout's own cited numbers:
+
+![Wide card](docs/assets/social-card.png)
+
+Real examples with their full write-ups are in **[examples/](examples/)**.
+
+---
+
 ## Quickstart
 
-Requires Python 3, Pillow, and a monospace font with half-block glyph coverage. JetBrains Mono Nerd Font is the reference face. Plenty of mono faces lack `▀ ▄ █ ▞ ▚ ▁` and will render tofu.
+Needs Python 3, Pillow, and a monospace font with half-block glyph coverage. JetBrains Mono Nerd Font is the reference; many faces lack `▀ ▄ █ ▞ ▚ ▁` and render tofu.
 
 ```bash
 pip install pillow
-python3 engine/render_card.py engine/cards/2026-08-16_clarity-act.card.json out.png
+python3 engine/render_card.py engine/cards/2026-08-16_ercot-pause.card.json out.png
 ```
 
-If your fonts live somewhere unusual:
+| Renderer | Output |
+|---|---|
+| `render_card.py` | 1200x1500 article card |
+| `render_slate.py` | 1200x1500 slate, a group of calls |
+| `render_wide.py` | 1600x900 with a data panel, for unfurls |
+| `render_hero.py` | 1600x900 brand card with the character plate |
+| `render_ansi.py` | Discord ANSI block, seam forced to neon pink |
+| `render_seam.py` | Seam as a PNG, for surfaces that cannot colour text |
+
+Two rules the renderers enforce rather than suggest: **copy is never hand-wrapped**, and **type size is never a choice**. If a renderer refuses, the fix is shorter copy. `engine/test_renderers.py` guards both, plus truncation, panel overflow and missing attribution.
+
+Full conventions in **[SPEC.md](SPEC.md)**.
+
+---
+
+## SPORTS LOGIC
+
+A policy marker resolves in months. A ballgame resolves in three hours.
+
+That is why sports is here. It is the only place this engine generates honest forward calibration at any speed, and it is the proving ground that earns the right to be believed on the serious work.
 
 ```bash
-NIE_FONT_DIR=/path/to/fonts python3 engine/render_card.py <card.json> <out.png>
+python3 engine/sports/gamefile.py mlb --date 2026-08-16    # list games
+python3 engine/sports/gamefile.py mlb --game 823344        # verified dossier
+python3 engine/sports/grade.py  mlb --game 823344 --call "Red Sox 5, Pirates 3"
 ```
 
-The card JSON carries seven fields and nothing else:
+The weather discipline is the part worth stealing. Roof type comes from the venue record, never from anyone's memory of the ballpark:
 
-```json
-{
-  "present_line": "2026-08-16",
-  "mode": "ARTICLE",
-  "canon": "v01",
-  "title":      ["The bill that could not be written while he was in office"],
-  "dek":        ["Warren, the CLARITY Act, and a cloture motion filed at 4:52 in the morning."],
-  "quote":      ["\"Stop counting votes and go read the manager's amendment...\""],
-  "cta":        ["▸ Read the full recollection of the events that follow."]
-}
-```
+| Roof | Behaviour |
+|---|---|
+| Dome | Weather never fetched, **block does not render** |
+| Retractable | Fetched, flagged unknown unless actually reported |
+| Open | Fetched, and the block **must name a mechanism or get cut** |
+| No forecast | Fails silently. NWS covers the US only |
 
-Two things are deliberately not adjustable:
+Grading is objective only, and always against the naive pick. A hit rate with no baseline is a number that sounds like something and means nothing.
 
-- **Do not hand-wrap the copy.** Write each field as one unbroken string. The renderer wraps to 46 columns. Hand-wrapping is exactly where an author breaks the column grid.
-- **Type size is not a choice.** The renderer picks the largest size at which 48 columns fit the width and every line fits the height. If it refuses, shorten the copy. Do not shrink the type and do not edit the script to make room.
-
-For chat surfaces, `render_ansi.py` emits a Discord-ready fenced block from the
-same JSON and the same line builder, so the text cut and the PNG cut cannot drift:
-
-```bash
-python3 engine/render_ansi.py engine/cards/2026-08-16_clarity-act.card.json
-```
-
-**The seam is always neon pink,** `#FF4FD8`, on every surface that can carry
-colour. It is the one element that breaks the green, and that is the point: in a
-field of phosphor green the eye lands on the seam first, which is the reading
-order the artifact wants. The ANSI emitter raises on an unmapped colour rather
-than falling back to green, because a silent fallback is exactly how a seam goes
-green without anyone noticing.
+Detail in **[SPEC.md](SPEC.md)**. Open calls in **[tells-sports.md](engine/sports/tells-sports.md)**.
 
 ---
 
 ## Layout
 
 ```
-SPEC.md                  The full Bosephus 2050 spec, including the system prompt
+SPEC.md                  The spec, including the system prompt
+FRAME.md                 The story, in character
 engine/
-  masthead.txt           Frozen art. Three cuts: 64 col, 48 col chat, 7-bit ASCII
-  render_card.py         Canonical card emit, 1200x1500, terminal only
-  render_ansi.py         Discord ANSI block, seam forced to neon pink
-  render_seam.py         Seam rule as a PNG, for surfaces that cannot colour text
-  render_slate.py        Slate card: a whole group of calls on one PNG
-  cards/                 Card copy, one JSON per artifact
-  sports/                SPORTS LOGIC, mode GAME
-    gamefile.py          Verified pre-game dossier: venue, roof, weather, form
-    grade.py             Resolves a call against the final. Baseline included
-    fan-identity.md      Allegiances, and the rule that keeps them out of THE CALL
-    canon-sports.md      Sports continuity, kept out of the world-history Canon
-    tells-sports.md      Calibration record, rubric fixed before the first call
-examples/
-  2026-08-16_clarity-act.md    A complete artifact
-  2026-08-16_clarity-act_card.png
-  canon-2050.md          Persistent timeline state
-  tells-ledger.md        The calibration record
+  masthead.txt           Frozen art: 64 col, 48 col chat, 7-bit ASCII
+  persona.md             Invariant identity
+  locked-calendar.md     Invariant constraints: physics and arithmetic
+  render_*.py            Six renderers
+  test_renderers.py      Guards silent truncation, shrink and overflow
+  cards/                 Card copy, one JSON per readout
+  sports/                SPORTS LOGIC tooling and the calibration record
+examples/                Complete readouts with their cards
+docs/                    The Pages site
 ```
-
----
-
-## SPORTS LOGIC
-
-A ballgame resolves in three hours. Every other mode's markers resolve in months.
-So sports is where this engine generates honest forward calibration at any speed,
-and that is the point of the mode: it is the proving ground that earns the right
-to be believed on the serious work.
-
-```bash
-python3 engine/sports/gamefile.py mlb --date 2026-08-16      # list games
-python3 engine/sports/gamefile.py mlb --game 823344          # verified dossier
-python3 engine/sports/grade.py  mlb --game 823344 --call "Red Sox 5, Pirates 3"
-```
-
-The dossier is everything that belongs above the seam. Its job is the conditions
-block, and the discipline there is the whole difference between weather as a
-differentiator and weather as filler:
-
-| Roof | Behaviour |
-|---|---|
-| Dome | Weather is never fetched and **the block does not render at all** |
-| Retractable | Fetched, flagged `roof_decision_unknown` unless actually reported |
-| Open | Fetched, and the block **must name a mechanism or get cut** |
-| No forecast | Renders and says so. A missing forecast is not a dome |
-
-That last row matters more than it looks. The National Weather Service covers the
-United States and its territories only, so Toronto, London and Mexico City return
-nothing. Collapsing that into the dome case would let a missing forecast
-masquerade as a roof.
-
-Grading is objective only. Winner, margin against a fixed threshold, and for MMA
-method and round scored separately. Every call is measured against the naive pick
-for that game, because a hit rate with no baseline is a number that sounds like
-something and means nothing.
-
----
-
-## The worked example
-
-[`examples/2026-08-16_clarity-act.md`](examples/2026-08-16_clarity-act.md) is a real run against the CLARITY Act cloture filing of 2026-08-08. It carries six cited hard numbers, a named pivot, three weighted forks, and five Tells, the first two of which resolve on 2026-09-16.
-
-Read it for the seam and for what sits on either side of it. Note that the market data came from a market data API rather than from press reporting, and that where the largest move in the window looked idiosyncratic the artifact says so and declines to attribute it. Note also that a political claim central to the story is quoted as a claim, with its source, rather than laundered into a verified number.
 
 ---
 
 ## What this is honest about
 
-- **The engine is not a forecaster.** Every artifact says so in its own footer. Constructed content is a reasoning device.
-- **Backtests validate the harness, not the forecaster.** A constructor writing a 2015 branch already knows about the pandemic and the 2022 inflation shock, and no amount of good faith unknows it inside one session. Run 01 scored the machinery at 78.8%. Its 73.5% reality-match measures how well something that knew the answer could write a plausible path to it, which is not a hit rate and is not published as one. Only forward Tells validate the forecaster.
-- **Weight bands, never percentages.** Forks are load-bearing, live, or tail. A decimal on a narrative artifact makes it look like model output, which is the exact confusion the whole posture exists to prevent.
-- **Boring is allowed and periodically required.** Most decades are mostly continuity with two or three real discontinuities. If every beat is a discontinuity, the artifact is fiction.
+- **It is not a forecaster.** Every readout says so in its own footer.
+- **Backtests validate the harness, not the forecaster.** A constructor writing a 2015 branch already knows about the pandemic. Run 01 scored the machinery at 78.8%; its 73.5% reality match is not a hit rate and is not published as one.
+- **Weight bands, never percentages.** Load-bearing, live, or tail. A decimal makes a narrative artifact look like model output.
+- **Boring is allowed and periodically required.** Most decades are mostly continuity. If every beat is a discontinuity, the artifact is fiction.
 
 ---
 
 ## Rights
 
-**Code is Apache 2.0.** The renderers, `gamefile.py`, `grade.py` and everything
-else executable in this repository. Use it, build on it, ship it commercially.
-Keep the `NOTICE` file with it, which is how credit travels.
+**Code is Apache 2.0.** Use it, build on it, ship it commercially. Keep the `NOTICE` file with it, which is how credit travels.
 
-**The brand and the content are not.** Reserved in full by MØNTAN1 LLC:
+**The brand and the content are not.** Reserved in full by MØNTAN1 LLC: the B0SEPHUS G. ALTAMONT persona, the specification and documentation prose, all artwork, and the marks MØNTAN1, MONTANI and B0SEPHUS.
 
-- The B0SEPHUS G. ALTAMONT persona and character
-- The specification prose in `SPEC.md` and all documentation prose
-- The masthead artwork, card artwork, and all images
-- The marks MØNTAN1, MONTANI and B0SEPHUS
-
-Apache 2.0 section 6 grants no trademark rights, which is deliberate. Build your
-own engine with these tools and give it your own name. If you want to use the
-persona or the artwork, ask.
+Apache 2.0 section 6 grants no trademark rights, which is deliberate. Build your own engine with these tools and give it your own name.
 
 Built in West Virginia. Educate. Disintermediate. Innovate. Build.
