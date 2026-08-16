@@ -105,6 +105,25 @@ except SystemExit as e:
 check("render_wide terminal panel is wide enough for 48 cols",
       rww.TERM_W - 2 * rww.PAD >= ImageFont.truetype(rc.F_BOLD, rc.MIN_FS).getlength("0" * 48))
 
+# --- 8. data panel must wrap to its own width, not slice -----------------
+fig = {"title": "A title long enough that it has to wrap somewhere",
+       "unit": "GW", "bars": [{"label": "Requested", "value": 474},
+                              {"label": "Record peak", "value": 95}],
+       "note": "A note long enough that it also has to wrap more than once."}
+pl = rww.bar_lines(fig)
+over = [l for l, _c, _b in pl if len(l) > rww.PANEL_COLS]
+check("data panel wraps to panel width", not over, "over-wide: %s" % over[:2])
+joined = " ".join(l for l, _c, _b in pl)
+lost = [w for w in fig["note"].split() if w not in joined]
+check("data panel loses no words from the note", not lost, "lost %s" % lost[:3])
+try:
+    rww.bar_lines({"title": "t", "bars": [{"label": "X" * 60, "value": 1}]})
+    check("data panel refuses an over-long bar label", False, "truncated")
+except SystemExit as e:
+    check("data panel refuses an over-long bar label", "too long" in str(e))
+check("wrap() honours a custom width",
+      max(len(l) for l in rc.wrap("word " * 40, 20)) <= 20)
+
 print()
 print("FAILURES:", len(fails))
 sys.exit(1 if fails else 0)

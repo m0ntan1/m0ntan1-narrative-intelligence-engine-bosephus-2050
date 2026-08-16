@@ -14,5 +14,21 @@
   "cta": [
     "> Read the full recollection of the events that follow."
   ],
-  "disclaimer": "Constructed. Not a forecast, not advice."
+  "disclaimer": "Constructed. Not a forecast, not advice.",
+  "figures": {
+    "title": "Requests vs record peak",
+    "unit": "GW",
+    "bars": [
+      {
+        "label": "Requested",
+        "value": 474
+      },
+      {
+        "label": "ERCOT record peak",
+        "value": 95,
+        "approx": true
+      }
+    ],
+    "note": "~90% of requests are data centres. Filing is close to free."
+  }
 }

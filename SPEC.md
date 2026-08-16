@@ -262,17 +262,27 @@ Three rules the renderer enforces or the agent must respect:
 3. **Nothing is ever silently cut or silently shrunk.** Every renderer either fits the copy or refuses with a message naming the field and the limit. This was learned the hard way on readout 91C4: the card first rendered at less than half normal type size because there was no floor, and the floor then exposed a worse fault where a field passed as a bare string was iterated character by character, turning one line into forty. `tools/test_renderers.py` guards both, plus over-long rows and panel overflow. Run it after touching any renderer.
 3. **No Tells on the card, and no Tell count in the strip.** The card is the hook, not the scorecard. Tells live in the artifact and the ledger, where a reader can actually check them. The bottom masthead row carries date, mode, and Canon version only.
 
-**The wide cut, ARTICLE mode only.** `tools/render_wide.py` renders 1600x900 for link unfurls: terminal on the left, and the story's own lead image on the right, rebuilt as ASCII. It takes `--url` and lifts the source article's `og:image`, or `--image` for a file.
+**The wide cut, for link unfurls.** `tools/render_wide.py` renders 1600x900: terminal left, and on the right a data panel drawn from the readout's own cited numbers.
 
 ```
-python3 tools/render_wide.py cards/<id>.card.json social/<id>_wide.png --url <article>
+python3 tools/render_wide.py cards/<id>.card.json social/<id>_wide.png
 ```
 
-Two things to know before using it.
+An earlier version put the source article's photograph there, converted to characters. That is gone. Lifting a news outlet's image raises a rights question we cannot answer, the conversion quality is a lottery decided by a histogram we do not control, and it needs a network fetch that can fail. It was also wrong for the conceit: a terminal in 2050 does not show you a wire photo, it draws what it knows.
 
-**Source images are converted to characters, never tinted.** That matches the masthead treatment, and it matters for a second reason: a card that republishes a news outlet's photograph is a reproduction, one that rebuilds it out of characters is a transformation. For anything public, prefer an image you own or one you generated. The renderer does not check rights and cannot.
+The panel takes an optional `figures` block on the card and scales the bars to the largest value, so the shape carries the ratio before anyone reads a digit. On the ERCOT readout that is 474 GW of requests against a record peak near 95, which is the entire argument of the piece in one image.
 
-**Most news photography is a poor ASCII subject and the tool will tell you.** ASCII needs a clear silhouette and midtones spread across the ramp. The first real test used a data center interior that was 80 percent near-black with 9 percent midtone, and it converted into two bright wedges on an empty field. That was the renderer being faithful, not broken. It now measures the histogram and warns before rendering. When it warns, use `--image` with something else. Generated art and high-contrast subjects convert extremely well.
+```json
+"figures": {
+  "title": "Requests vs record peak",
+  "unit": "GW",
+  "bars": [{"label": "Requested", "value": 474},
+           {"label": "ERCOT record peak", "value": 95, "approx": true}],
+  "note": "~90% of requests are data centres. Filing is close to free."
+}
+```
+
+Pick the comparison that *is* the thesis. If the panel needs three bars to make a point, it is the wrong point.
 
 For chat surfaces, `tools/render_ansi.py` emits the Discord-ready fenced block from the same card JSON and the same line builder, so the text cut and the PNG cut cannot drift and the seam cannot come out green:
 

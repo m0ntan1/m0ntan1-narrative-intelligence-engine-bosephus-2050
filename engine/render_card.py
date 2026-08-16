@@ -81,14 +81,9 @@ MASTHEAD = [
 
 # ---------------------------------------------------------------- portrait
 
-_HERE = os.path.dirname(os.path.abspath(__file__))
-# vault layout puts Elements beside tools/; repo layout puts it inside engine/
-PORTRAIT = next((p for p in (
-    os.path.join(_HERE, "Elements", "X"),
-    os.path.join(os.path.dirname(_HERE), "Elements", "X"),
-) if os.path.isdir(os.path.dirname(p))), os.path.join(_HERE, "Elements", "X"))
 PORTRAIT = os.path.join(
-    os.path.dirname(PORTRAIT),
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "Elements",
     "nano-banana-2_Professional_graphic_design_2D_illustration_Make_this_an_ASCII_Hex_color_8DFFB4_-0.jpg")
 
 # The masthead's left half is a block-character sun. On a PNG we can do better,
@@ -187,8 +182,8 @@ def seam(date):
     return tape(l) + txt + tape(r)
 
 
-def wrap(block):
-    """Wrap to 46 columns.
+def wrap(block, width=WRAP):
+    """Wrap to `width` columns, 46 by default.
 
     Accepts a string or a list of strings. A bare string used to be iterated
     character by character, so a 40 character disclaimer became 40 lines and
@@ -199,7 +194,7 @@ def wrap(block):
         block = [block]
     out = []
     for para in block:
-        out.extend(textwrap.wrap(para, WRAP) or [""])
+        out.extend(textwrap.wrap(para, width) or [""])
     return out
 
 
