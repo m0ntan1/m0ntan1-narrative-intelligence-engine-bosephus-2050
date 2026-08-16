@@ -45,6 +45,7 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 
 UA = "montan1-narrative-intelligence-engine (rick@montanibitcoin.com)"
+ESPN_UA = "curl/8.7.1"   # see get(): ESPN 403s descriptive and browser UAs
 MLB = "https://statsapi.mlb.com/api/v1"
 ESPN = "https://site.api.espn.com/apis/site/v2/sports"
 NWS = "https://api.weather.gov"
@@ -54,8 +55,15 @@ ESPN_PATH = {"nfl": "football/nfl", "mma": "mma/ufc",
 
 
 def get(url):
-    req = urllib.request.Request(url, headers={"User-Agent": UA,
-                                               "Accept": "application/json"})
+    """Per-host User-Agent, and this is not cosmetic.
+
+    NWS policy requires a descriptive UA with contact details. ESPN's edge does
+    the opposite: it 403s a descriptive UA and a browser UA, and serves a plain
+    curl UA. Sending one UA everywhere breaks one of the two, silently, and the
+    ESPN failure looks like a missing game rather than a blocked request.
+    """
+    ua = ESPN_UA if "espn.com" in url else UA
+    req = urllib.request.Request(url, headers={"User-Agent": ua})
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 

@@ -56,6 +56,39 @@ go against it, so the delta will actually measure something.
 | S-009 | `823912` | Brewers @ Dodgers | **Brewers 3, Dodgers 2** | no | Dodgers (H) | Henderson 0.91 WHIP against Skubal 0.93. Two aces, low total, best record takes it | open |
 | S-010 | `824156` | Mariners @ Astros | **Astros 5, Mariners 3** | no | Astros (H) | Seattle 3.92 RS/G is the weakest offence on the slate, 95F so the roof is likely shut | open |
 
+
+## Ledger, NCAA football week 1
+
+Issued 2026-08-16, twelve to twenty-one days before kickoff. Two things a reader
+should know before reading a hit rate off these.
+
+**No weather.** NWS forecasts reach 6.5 days. These games are 12 to 21 days out,
+so the CONDITIONS block is absent from all ten and the weather layer contributed
+nothing. It can be layered in nearer kickoff, but the calls are locked now and do
+not move.
+
+**No current-season data.** Week 1 means every record is 0-0. These rest on 2025
+final records and home field, nothing more. ESPN's pointsFor and pointsAgainst
+fields are not season totals (North Carolina shows PF 16 for a 4-8 year), so they
+were ignored rather than trusted. Expect these to grade worse than the MLB set,
+and if they do not, that is worth knowing too.
+
+Margin threshold is 10 points for CFB, fixed here before any game is played.
+Six calls agree with the naive home pick and four go against it.
+
+| # | Game | Date | Matchup | The call | Fan | Baseline | Reasoning | Outcome |
+|---|---|---|---|---|---|---|---|---|
+| C-001 | `401856780` | 2026-09-05 | Coastal Carolina @ West Virginia | **West Virginia 27, Coastal Carolina 20** | yes | WVU (H) | WVU 4-8 in 2025 and Coastal 6-7. Home opener, but a four-win team does not blow anybody out. Called close on purpose | open |
+| C-002 | `401858206` | 2026-09-05 | Miami @ Stanford | **Miami 38, Stanford 13** | no | Stanford (H) | 13-3 against 4-8. The only thing road status buys Stanford here is a nicer bus ride | open |
+| C-003 | `401858209` | 2026-09-05 | Tulane @ Duke | **Tulane 28, Duke 24** | no | Duke (H) | 11-3 on the road against 9-5. Records say the visitor is the better team | open |
+| C-004 | `401864432` | 2026-09-06 | Western Kentucky @ Nevada | **Western Kentucky 31, Nevada 21** | no | Nevada (H) | 9-4 at 3-9. Road favourite, and Nevada gave up the season last year | open |
+| C-005 | `401860878` | 2026-09-05 | Wyoming @ Colorado State | **Wyoming 24, Colorado State 17** | no | Colorado State (H) | 4-8 at 2-10. Border War, and the worse team is at home | open |
+| C-006 | `401858425` | 2026-09-05 | North Texas @ Indiana | **Indiana 34, North Texas 20** | no | Indiana (H) | 16-0 hosting 12-2. North Texas is real, which is why this is not a blowout | open |
+| C-007 | `401858433` | 2026-09-05 | Boise State @ Oregon | **Oregon 35, Boise State 17** | no | Oregon (H) | 13-2 at home against 9-5. Boise travels well and still loses this by three scores | open |
+| C-008 | `401856660` | 2026-09-05 | Clemson @ LSU | **LSU 27, Clemson 24** | no | LSU (H) | Both 7-6. Dead even on the record, so the call is home field and nothing else | open |
+| C-009 | `401858438` | 2026-09-06 | Wisconsin @ Notre Dame | **Notre Dame 31, Wisconsin 13** | no | Notre Dame (H) | 10-2 hosting 4-8 | open |
+| C-010 | `401858437` | 2026-09-06 | Washington State @ Washington | **Washington 30, Washington State 23** | no | Washington (H) | Apple Cup. 9-4 over 7-6, and rivalry games run closer than the gap suggests | open |
+
 ## Resolution
 
     python3 grade.py mlb --game <id> --call "<the call>"

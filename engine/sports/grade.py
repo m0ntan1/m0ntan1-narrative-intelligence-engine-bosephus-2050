@@ -23,13 +23,23 @@ import sys
 import urllib.request
 
 UA = "montan1-narrative-intelligence-engine (rick@montanibitcoin.com)"
+ESPN_UA = "curl/8.7.1"   # see get(): ESPN 403s descriptive and browser UAs
 MLB = "https://statsapi.mlb.com/api/v1"
 
-MARGIN = {"mlb": 2, "nfl": 7}          # fixed in tells-sports.md, before any call
+MARGIN = {"mlb": 2, "nfl": 7, "cfb": 10}   # fixed in tells-sports.md, before any call
+ESPN = "https://site.api.espn.com/apis/site/v2/sports"
 
 
 def get(url):
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    """Per-host User-Agent, and this is not cosmetic.
+
+    NWS policy requires a descriptive UA with contact details. ESPN's edge does
+    the opposite: it 403s a descriptive UA and a browser UA, and serves a plain
+    curl UA. Sending one UA everywhere breaks one of the two, silently, and the
+    ESPN failure looks like a missing game rather than a blocked request.
+    """
+    ua = ESPN_UA if "espn.com" in url else UA
+    req = urllib.request.Request(url, headers={"User-Agent": ua})
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 
@@ -48,22 +58,48 @@ def mlb_final(game_pk):
     }
 
 
+def espn_final(sport, event_id):
+    path = {"cfb": "football/college-football", "nfl": "football/nfl"}[sport]
+    d = get("{}/{}/summary?event={}".format(ESPN, path, event_id))
+    comp = ((d.get("header") or {}).get("competitions") or [{}])[0]
+    if not comp.get("status", {}).get("type", {}).get("completed"):
+        raise SystemExit("game is {}, not final. Nothing to grade yet.".format(
+            comp.get("status", {}).get("type", {}).get("description", "unknown")))
+    out = {}
+    for c in comp.get("competitors", []):
+        side = "home" if c.get("homeAway") == "home" else "away"
+        out[side] = int(c.get("score"))
+        out[side + "_name"] = (c.get("team") or {}).get("displayName")
+    return out
+
+
 def parse_call(text, final):
     """Pull two integers out of a call written the way Bosephus writes it."""
     nums = [int(n) for n in re.findall(r"\b(\d{1,2})\b", text)]
     if len(nums) < 2:
         raise SystemExit("could not read two scores out of: {!r}".format(text))
     def locate(full):
-        """Full club name first, then the last word. Last word alone is
-        ambiguous: Red Sox and White Sox both reduce to 'sox', as do the two
-        Chicago clubs' nicknames in other sports."""
+        """Find where a club is named, however the writer shortened it.
+
+        Tries the longest form first and works down: the full display name,
+        then progressively shorter word-prefixes, then the nickname alone.
+        Longest-first is what disambiguates Washington from Washington State,
+        and prefix matching is what catches "Duke" inside "Duke Blue Devils"
+        and "West Virginia" inside "West Virginia Mountaineers".
+
+        Matching only the full name and the nickname, as this did originally,
+        silently reversed every college call: neither form appears in the way
+        anybody actually writes a score line.
+        """
         low = text.lower()
-        i = low.find(full.lower())
-        if i != -1:
-            return i
-        nick = full.split()[-1].lower()
-        # only trust the nickname if it appears exactly once
-        return i if low.count(nick) != 1 else low.find(nick)
+        parts = full.split()
+        cands = [" ".join(parts[:i]) for i in range(len(parts), 0, -1)]
+        cands.append(parts[-1])
+        for c in cands:
+            i = low.find(c.lower())
+            if i != -1:
+                return i
+        return -1
 
     away_first = locate(final["away_name"])
     home_first = locate(final["home_name"])
@@ -99,13 +135,13 @@ def grade(sport, final, call):
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("sport", choices=["mlb"])
+    ap.add_argument("sport", choices=["mlb", "cfb", "nfl"])
     ap.add_argument("--game", required=True)
     ap.add_argument("--call")
     ap.add_argument("--call-json")
     a = ap.parse_args()
 
-    final = mlb_final(a.game)
+    final = mlb_final(a.game) if a.sport == "mlb" else espn_final(a.sport, a.game)
     if a.call_json:
         call = json.loads(a.call_json)
     elif a.call:
