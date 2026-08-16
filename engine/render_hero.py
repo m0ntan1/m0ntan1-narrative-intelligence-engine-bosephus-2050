@@ -22,7 +22,7 @@ import sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 from render_card import (
-    F_REG, F_BOLD, build_lines, GREEN, CYAN,
+    F_REG, F_BOLD, build_lines, paste_portrait, GREEN, CYAN,
 )
 
 S = 2
@@ -39,7 +39,10 @@ MAX_LINES = (H - 2 * 30 * S) // LH      # what the 720px terminal panel holds
 
 
 def render(spec, element_path, out_path):
-    lines = build_lines(spec)
+    # portrait=True: the hero carries the face in the masthead like every other
+    # card. It was defaulting to the old block sun, which made the one image
+    # most people see the only one with the wrong logo on it.
+    lines = build_lines(spec, portrait=True)
     if len(lines) > MAX_LINES:
         raise SystemExit(
             "Copy overflows the terminal panel: {} lines into room for {}. "
@@ -70,9 +73,11 @@ def render(spec, element_path, out_path):
     art.paste(Image.new("RGB", (ART_W, H), (4, 5, 10)), (0, 0), fade.resize((ART_W, H)))
     base.paste(art, (TERM_W, 0))
 
+    y = (H - len(lines) * LH) // 2
+    base = paste_portrait(base, PAD_X, y, bold.getlength("0"), LH)
+
     layer = Image.new("RGBA", (TERM_W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
-    y = (H - len(lines) * LH) // 2
     for text, colour, is_bold in lines:
         if text:
             d.text((PAD_X, y), text, font=(bold if is_bold else reg), fill=colour + (255,))

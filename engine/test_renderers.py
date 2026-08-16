@@ -136,6 +136,20 @@ check("data panel names what it shows",
 check("wrap() honours a custom width",
       max(len(l) for l in rc.wrap("word " * 40, 20)) <= 20)
 
+# --- 9. blanking the sun without pasting the plate is a hole in the masthead
+import inspect, importlib
+for mod in ("render_card", "render_slate", "render_wide", "render_hero"):
+    try:
+        m = importlib.import_module(mod)
+    except Exception:
+        continue
+    src = inspect.getsource(m)
+    blanks = "portrait=True" in src
+    pastes = "paste_portrait" in src
+    check("%s: blanks sun only if it pastes the plate" % mod,
+          (not blanks) or pastes,
+          "blanks the sun and never composites, leaving an empty masthead")
+
 print()
 print("FAILURES:", len(fails))
 sys.exit(1 if fails else 0)

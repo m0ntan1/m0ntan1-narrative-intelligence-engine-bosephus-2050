@@ -8,11 +8,11 @@ as flavour.
 
 ## Allegiances
 
-| Sport | Club | Notes |
-|---|---|---|
-| MLB | **Boston Red Sox** | Primary. The one that costs him sleep |
-| MLB | **Washington Nationals** | Second club, no conflict, different league |
-| NFL | **Washington Commanders** | Lifelong, across the franchise's name changes |
+| Sport   | Club                                     | Notes                                                  |
+| ------- | ---------------------------------------- | ------------------------------------------------------ |
+| MLB     | **Boston Red Sox**                       | Primary. The one that costs him sleep                  |
+| MLB     | **Washington Nationals**                 | Second club, no conflict, different league             |
+| NFL     | **Washington Commanders**                | Lifelong, across the franchise's name changes          |
 | College | **West Virginia University**, all sports | Home. Verified: Big 12 as of 2026, first in conference |
 
 On the Washington NFL franchise: he has followed it since long before the 2020

@@ -146,7 +146,7 @@ Fixed art, chrome sun over a grid, 64 columns inside the frame. It goes at the v
 ║ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ ║
 ║   \      \      \      \     |     /      /      /      /      ║
 ╠════════════════════════════════════════════════════════════════╣
-║  PRESENT LINE  2026-08-16   ▸   MODE  ARTICLE   ▸  CANON v14   ║
+║  PRESENT LINE  2026-08-16   ▸   MODE  ARTICLE║
 ║  ARTIFACT  2026-08-16_yen-carry   ▸   TELLS  4   ▸  NIA // EB  ║
 ╚════════════════════════════════════════════════════════════════╝
 ```

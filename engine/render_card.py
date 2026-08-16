@@ -81,10 +81,18 @@ MASTHEAD = [
 
 # ---------------------------------------------------------------- portrait
 
-PORTRAIT = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "Elements",
-    "nano-banana-2_Professional_graphic_design_2D_illustration_Make_this_an_ASCII_Hex_color_8DFFB4_-0.jpg")
+PLATE = "nano-banana-2_Professional_graphic_design_2D_illustration_Make_this_an_ASCII_Hex_color_8DFFB4_-0.jpg"
+
+# Resolve the plate in BOTH layouts from one file. The vault keeps Elements/
+# beside tools/; the repo keeps it inside engine/. This used to be patched
+# repo-side after every sync, and a later sync overwrote the patch and silently
+# disabled the portrait there. Search instead of assume.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+PORTRAIT = next(
+    (c for c in (os.path.join(_HERE, "Elements", PLATE),
+                 os.path.join(os.path.dirname(_HERE), "Elements", PLATE))
+     if os.path.exists(c)),
+    os.path.join(_HERE, "Elements", PLATE))
 
 # The masthead's left half is a block-character sun. On a PNG we can do better,
 # so the portrait is composited into exactly that footprint. Text surfaces keep

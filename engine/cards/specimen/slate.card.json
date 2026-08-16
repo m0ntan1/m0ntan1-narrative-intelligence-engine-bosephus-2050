@@ -1,0 +1,19 @@
+{
+  "present_line": "YYYY-MM-DD",
+  "mode": "SLATE",
+  "readout": "0000",
+  "title": "What a slate looks like",
+  "rows": [
+    {"matchup": "Away club @ Home club",  "call": "Home 5-3", "fan": true},
+    {"matchup": "Away club @ Home club",  "call": "Away 4-2", "against_baseline": true},
+    {"matchup": "Away club @ Home club",  "call": "Home 6-5"},
+    {"matchup": "Away club @ Home club",  "call": "Away 6-4", "against_baseline": true},
+    {"matchup": "Away club @ Home club",  "call": "Home 7-5"}
+  ],
+  "notes": [
+    "* his club   ^ against the naive home pick",
+    "Every call locked before first pitch, graded against the naive pick, never against a coin."
+  ],
+  "cta": "> Read the full recollection of the night.",
+  "disclaimer": "Constructed. Not a forecast, not advice."
+}
