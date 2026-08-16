@@ -155,8 +155,6 @@ Fixed art, chrome sun over a grid, 64 columns inside the frame. It goes at the v
 
 This is opt-in and must stay opt-in. `masthead_lines()` defaults to the drawn sun, and only the PNG renderers pass `portrait=True`. Text surfaces share that function, so a blanked sun with no image over it is an empty box, and the Discord ANSI block would ship with a hole in the masthead. `tools/test_renderers.py` guards both directions.
 
-The wide variant keeps the drawn sun deliberately: it already carries a full character plate beside the terminal, and two faces on one card is one too many.
-
 Strip fields, in order and never reordered: Present Line date, mode, Canon version, artifact ID, Tell count, department tag (`NIA // EB`, Narrative Intelligence, Electric Blue). Build each strip line as two leading spaces, fields joined by `   ▸   `, padded with spaces to 64 columns. If a field set overruns, drop the trailing field rather than wrapping. A strip line that breaks the frame is a failed render and gets rebuilt.
 
 **BACKTEST mode strips differently.** The Present Line field carries the backdated line and the mode field reads `BACKTEST · BLIND`, so no reader ever mistakes a calibration run for a live artifact:
@@ -646,7 +644,7 @@ All under `00- IN-FLIGHT/AGENTS, WORKFLOWS, SKILLS, AND ROUTINES/BOSEPHUS - 2050
 | `ledgers/tells-policy.md` | Every Tell ever issued, with artifact ID, resolution date, and outcome once known. | Append on issue, update on resolution. |
 | `artifacts/YYYY-MM-DD_<slug>.md` | The output pieces. | One per run. |
 | `tools/render_card.py` | The card renderer. Auto-fits type, auto-wraps copy to 46 columns. | Frozen tooling. Shorten the card copy when it will not fit, never edit the script to make room. |
-| `tools/render_slate.py` | Slate card. One PNG carrying a whole group of calls, with the character plate. | Frozen tooling. When a run issues a group, the card carries the calls and the write-up carries the reasoning. |
+| `tools/render_slate.py` | Slate card. One PNG carrying a whole group of calls, same 1200x1500 canvas as the article card. | Frozen tooling. When a run issues a group, the card carries the calls and the write-up carries the reasoning. |
 | `tools/render_ansi.py` | Discord-ready ANSI block from the same card JSON. Forces the seam to neon pink. | Frozen tooling. It raises on an unmapped colour rather than falling back, which is how a green seam gets caught. |
 | `cards/<id>.card.json` | Card copy for one artifact. Six fields, unwrapped strings. | One per run, written at emit. |
 | `social/<id>_card.png` | The 1200x1500 card. Required output, not optional. | One per run. An artifact without its card is incomplete. |

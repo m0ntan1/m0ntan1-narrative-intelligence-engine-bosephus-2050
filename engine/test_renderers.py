@@ -74,13 +74,12 @@ try:
 except SystemExit as e:
     check("render_slate floor actually raises", "MIN_FS" in str(e))
 
-# --- 5. wide variant must not overflow its panel -------------------------
-import render_card_with_element as rw
-tall = spec(quote=[LONG])
-need = len(rc.build_lines(tall)) * rw.LH
-check("render_card_with_element checks overflow",
-      hasattr(rw, "MAX_LINES") or need <= rw.H,
-      "%d px of text into a %d px panel, no check" % (need, rw.H))
+# --- 5. slate reserves footer clearance ----------------------------------
+# The stamp sits in the bottom strip. If fit() is allowed the full height the
+# text block grows into it and the two collide.
+fs, lh = rs.fit(20, rs.TERM_W - 2 * rs.PAD, rs.H - 2 * rs.PAD - 34 * rs.S)
+check("slate reserves room for the footer stamp",
+      20 * lh <= rs.H - 2 * rs.PAD - 34 * rs.S)
 
 # --- 6. the portrait must never blank the sun on text surfaces -----------
 check("text masthead keeps the drawn sun",

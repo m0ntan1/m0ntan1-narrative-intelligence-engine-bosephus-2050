@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Slate card: one PNG carrying a whole group of calls, with the character plate.
+Slate card: one PNG carrying a whole group of calls.
 
-  python3 render_slate.py <slate.json> <element.png> <out.png>
+  python3 render_slate.py <slate.json> <out.png>
 
 Used when a run issues a group rather than a single artifact. The PNG carries
 the load: every matchup and every call is legible on the card itself, so the
 image is the deliverable and the write-up is the footnote rather than the other
 way round.
 
-Reuses the masthead, palette, font and glow from render_card.py, so a slate and
-a single card are visibly the same object.
+Same canvas, palette, font and glow as render_card.py, so a slate and a single
+card are the same object with different contents. The character plate that used
+to sit on the right was dropped once the portrait moved into the masthead: one
+face per card is enough, and the freed width goes to the calls, which are what
+the card is for.
 """
 import json
 import sys
@@ -21,10 +24,9 @@ from render_card import (F_REG, F_BOLD, masthead_lines, paste_portrait, strip,
                          seam, wrap, MIN_FS, GREEN, MASTC, HEAD, PINK, DIM, CYAN)
 
 S = 2
-W_OUT, H_OUT = 1600, 1400
+W_OUT, H_OUT = 1200, 1500      # same canvas as the article card
 W, H = W_OUT * S, H_OUT * S
-ART_W = 560 * S
-TERM_W = W - ART_W
+TERM_W = W
 PAD = 40 * S
 COLS = 48
 
@@ -83,9 +85,10 @@ def fit(n, avail_w, avail_h):
         "Do not lower MIN_FS.".format(n))
 
 
-def render(spec, element_path, out_path):
+def render(spec, out_path):
     lines = build(spec)
-    fs, lh = fit(len(lines), TERM_W - 2 * PAD, H - 2 * PAD)
+    # reserve the footer strip so the text block cannot crowd the stamp
+    fs, lh = fit(len(lines), TERM_W - 2 * PAD, H - 2 * PAD - 34 * S)
     reg = ImageFont.truetype(F_REG, fs)
     bold = ImageFont.truetype(F_BOLD, fs)
 
@@ -96,22 +99,7 @@ def render(spec, element_path, out_path):
     bloom = bloom.resize((TERM_W, H), Image.LANCZOS).filter(ImageFilter.GaussianBlur(50))
     base.paste(Image.new("RGB", (TERM_W, H), (10, 34, 20)), (0, 0), bloom)
 
-    art = Image.open(element_path).convert("RGB")
-    side = max(ART_W, H)
-    art = art.resize((side, side), Image.LANCZOS)
-    # Bias the crop left of centre. The almanac is the storytelling object in
-    # this plate and dead-centre cropping slices its title off.
-    cx = int((art.width - ART_W) * 0.34)
-    art = art.crop((cx, (art.height - H) // 2, cx + ART_W, (art.height - H) // 2 + H))
-    fade = Image.new("L", (ART_W, 1))
-    px = fade.load()
-    for x in range(ART_W):
-        t = x / (ART_W * 0.26)
-        px[x, 0] = 0 if t >= 1 else int(255 * (1 - t) ** 1.4)
-    art.paste(Image.new("RGB", (ART_W, H), (4, 5, 10)), (0, 0), fade.resize((ART_W, H)))
-    base.paste(art, (TERM_W, 0))
-
-    y = (H - len(lines) * lh) // 2
+    y = (H - 34 * S - len(lines) * lh) // 2
     x = (TERM_W - bold.getlength("0" * COLS)) / 2
     base = paste_portrait(base, x, y, bold.getlength("0"), lh)
 
@@ -135,29 +123,20 @@ def render(spec, element_path, out_path):
         ds.rectangle([0, yy, TERM_W, yy + S - 1], fill=(0, 0, 0, 70))
     base.paste(scan, (0, 0), scan)
 
-    div = Image.new("RGB", (4 * S, H))
-    dd = ImageDraw.Draw(div)
-    for yy in range(H):
-        t = abs(yy - H / 2) / (H / 2)
-        dd.line([(0, yy), (4 * S, yy)],
-                fill=(int(255 - 255 * t), int(47 + 182 * t), int(208 + 47 * t)))
-    halo = Image.new("RGB", (W, H), (0, 0, 0))
-    halo.paste(div, (TERM_W - 2 * S, 0))
-    halo = halo.filter(ImageFilter.GaussianBlur(16 * S))
-    base.paste(halo, (0, 0), halo.convert("L").point(lambda v: min(255, int(v * 1.6))))
-    base.paste(div, (TERM_W - 2 * S, 0))
-
+    ImageDraw.Draw(base).rectangle(
+        [PAD // 3, PAD // 3, W - PAD // 3, H - PAD // 3],
+        outline=(120, 40, 150), width=S)
     ImageDraw.Draw(base).text(
-        (W - 22 * S, H - 30 * S), "MØNTAN1 // NARRATIVE INTELLIGENCE",
-        font=ImageFont.truetype(F_BOLD, 15 * S), fill=CYAN, anchor="ra")
+        (W // 2, H - PAD // 2), "MØNTAN1 // NARRATIVE INTELLIGENCE",
+        font=ImageFont.truetype(F_BOLD, 15 * S), fill=CYAN, anchor="ms")
 
     base.resize((W_OUT, H_OUT), Image.LANCZOS).save(out_path, optimize=True)
     return fs, len(lines)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 3:
         raise SystemExit(__doc__)
     spec = json.load(open(sys.argv[1], encoding="utf-8"))
-    size, n = render(spec, sys.argv[2], sys.argv[3])
-    print("wrote {}  ({} lines at {}px)".format(sys.argv[3], n, size))
+    size, n = render(spec, sys.argv[2])
+    print("wrote {}  ({} lines at {}px)".format(sys.argv[2], n, size))
