@@ -327,6 +327,16 @@ Runs on query, never on a schedule. You hand him a matchup and he recalls it.
 **The conditions rule.** The first game on the schedule the day this was written was Orioles at Rays in Tropicana Field, a dome. An engine that reports cloud cover for indoor games does it hundreds of times a season.
 
 1. Roof type comes from the venue record, never from anyone's memory of the ballpark. `gamefile.py` resolves it.
+
+**Weather is pulled from three NOAA surfaces, not one.** The plain hourly forecast product exposes about eight fields and flattens cloud cover into a text blurb, which is not enough to build a mechanism on.
+
+| Surface | What it gives |
+|---|---|
+| `/gridpoints/{office}/{x},{y}` | 59 raw variables. `skyCover`, `probabilityOfThunder`, `windGust`, `dewpoint`, `pressure`, `quantitativePrecipitation`, `visibility`, `ceilingHeight` |
+| `/alerts/active?point=` | Watches and warnings. A Severe Thunderstorm Watch is a discrete delay risk that no forecast text states |
+| `/stations/{id}/observations/latest` | Actual observed conditions near the venue. Grounds the read, and grades it afterwards. Only fetched when first pitch is inside six hours, since for a game four days out it is noise |
+
+Plus **one derived value, labelled as derived**: air density and a carry index computed from the cited temperature, dewpoint and pressure. Ball carry rises as air thins, which is why the same swing is a home run in August and a fly out in April. It is the one weather fact in baseball with real physics behind it rather than folklore, and it is never presented as retrieved.
 2. **Dome: the block does not render at all.** Not "conditions were not a factor." Absent.
 3. **Retractable: the roof decision is flagged unknown** unless it is actually reported.
 4. **Outdoor: the block must name a mechanism or get cut.** Not "79 degrees, 10 mph wind." Instead: wind out to right at 12, the direction that turns warning-track flies into home runs at this park, against a fly-ball starter. Weather that does not change how the game is played is trivia, and trivia is what makes a piece read like filler.
