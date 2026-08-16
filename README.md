@@ -122,6 +122,7 @@ engine/
   render_card.py         Canonical card emit, 1200x1500, terminal only
   render_ansi.py         Discord ANSI block, seam forced to neon pink
   render_seam.py         Seam rule as a PNG, for surfaces that cannot colour text
+  render_slate.py        Slate card: a whole group of calls on one PNG, with the plate
   render_card_with_element.py  Wide variant with character plate, 1600x900
   cards/                 Card copy, one JSON per artifact
   sports/                SPORTS LOGIC, mode GAME

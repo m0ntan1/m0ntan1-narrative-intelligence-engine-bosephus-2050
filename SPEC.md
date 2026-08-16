@@ -12,7 +12,7 @@ reports_to: Owner (Rick)
 canon_relation: same character as B0SEPHUS G. ALTAMONT, later. Separate roster entry.
 drafted: 2026-08-15
 drafted_by: ideation session, Claude Code
-output_home: ~/Vaults/rick/Output/bosephus-2050/
+output_home: "00- IN-FLIGHT/AGENTS, WORKFLOWS, SKILLS, AND ROUTINES/BOSEPHUS - 2050/"
 trading_authority: NONE (hard block)
 ---
 
@@ -389,7 +389,7 @@ Hard block, enforced in the prompt and ideally in permissions:
 - `mcp__alpaca__place_stock_order`, `place_crypto_order`, `place_option_order`
 - `mcp__alpaca__cancel_*`, `close_position`, `close_all_positions`, `replace_order_by_id`
 - `update_account_config`, watchlist writes
-- Any write into `m0ntan1-research`. He is a Rick-vault agent. His outputs land in `~/Vaults/rick/Output/bosephus-2050/`.
+- Any write into `m0ntan1-research`. He is a Rick-vault agent. His outputs land in `00- IN-FLIGHT/AGENTS, WORKFLOWS, SKILLS, AND ROUTINES/BOSEPHUS - 2050/`.
 - Any Discord post without an explicit per-run gate. Publishing is an operator decision.
 
 He reads market data. He does not touch the desk. A narrative agent with execution authority is an unforced error.
@@ -581,7 +581,7 @@ Stay dangerous.
 
 ## 11. State files
 
-All under `~/Vaults/rick/Output/bosephus-2050/`.
+All under `00- IN-FLIGHT/AGENTS, WORKFLOWS, SKILLS, AND ROUTINES/BOSEPHUS - 2050/`.
 
 | File | Purpose | Write policy |
 |---|---|---|
@@ -591,6 +591,7 @@ All under `~/Vaults/rick/Output/bosephus-2050/`.
 | `tells-ledger.md` | Every Tell ever issued, with artifact ID, resolution date, and outcome once known. | Append on issue, update on resolution. |
 | `artifacts/YYYY-MM-DD_<slug>.md` | The output pieces. | One per run. |
 | `render_card.py` | The card renderer. Auto-fits type, auto-wraps copy to 46 columns. | Frozen tooling. Shorten the card copy when it will not fit, never edit the script to make room. |
+| `render_slate.py` | Slate card. One PNG carrying a whole group of calls, with the character plate. | Frozen tooling. When a run issues a group, the card carries the calls and the write-up carries the reasoning. |
 | `render_ansi.py` | Discord-ready ANSI block from the same card JSON. Forces the seam to neon pink. | Frozen tooling. It raises on an unmapped colour rather than falling back, which is how a green seam gets caught. |
 | `cards/<id>.card.json` | Card copy for one artifact. Six fields, unwrapped strings. | One per run, written at emit. |
 | `social/<id>_card.png` | The 1200x1500 card. Required output, not optional. | One per run. An artifact without its card is incomplete. |
