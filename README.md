@@ -91,6 +91,40 @@ better spine, and it is the one that can be graded.
 Every artifact carries a `READOUT` identifier rather than a version number,
 because a version implies succession and readouts have none.
 
+## The machine in the storage room
+
+<img src="docs/assets/the-machine.jpg" alt="Seen over his shoulder in a dark room, a man outlined in red sits at an old CRT. The screen shows the green masthead: a portrait, the year 2050, and a readout stamp." width="520" align="right">
+
+This engine explains itself in exactly one place, and it does it in character.
+
+Bosephus at forty-one, in West Virginia, in 2026, moves a tarp in the old boiler
+room behind the office and finds a machine that should not still power on. There
+is nothing on it. Solitaire. A word processor wanting a licence key. And one
+folder with a name he did not put there.
+
+It opens as garbage until he notices the garbage has structure. It does not want
+a viewer. It wants a terminal.
+
+> He does not get everything right. I have asked him about outcomes and he has
+> been wrong. Scores, numbers, who won a thing. What he does not miss is the
+> turn. He tells me what a thing hinged on, before, with a date on it, and
+> specific enough that I can go and watch for it myself.
+
+Two things he will not discuss: the price of anything, and Bosephus's own life.
+Not because MØNTAN1 is not a registered adviser, though it is not. Because he is
+sixty-five and has something behind him he will not risk to win an argument with
+a younger man who already thinks he is right. Every guardrail in this repo is
+that refusal wearing a different hat.
+
+It is also why the cards look the way they do. The green phosphor, the
+scanlines, the block-drawn masthead: not a style choice, a rendering of a real
+object in the story.
+
+**[Read it in full](FRAME.md).** It is the shortest way to understand why any of
+the rest of this is shaped the way it is.
+
+<br clear="all">
+
 ## Success is the pivot, not the outcome
 
 This engine gets outcomes wrong, routinely. That is neither hidden nor excused.
