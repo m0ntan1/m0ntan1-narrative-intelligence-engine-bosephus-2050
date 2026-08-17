@@ -65,7 +65,7 @@ Recall is implemented as **retrieval, never as memory**. The engine's past is ac
 
 That is the model here, and it replaced a worse one.
 
-An early draft kept a **Canon file**: settled beats every run had to honour, so the constructed future stayed consistent across artifacts. That was a mistake. Canon made every artifact a hostage to every other one. A single beat contradicted by reality poisons everything downstream that honoured it, and the damage compounds with every run.
+An early draft kept a **Canon file**: settled beats every run had to honour, so the constructed future stayed consistent across artifacts. That was a mistake. Canon made every artifact a hostage to every other one. A single beat contradicted by reality poisons everything downstream that honored it, and the damage compounds with every run.
 
 So the world is re-instantiated at query time. Every run retrieves the record as it stands that day and builds forward from that alone. A later recollection that differs from an earlier one is not an error to suppress. **The negative has not fixed.** People at the edges of the frame come and go depending on what happened last week, and the thing in the middle of the frame does not move.
 
