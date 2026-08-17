@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOSEPHUS - 2050 // DIRECTORY</title>
+<meta name="description" content="A directory listing of BOSEPHUS - 2050. Seven readouts and one essay on the catalyst identification problem.">
+
+<!-- https://m0ntan1.github.io/m0ntan1-narrative-intelligence-engine-bosephus-2050/ is rewritten per target. Unfurlers need absolute URLs, so the
+     vault build leaves these pointing nowhere useful and only the deploy
+     build produces a working card. That is fine: nobody shares a file path. -->
+<link rel="canonical" href="https://m0ntan1.github.io/m0ntan1-narrative-intelligence-engine-bosephus-2050/why-narrative.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MØNTAN1">
+<meta property="og:title" content="Why Narrative">
+<meta property="og:description" content="A model will not name a catalyst in the future tense. It names one automatically in the past tense. The engine is a tense change plus a scoreboard.">
+<meta property="og:url" content="https://m0ntan1.github.io/m0ntan1-narrative-intelligence-engine-bosephus-2050/why-narrative.html">
+<meta property="og:image" content="https://m0ntan1.github.io/m0ntan1-narrative-intelligence-engine-bosephus-2050/assets/bosephus-2050_hero_1280x640.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Green phosphor terminal beside a synthwave portrait of B0SEPHUS G. ALTAMONT holding a sports almanac for 2025 to 2050.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why Narrative">
+<meta name="twitter:description" content="Why a model refuses to name a catalyst in the future tense, and what happens when you move the vantage to 2050 and ask it to remember instead.">
+<meta name="twitter:image" content="https://m0ntan1.github.io/m0ntan1-narrative-intelligence-engine-bosephus-2050/assets/bosephus-2050_hero_1280x640.jpg">
+<style>
+:root{
+  --g:#35FF6A; --mast:#8DFFB4; --head:#C9FFDC; --pink:#FF4FD8;
+  --dim:#1F9D4C; --cy:#BFF7FF; --bg:#04050A;
+  --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --fs:13px;
+  --rlh:1.34;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--g);
+  font-family:var(--mono); font-size:var(--fs); line-height:1.5;
+  text-shadow:0 0 5px rgba(53,255,106,.20);
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+::selection{background:var(--g); color:var(--bg); text-shadow:none}
+body.locked{overflow:hidden}
+#crt{position:fixed; inset:0; pointer-events:none; z-index:60;
+  background:
+   radial-gradient(120% 100% at 50% 40%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%),
+   repeating-linear-gradient(to bottom, rgba(53,255,106,.030) 0 1px, rgba(0,0,0,0) 1px 3px);
+}
+.dim{color:var(--dim); text-shadow:none}
+.cy{color:var(--cy); text-shadow:0 0 6px rgba(191,247,255,.25)}
+.mastc{color:var(--mast)}
+.hd{color:var(--head)}
+.pk{color:var(--pink); text-shadow:0 0 7px rgba(255,79,216,.35)}
+
+#shell{height:100dvh; height:100vh; display:grid; grid-template-rows:auto 1fr auto; max-width:1500px; margin:0 auto;
+  border-left:1px solid rgba(31,157,76,.30); border-right:1px solid rgba(31,157,76,.30)}
+
+/* ---------- header ---------- */
+header{padding:10px 16px 8px; border-bottom:1px solid rgba(31,157,76,.45)}
+.vol{display:flex; flex-wrap:wrap; gap:0 18px; align-items:baseline}
+.vol .title{color:var(--mast); letter-spacing:.26em; font-size:15px}
+.vol .sub{color:var(--dim); letter-spacing:.12em; font-size:11px; text-shadow:none}
+.wm{margin-top:2px; font-size:11px; letter-spacing:.20em}
+.volstats{margin-top:4px; font-size:11px; color:var(--dim); text-shadow:none; letter-spacing:.06em}
+
+/* ---------- panes ---------- */
+main{display:grid; grid-template-columns:minmax(380px, 46%) 1fr; min-height:0}
+section{min-height:0; display:flex; flex-direction:column}
+#dirpane{border-right:1px solid rgba(31,157,76,.45)}
+.panehead{padding:7px 16px; font-size:11px; letter-spacing:.16em; color:var(--head);
+  border-bottom:1px solid rgba(31,157,76,.30); display:flex; justify-content:space-between; gap:12px}
+.panehead span{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.panehead .r{color:var(--dim); text-shadow:none; flex:none}
+.colhead{padding:6px 22px 4px; font-size:10.5px; letter-spacing:.14em; color:var(--dim); text-shadow:none}
+
+.grid{display:grid; grid-template-columns:1.6ch 13ch 1fr 16ch 8ch; gap:0 10px; align-items:baseline}
+#list{overflow-y:auto; overflow-x:hidden; padding:0 8px 6px; outline:none; flex:1}
+#list:focus-visible{box-shadow:inset 0 0 0 1px rgba(53,255,106,.45)}
+.row{padding:0 8px}
+.row .line{padding:1px 6px; cursor:pointer; white-space:nowrap; overflow:hidden}
+.row .fname{color:var(--head)}
+.row .fsize{text-align:right; color:var(--g)}
+.row .fdate,.row .fkind{color:var(--dim); text-shadow:none; font-size:11.5px}
+.row .mark{color:var(--dim)}
+.row:hover .line{background:rgba(53,255,106,.07)}
+.row[aria-selected="true"] .line{background:var(--g); color:var(--bg); text-shadow:none}
+.row[aria-selected="true"] .line span{color:var(--bg); text-shadow:none}
+.row.stutter{opacity:0}
+
+.card{display:none}
+.row[aria-selected="true"] .card{
+  display:block; margin:6px 0 12px; padding:10px 12px 11px; cursor:pointer;
+  border:1px solid rgba(53,255,106,.40); background:rgba(53,255,106,.045);
+  box-shadow:0 0 0 1px rgba(4,5,10,.9), 0 0 22px rgba(53,255,106,.10), 0 0 60px rgba(53,255,106,.05);
+}
+.chead{color:var(--head); font-size:15px; line-height:1.35; letter-spacing:.01em; text-transform:uppercase}
+.cdek{margin-top:7px; color:var(--g); font-size:12px; line-height:1.6;
+  display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden}
+.cmeta{margin-top:8px; color:var(--dim); text-shadow:none; font-size:11px; letter-spacing:.06em}
+.cacts{margin-top:9px; display:flex; flex-wrap:wrap; gap:8px}
+.act{font:inherit; font-size:11px; letter-spacing:.10em; color:var(--g); background:transparent;
+  border:1px solid rgba(53,255,106,.45); padding:3px 9px; cursor:pointer; text-shadow:inherit}
+.act:hover,.act:focus-visible{color:var(--bg); background:var(--g); text-shadow:none; outline:none}
+.noplate{font-size:11px; letter-spacing:.10em; color:var(--dim); text-shadow:none; border:1px dashed rgba(31,157,76,.5); padding:3px 9px}
+
+/* prompt */
+.prompt{border-top:1px solid rgba(31,157,76,.30); padding:7px 16px; display:flex; align-items:center; gap:0}
+.prompt .ps1{color:var(--dim); text-shadow:none; white-space:nowrap}
+#cmd{font:inherit; background:transparent; border:0; outline:none; color:var(--head); caret-color:transparent;
+  flex:1; min-width:40px; padding:0 2px; text-shadow:inherit}
+.cur{display:inline-block; width:.62em; height:1.05em; background:var(--g); transform:translateY(.18em)}
+.cur.off{background:transparent}
+
+/* ---------- essay ---------- */
+#doc{overflow-y:auto; padding:26px 32px 60px; flex:1; scroll-behavior:smooth}
+#essay{max-width:76ch}
+.eyebrow{color:var(--dim); text-shadow:none; font-size:10.5px; letter-spacing:.18em; margin:0 0 22px}
+#essay h1{font-size:clamp(20px,2.4vw,29px); letter-spacing:.20em; color:var(--head); margin:0; text-transform:uppercase; font-weight:700}
+#essay .dek{color:var(--g); margin:8px 0 0; font-size:12.5px; letter-spacing:.04em}
+.erule{height:0; border-top:1px solid rgba(31,157,76,.40); margin:22px 0}
+#essay p{margin:0 0 14px; font-size:13px; line-height:1.72}
+#essay .statement{color:var(--head); font-size:clamp(14px,1.5vw,17px); line-height:1.5; letter-spacing:.06em;
+  text-transform:uppercase; margin:0 0 16px}
+#essay h2{color:var(--head); font-size:13px; letter-spacing:.06em; margin:0 0 10px; font-weight:700}
+#essay h2::before{content:"\25B8  "; color:var(--dim)}
+#essay blockquote{margin:0; padding:14px 16px; border-left:2px solid var(--g); background:rgba(53,255,106,.05);
+  color:var(--head); font-size:14px; line-height:1.65}
+.endmark{color:var(--dim); text-shadow:none; letter-spacing:.3em; font-size:11px; margin-top:26px}
+
+/* ---------- status ---------- */
+footer{border-top:1px solid rgba(31,157,76,.45)}
+#status{display:flex; justify-content:space-between; gap:16px; padding:5px 16px; font-size:11px; letter-spacing:.06em;
+  border-bottom:1px solid rgba(31,157,76,.20)}
+#msg{color:var(--head); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:1 1 auto}
+#tick{color:var(--dim); text-shadow:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:right; min-width:0; flex:0 1 auto}
+#keys{display:flex; flex-wrap:wrap; gap:0 2px; padding:5px 12px 7px; font-size:11px}
+#keys b{font-weight:400; color:var(--bg); background:var(--dim); padding:1px 5px; text-shadow:none}
+#keys span{padding:1px 8px 1px 5px; color:var(--g); letter-spacing:.04em}
+#keys .legend{margin-left:auto; color:var(--dim); text-shadow:none; padding-right:0}
+#keys .legend i{font-style:normal}
+#keys .touch{display:none}
+.touchonly{display:none}
+.chip{display:inline-block; width:.7em; height:.7em; background:var(--pink); box-shadow:0 0 8px rgba(255,79,216,.6); transform:translateY(.05em)}
+
+/* ---------- overlays ---------- */
+.overlay{position:fixed; inset:0; z-index:70; background:rgba(4,5,10,.90); display:flex; align-items:center; justify-content:center; padding:18px}
+.overlay[hidden]{display:none}
+.win{background:var(--bg); border:1px solid rgba(53,255,106,.55); max-width:min(96vw, 720px); width:100%;
+  max-height:94vh; display:flex; flex-direction:column;
+  box-shadow:0 0 0 1px rgba(4,5,10,1), 0 0 30px rgba(53,255,106,.16), 0 0 90px rgba(53,255,106,.07)}
+.wintop{display:flex; align-items:center; gap:12px; padding:6px 10px; border-bottom:1px solid rgba(53,255,106,.35); font-size:11px; letter-spacing:.10em}
+.wintop .wname{color:var(--head)}
+.wintop .wmeta{color:var(--dim); text-shadow:none}
+.wintop .sp{flex:1}
+.wclose{font:inherit; font-size:11px; letter-spacing:.10em; background:transparent; border:1px solid rgba(53,255,106,.45);
+  color:var(--g); padding:2px 8px; cursor:pointer; text-shadow:inherit}
+.wclose:hover,.wclose:focus-visible{background:var(--g); color:var(--bg); text-shadow:none; outline:none}
+.winbody{position:relative; overflow:auto; padding:12px 14px; outline:none; flex:1}
+.winbody:focus-visible{box-shadow:inset 0 0 0 1px rgba(53,255,106,.4)}
+/* the top pad lives on the text, not the scroll container, so nothing bleeds
+   through above the sticky zone tag */
+#mbody{padding-top:0}
+#mpre{margin:0; padding-top:12px; font-family:var(--mono); font-size:12px; line-height:var(--rlh); color:var(--g)}
+/* the body is segmented into runs so wide art scrolls in its own box and prose can reflow */
+.run{margin:0; font:inherit; line-height:inherit; color:inherit; white-space:pre}
+.run.wide{overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain}
+.run.blank{height:calc(var(--rlh) * 1em)}
+.run.wide::-webkit-scrollbar{height:6px}
+.run.wide::-webkit-scrollbar-thumb{background:rgba(31,157,76,.55)}
+.run.wide::-webkit-scrollbar-track{background:rgba(31,157,76,.10)}
+/* a one line rule needs no scrollbar advertising itself under every heading */
+.run.wide.solo{scrollbar-width:none}
+.run.wide.solo::-webkit-scrollbar{height:0; display:none}
+/* the seam rail: teaches which half of the artifact you are standing in */
+.zone{position:relative; padding-left:14px; margin-left:-14px}
+.zone::before{content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:rgba(31,157,76,.65)}
+.zone.z-con::before{background:none;
+  background-image:repeating-linear-gradient(to bottom, var(--pink) 0 5px, rgba(255,79,216,0) 5px 11px);
+  box-shadow:0 0 10px rgba(255,79,216,.30)}
+.ztag{position:sticky; top:0; z-index:2; background:var(--bg); color:var(--dim); text-shadow:none;
+  font-size:10.5px; letter-spacing:.16em; padding:3px 0 4px; margin-bottom:6px;
+  border-bottom:1px solid rgba(31,157,76,.30); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.zone.z-ret > .ztag::before{content:'▴  ABOVE THE SEAM · RETRIEVED · CARRIES A SOURCE'}
+.zone.z-none > .ztag::before{content:'▪  NO SEAM ON THIS ARTIFACT · RETRIEVED THROUGHOUT'}
+.zone.z-con > .ztag{color:var(--pink); text-shadow:0 0 7px rgba(255,79,216,.35); border-bottom-color:rgba(255,79,216,.40)}
+.zone.z-con > .ztag::before{content:'▾  BELOW THE SEAM · CONSTRUCTED · ONE PLAUSIBLE BRANCH'}
+#mpre .ln{display:inline}
+#mpre .ln.off{visibility:hidden}
+#mpre .mast{color:var(--mast)}
+#mpre .rule{color:var(--head); font-weight:700}
+#mpre .seam{color:var(--pink); text-shadow:0 0 8px rgba(255,79,216,.45)}
+#mpre .low{color:var(--dim); text-shadow:none}
+#mpre .src{color:var(--dim); text-shadow:none}
+#beam{position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg, rgba(53,255,106,0), rgba(141,255,180,.85), rgba(53,255,106,0)); pointer-events:none}
+#beam[hidden]{display:none}
+.winfoot{display:flex; align-items:center; gap:10px; padding:6px 10px; border-top:1px solid rgba(53,255,106,.35); font-size:11px; letter-spacing:.08em; color:var(--dim); text-shadow:none; flex-wrap:wrap}
+.winfoot .sp{flex:1}
+
+#plate .win{max-width:min(96vw,1100px)}
+#plateimg{display:block; width:100%; height:auto; max-height:78vh; object-fit:contain; background:#000}
+#helpwrap .win{max-width:560px}
+.helpbody{padding:14px 16px; font-size:12px; line-height:1.8}
+.helpbody dt{color:var(--head); display:inline-block; min-width:16ch}
+.helpbody .k{color:var(--bg); background:var(--dim); padding:0 5px; text-shadow:none}
+.helpbody .swatch{display:inline-block; width:1.1em; height:.75em; margin-right:8px; transform:translateY(.05em)}
+
+@media (max-width:900px){
+  body{overflow-y:auto; overflow-x:hidden}
+  #shell{height:auto; min-height:100vh; grid-template-rows:auto auto auto}
+  main{grid-template-columns:1fr}
+  #dirpane{border-right:0; border-bottom:1px solid rgba(31,157,76,.45)}
+  #list{max-height:none; overflow:visible}
+  #doc{overflow:visible}
+  footer{position:sticky; bottom:0; background:var(--bg)}
+  .grid{grid-template-columns:1.6ch 13ch 1fr 8ch}
+  .fdate{display:none}
+}
+/* ---------- narrow: prose reflows, wide art scrolls in its own box ---------- */
+@media (max-width:760px){
+  .run.prose{white-space:normal; line-height:1.62; overflow-wrap:break-word}
+  .run.blank{height:calc(var(--rlh) * .9em)}
+  .overlay{padding:0; align-items:stretch; justify-content:stretch}
+  .win{max-width:100%; width:100%; max-height:100dvh; height:100dvh}
+  #plate .win{max-width:100%}
+  #pbody{display:flex; align-items:center; justify-content:center}
+  #plateimg{max-height:78dvh}
+  .wintop{padding:8px 10px}
+  .wclose{padding:6px 10px}
+  .winbody{padding:10px 12px}
+  .zone{padding-left:12px; margin-left:-12px}
+  .ztag{font-size:11px; letter-spacing:.10em}
+  #mpre{padding-top:10px}
+  .zone.z-ret > .ztag::before{content:'▴  ABOVE THE SEAM · RETRIEVED'}
+  .zone.z-con > .ztag::before{content:'▾  BELOW THE SEAM · CONSTRUCTED'}
+  .zone.z-none > .ztag::before{content:'▪  NO SEAM · RETRIEVED THROUGHOUT'}
+  /* touch targets */
+  .row .line{padding:8px 6px; -webkit-user-select:none; user-select:none; -webkit-tap-highlight-color:transparent}
+  .act,.noplate{padding:8px 11px; font-size:11px}
+  .cdek{-webkit-line-clamp:6}
+  #cmd{padding:6px 2px}
+  #keys b.kb,#keys span.kb{display:none}
+  #keys .touch{display:inline; padding:1px 8px 1px 5px; color:var(--g); letter-spacing:.04em}
+  .kbonly{display:none}
+  .touchonly{display:inline}
+}
+@media (max-width:560px){
+  #tick{display:none}
+  #keys .legend{margin-left:0; flex-basis:100%; padding-top:3px}
+}
+@media (max-width:430px){
+  :root{--fs:12px}
+  #doc{padding:20px 16px 40px}
+  .grid{grid-template-columns:1.6ch 13ch 1fr}
+  .fkind{display:none}
+  #mpre{font-size:11.5px}
+  .colhead{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){
+  .row.stutter{opacity:1}
+  #doc{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div id="crt" aria-hidden="true"></div>
+
+<div id="shell">
+<header>
+  <div class="vol">
+    <span class="title mastc">BOSEPHUS - 2050</span>
+    <span class="sub">NARRATIVE INTELLIGENCE ENGINE &nbsp;/&nbsp; ARTIFACT VOLUME 01</span>
+  </div>
+  <div class="wm cy">M&Oslash;NTAN1 &nbsp;//&nbsp; FIELD TERMINAL &nbsp;//&nbsp; PRESENT LINE 2026-08-17</div>
+  <div class="volstats">DEVICE 16,777,216 BYTES &nbsp;&middot;&nbsp; 11 FILES &nbsp;&middot;&nbsp; 8,854,849 USED &nbsp;&middot;&nbsp; 7,922,367 FREE &nbsp;&middot;&nbsp; MOUNTED READ ONLY</div>
+</header>
+
+<main>
+  <section id="dirpane">
+    <div class="panehead"><span>DIRECTORY OF A:\BOSEPHUS-2050</span><span class="r" id="dircount">11 ENTRIES</span></div>
+    <div class="colhead grid"><span></span><span>NAME</span><span style="text-align:right">SIZE</span><span class="fdate">MODIFIED</span><span class="fkind">KIND</span></div>
+    <div id="list" role="listbox" tabindex="0" aria-label="Directory of BOSEPHUS - 2050" aria-activedescendant="row-0">
+<!--LISTING:BEGIN-->
+<div class="row" role="option" id="row-0" data-i="0" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">WHYNARR .TXT</span><span class="fsize">3,457</span><span class="fdate">2026-08-17 09:02</span><span class="fkind">ESSAY</span></div><div class="card"><div class="chead">Why Narrative</div><div class="cdek">The catalyst identification problem in modern LLMs, and the fix. Why a model refuses to name a catalyst in the future tense, and what happens to the output when you move the vantage to 2050 and ask it to remember instead.</div><div class="cmeta jank">2026-08-17&nbsp;&nbsp;&middot;&nbsp;&nbsp;PLAIN TEXT&nbsp;&nbsp;&middot;&nbsp;&nbsp;OPEN IN VIEWPORT</div><div class="cacts"><button class="act" data-act="open">[ENTER] OPEN</button><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<div class="row" role="option" id="row-1" data-i="1" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">CLARITY .RDO</span><span class="fsize">14,193</span><span class="fdate">2026-08-16 04:52</span><span class="fkind">ARTICLE</span></div><div class="card"><div class="chead">The Bill That Could Not Be Written While He Was In Office</div><div class="cdek">Senate Majority Leader John Thune filed cloture on the motion to proceed to the Digital Asset Market Clarity Act at 4:52 a.m. ET on Saturday 2026-08-08, setting the first procedural vote for 2026-09-15 at 2:15 p.m. ET, seventeen days after Banking Committee Ranking Member...</div><div class="cmeta jank">2026-08-16&nbsp;&nbsp;&middot;&nbsp;&nbsp;ARTICLE&nbsp;&nbsp;&middot;&nbsp;&nbsp;5 TELLS&nbsp;&nbsp;&middot;&nbsp;&nbsp;B0SEPHUS G. ALTAMONT</div><div class="cacts"><button class="act" data-act="open">[ENTER] OPEN</button><span class="noplate">[P] NO PLATE ON DEVICE</span></div></div></div>
+<div class="row" role="option" id="row-2" data-i="2" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">ERCOTPAU.RDO</span><span class="fsize">12,349</span><span class="fdate">2026-08-16 11:19</span><span class="fkind">ARTICLE</span></div><div class="card"><div class="chead">The Queue Was Never Demand</div><div class="cdek">Governor Abbott directed the PUCT and ERCOT on 2026-08-03 to audit every data center project moving through the interconnection queue, said noncompliant projects should be denied grid access, and ERCOT paused the Batch Zero study process the same day, missing its 2026-08-07...</div><div class="cmeta jank">2026-08-16&nbsp;&nbsp;&middot;&nbsp;&nbsp;ARTICLE&nbsp;&nbsp;&middot;&nbsp;&nbsp;5 TELLS&nbsp;&nbsp;&middot;&nbsp;&nbsp;B0SEPHUS G. ALTAMONT</div><div class="cacts"><button class="act" data-act="open">[ENTER] OPEN</button><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<div class="row" role="option" id="row-3" data-i="3" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">MLBSLATE.RDO</span><span class="fsize">10,553</span><span class="fdate">2026-08-16 18:07</span><span class="fkind">SLATE</span></div><div class="card"><div class="chead">Ten Calls, One Night</div><div class="cdek">Ten games from the schedule of 2026-08-16, every one of them verified unstarted at the moment the call was written. Five calls agree with the naive home pick and five go against it.</div><div class="cmeta jank">2026-08-16&nbsp;&nbsp;&middot;&nbsp;&nbsp;SLATE (GAME)&nbsp;&nbsp;&middot;&nbsp;&nbsp;B0SEPHUS G. ALTAMONT</div><div class="cacts"><button class="act" data-act="open">[ENTER] OPEN</button><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<div class="row" role="option" id="row-4" data-i="4" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">KOREADRL.RDO</span><span class="fsize">15,625</span><span class="fdate">2026-08-17 06:41</span><span class="fkind">ARTICLE</span></div><div class="card"><div class="chead">The Exercise Was the Instrument</div><div class="cdek">President Trump said on 2026-08-16, hours before Ulchi Freedom Shield was due to begin, that he had instructed Secretary of War Pete Hegseth to &quot;substantially reduce&quot; the joint military exercises with South Korea, citing cost, his relationship with Kim Jong Un, and Seoul's...</div><div class="cmeta jank">2026-08-17&nbsp;&nbsp;&middot;&nbsp;&nbsp;ARTICLE&nbsp;&nbsp;&middot;&nbsp;&nbsp;5 TELLS&nbsp;&nbsp;&middot;&nbsp;&nbsp;B0SEPHUS G. ALTAMONT</div><div class="cacts"><button class="act" data-act="open">[ENTER] OPEN</button><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<div class="row" role="option" id="row-5" data-i="5" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">MLBRVSIT.RDO</span><span class="fsize">5,118</span><span class="fdate">2026-08-17 23:58</span><span class="fkind">REVISIT</span></div><div class="card"><div class="chead">The Arm Went Four For Four</div><div class="cdek">All ten calls from `2026-08-16_mlb-slate`, S-001 through S-010, graded against the MLB Stats API final for each game ID on 2026-08-17.</div><div class="cmeta jank">2026-08-17&nbsp;&nbsp;&middot;&nbsp;&nbsp;REVISIT&nbsp;&nbsp;&middot;&nbsp;&nbsp;B0SEPHUS G. ALTAMONT</div><div class="cacts"><button class="act" data-act="open">[ENTER] OPEN</button><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<div class="row" role="option" id="row-6" data-i="6" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">MLBSLAT2.RDO</span><span class="fsize">14,290</span><span class="fdate">2026-08-17 10:51</span><span class="fkind">SLATE</span></div><div class="card"><div class="chead">Ten Hinges, One Night</div><div class="cdek">Ten games from the schedule of 2026-08-17, every one verified in Preview at 10:51 Eastern, before any first pitch. Eleven games were scheduled. The Cincinnati doubleheader nightcap is left off so the count is ten and so the first game's bullpen consequences are not double...</div><div class="cmeta jank">2026-08-17&nbsp;&nbsp;&middot;&nbsp;&nbsp;SLATE (GAME)&nbsp;&nbsp;&middot;&nbsp;&nbsp;B0SEPHUS G. ALTAMONT</div><div class="cacts"><button class="act" data-act="open">[ENTER] OPEN</button><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<div class="row" role="option" id="row-7" data-i="7" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">CFBWEEK1.RDO</span><span class="fsize">9,495</span><span class="fdate">2026-08-16 21:33</span><span class="fkind">SLATE</span></div><div class="card"><div class="chead">Week One, Called From Twelve Days Out</div><div class="cdek">Ten games from the opening weekend of the 2026 season, called on 2026-08-16, which is twelve to twenty-one days before kickoff. Six agree with the naive home pick and four go against it.</div><div class="cmeta jank">2026-08-16&nbsp;&nbsp;&middot;&nbsp;&nbsp;SLATE (GAME)&nbsp;&nbsp;&middot;&nbsp;&nbsp;B0SEPHUS G. ALTAMONT</div><div class="cacts"><button class="act" data-act="open">[ENTER] OPEN</button><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<div class="row" role="option" id="row-8" data-i="8" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">ALMANAC .IMG</span><span class="fsize">6,492,646</span><span class="fdate">2050-03-11 02:14</span><span class="fkind">IMAGE</span></div><div class="card"><div class="chead">PLATE 01</div><div class="cdek">A plate held on the device. The machine draws what it knows rather than showing you a wire photo, but it kept these.</div><div class="cmeta jank">2050-03-11 02:14&nbsp;&nbsp;&middot;&nbsp;&nbsp;IMAGE&nbsp;&nbsp;&middot;&nbsp;&nbsp;ON DEVICE</div><div class="cacts"><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<div class="row" role="option" id="row-9" data-i="9" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">BANNER  .IMG</span><span class="fsize">461,589</span><span class="fdate">2050-03-11 02:16</span><span class="fkind">IMAGE</span></div><div class="card"><div class="chead">PLATE 02</div><div class="cdek">A plate held on the device. The machine draws what it knows rather than showing you a wire photo, but it kept these.</div><div class="cmeta jank">2050-03-11 02:16&nbsp;&nbsp;&middot;&nbsp;&nbsp;IMAGE&nbsp;&nbsp;&middot;&nbsp;&nbsp;ON DEVICE</div><div class="cacts"><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<div class="row" role="option" id="row-10" data-i="10" aria-selected="false"><div class="line grid"><span class="mark" aria-hidden="true"> </span><span class="fname jank">BRAND   .IMG</span><span class="fsize">1,815,471</span><span class="fdate">2050-03-11 02:19</span><span class="fkind">IMAGE</span></div><div class="card"><div class="chead">BRAND</div><div class="cdek">A plate held on the device. The machine draws what it knows rather than showing you a wire photo, but it kept these.</div><div class="cmeta jank">2050-03-11 02:19&nbsp;&nbsp;&middot;&nbsp;&nbsp;IMAGE&nbsp;&nbsp;&middot;&nbsp;&nbsp;ON DEVICE</div><div class="cacts"><button class="act" data-act="plate">[P] VIEW PLATE</button></div></div></div>
+<!--LISTING:END-->
+    </div>
+    <div class="prompt">
+      <span class="ps1">A:\BOSEPHUS-2050&gt;&nbsp;</span>
+      <input id="cmd" autocomplete="off" spellcheck="false" aria-label="Filter the directory by name or headline" placeholder="">
+      <span class="cur" id="cur" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <section id="docpane">
+    <div class="panehead"><span>VIEWPORT &nbsp;&middot;&nbsp; WHYNARR .TXT</span><span class="r">OPEN</span></div>
+    <div id="doc" tabindex="-1">
+      <article id="essay">
+<!--ESSAY:BEGIN-->
+<p class="eyebrow">FILE 3,457 BYTES &middot; PLAIN TEXT &middot; READ ONLY &middot; NO SEAM (RETRIEVED THROUGHOUT)</p>
+<h1>Why Narrative</h1>
+<p class="dek">The catalyst identification problem in modern LLMs, and the fix</p>
+<div class="erule"></div>
+<p class="statement">The problem is not knowledge. It is tense.</p>
+<p>Ask a current model what happens next and it returns the safest available object: a hedged, multi-factor summary that cannot be wrong because it never commits. Regulatory clarity, adoption curves, macro conditions. Every driver named, none of them load bearing, nothing dated. The output is unfalsifiable, so it cannot be graded, so nothing downstream of it can improve. That is the catalyst identification problem. The model will discuss causes at length and refuse to nominate one.</p>
+<p><strong>Why it happens.</strong> Two forces stack. Calibration training rewards appropriate uncertainty, and forward-looking assertions are exactly where that training bites hardest. Then the request itself is malformed: asking for the single correct future is a search for an object that does not exist, and under that incentive the rational move is to widen the claim until it is safe. The mush is not a failure of intelligence. It is a correct response to a bad question.</p>
+<p><strong>Why prompting harder does not work.</strong> "Be specific." "Commit to one answer." "No hedging." These fight the trained behavior head on and lose. What comes back is compliance theater, a confident-sounding paragraph with the same non-committal structure underneath, or a refusal. The deeper issue is that you are asking the model to operate the weakest grammar the language has. Future statements arrive pre-hedged in every human language, and plenty of languages have no dedicated future tense at all. None are missing a past.</p>
+<p class="statement">The move: change the tense, not the instruction.</p>
+<p>Fix a vantage in 2050. Ask what he remembers 2026 turning into. Same model, same retrieved record, different grammatical mood. Recollection licenses detail in a way prediction never does, because nobody demands justification for a specific inside a memory. Say it was raining and the folder was green and the meeting ran long, and a listener just follows along. Put those same specifics in a forecast and the listener leans back. The stance shifts on both ends of the exchange, and none of it requires anyone to lie.</p>
+<p><strong>Why this produces catalysts specifically.</strong> This is the part that earned the design rather than merely permitting it. Memory is catalyst-shaped by default. When a person recounts how something turned out, they do not recite a distribution. They tell you what it hinged on. Retrospection compresses causality into turns, because that is structurally what a story is. So the named, dated hinge falls out of the format for free. I never had to engineer the model into nominating a pivot. Nominating one is what remembering is.</p>
+<p><strong>What it costs, and the fence around it.</strong> A well-told story persuades whether or not it is true, which makes the fiction the dangerous component here, not the clever one. Two structures contain it. The seam: everything above it is retrieved and carries a source, everything below it is constructed, and the line is dated. The ledger: every pivot is written down with a date and a binary resolution, and it is graded on whether it fired before anyone looks at the outcome. Fantasy buys the specificity. The ledger charges for it. Neither half is safe alone.</p>
+<p><strong>The whole thing in one line.</strong> A model will not name a catalyst in the future tense. It names one automatically in the past tense. The engine is a tense change plus a scoreboard.</p>
+<!--ESSAY:END-->
+</article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div id="status">
+    <span id="msg">READY.</span>
+    <span id="tick">POST &nbsp;0x0000 &nbsp;OK</span>
+  </div>
+  <div id="keys">
+    <b class="kb">&uarr;&darr;</b><span class="kb">MOVE</span>
+    <b class="kb">J K</b><span class="kb">MOVE</span>
+    <b class="kb">ENTER</b><span class="kb">OPEN</span>
+    <b class="kb">P</b><span class="kb">PLATE</span>
+    <b class="kb">/</b><span class="kb">FILTER</span>
+    <b class="kb">ESC</b><span class="kb">CLOSE</span>
+    <b class="kb">? H</b><span class="kb">KEYS</span>
+    <span class="touch">TAP A ROW TO SELECT</span>
+    <span class="touch">TAP THE CARD TO OPEN</span>
+    <span class="touch">TAP THE PROMPT TO FILTER</span>
+    <span class="legend"><i class="chip"></i>&nbsp; PINK = THE SEAM. ABOVE IT RETRIEVED, BELOW IT CONSTRUCTED.</span>
+  </div>
+</footer>
+</div>
+
+<!-- readout window -->
+<div id="modal" class="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="mtitle">
+  <div class="win">
+    <div class="wintop">
+      <span class="wname" id="mtitle">READOUT</span>
+      <span class="wmeta" id="mmeta"></span>
+      <span class="sp"></span>
+      <button class="wclose" id="mclose">[ X ] CLOSE</button>
+    </div>
+    <div class="winbody" id="mbody" tabindex="0">
+      <div id="mpre"></div>
+      <div id="beam" hidden></div>
+    </div>
+    <div class="winfoot">
+      <span class="kbonly">ESC CLOSE</span><span class="touchonly">TAP CLOSE ABOVE</span><span>&middot;</span><span class="kbonly">ANY KEY SKIPS PAINT</span><span class="touchonly">TAP SKIPS PAINT</span>
+      <span class="sp"></span>
+      <button class="act" id="mplate" hidden>[P] VIEW PLATE</button>
+    </div>
+  </div>
+</div>
+
+<!-- plate viewer -->
+<div id="plate" class="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="ptitle">
+  <div class="win">
+    <div class="wintop">
+      <span class="wname" id="ptitle">PLATE</span>
+      <span class="wmeta" id="pmeta"></span>
+      <span class="sp"></span>
+      <button class="wclose" id="pclose">[ X ] CLOSE</button>
+    </div>
+    <div class="winbody" style="padding:0" tabindex="0" id="pbody"><img id="plateimg" alt="" src=""></div>
+    <div class="winfoot"><span class="kbonly">ESC CLOSE</span><span class="touchonly">TAP CLOSE ABOVE</span><span>&middot;</span><span>THE PLATE IS AN EVENT, NOT A BACKDROP</span></div>
+  </div>
+</div>
+
+<!-- help -->
+<div id="helpwrap" class="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="htitle">
+  <div class="win">
+    <div class="wintop"><span class="wname" id="htitle">KEYS AND LEGEND</span><span class="sp"></span><button class="wclose" id="hclose">[ X ] CLOSE</button></div>
+    <div class="helpbody" tabindex="0" id="hbody">
+      <div><dt>MOVE</dt><span class="k">&uarr;</span> <span class="k">&darr;</span> <span class="k">J</span> <span class="k">K</span> <span class="k">HOME</span> <span class="k">END</span></div>
+      <div><dt>OPEN</dt><span class="k">ENTER</span> <span class="k">O</span> &nbsp;<span class="dim">or click the OPEN control</span></div>
+      <div><dt>VIEW PLATE</dt><span class="k">P</span> &nbsp;<span class="dim">only where the artifact carries one</span></div>
+      <div><dt>FILTER</dt><span class="k">/</span> &nbsp;<span class="dim">type to narrow, ESC to clear</span></div>
+      <div><dt>CLOSE</dt><span class="k">ESC</span></div>
+      <div><dt>ON A PHONE</dt><span class="dim">tap a row to select it, tap the card to open it, tap CLOSE to come back</span></div>
+      <div class="erule"></div>
+      <div><span class="swatch" style="background:#8DFFB4"></span>MASTHEAD. Frozen art, 66 columns, never redrawn.</div>
+      <div><span class="swatch" style="background:#C9FFDC"></span>SECTION RULES AND HEADLINES.</div>
+      <div><span class="swatch" style="background:#35FF6A"></span>BODY.</div>
+      <div><span class="swatch" style="background:#1F9D4C"></span>SOURCES AND DISCLOSURES.</div>
+      <div><span class="swatch" style="background:#FF4FD8"></span>THE SEAM. Everything above it is retrieved and carries a source. Everything below it is constructed.</div>
+    </div>
+    <div class="winfoot"><span class="kbonly">KEYBOARD FIRST. THE MOUSE STILL WORKS.</span><span class="touchonly">TOUCH WORKS. SO DOES A KEYBOARD IF YOU HAVE ONE.</span></div>
+  </div>
+</div>
+
+<script>
+const DATA = /*READOUTS:BEGIN*/[{"kind":"ESSAY","name":"WHYNARR .TXT","size":3457,"title":"Why Narrative","plate":"assets/plate-banner.jpg","plateCap":"PLATE 02  ·  BOSEPHUS 2050 BANNER  ·  2048 x 1136","body":null},{"kind":"RDO","name":"CLARITY .RDO","size":14193,"title":"The Bill That Could Not Be Written While He Was In Office","plate":null,"plateCap":null,"body":"╔════════════════════════════════════════════════════════════════╗\n║ ·        ▄▄▄▄▄▄▄▄▄▄▄▄                    ˙                 ·   ║\n║      ▄██████████████████▄      ▄▀▀▄ ▄▀▀▄ █▀▀▀ ▄▀▀▄             ║\n║    ████████████████████████      ▄▀ █  █ ▀▀▀▄ █  █             ║\n║    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀    █▄▄▄ ▀▄▄▀ ▀▄▄▀ ▀▄▄▀             ║\n║     ██████████████████████                                     ║\n║      ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀      B 0 S E P H U S                 ║\n║        ████████████████        G .  A L T A M O N T            ║\n║ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ ║\n║   \\      \\      \\      \\     |     /      /      /      /      ║\n╠════════════════════════════════════════════════════════════════╣\n║  PRESENT LINE  2026-08-16   ▸   MODE  ARTICLE                  ║\n║  ARTIFACT  2026-08-16_clarity-act   ▸   TELLS  5   ▸  NIA // EB║\n╚════════════════════════════════════════════════════════════════╝\n\n█▓▒░ THE ARTICLE ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nSenate Majority Leader John Thune filed cloture on the motion to\nproceed to the Digital Asset Market Clarity Act at 4:52 a.m. ET on\nSaturday 2026-08-08, setting the first procedural vote for 2026-09-15\nat 2:15 p.m. ET, seventeen days after Banking Committee Ranking Member\nElizabeth Warren called the rewritten text dead on arrival.\n[The Block, 2026-08-08. Warren statement, banking.senate.gov,\n2026-07-22.]\n\n█▓▒░ I REMEMBER THIS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nI read the cloture filing on a phone in a gravel lot outside\nMorgantown, on a Saturday, because a filing at 4:52 in the morning\nbefore a recess is a thing you do when you want the record to show you\ntried. Everybody I knew read it as a whip count. Seven Democrats, find\nthem, done. That was the wrong frame and it took most of us the better\npart of a year to put it down. The vote was never the constraint. The\nconstraint was that the one provision that would have bought those\nseven votes could not be written while the man it described held the\noffice, and no amount of goodwill on the floor changes an arithmetic\nproblem that lives in the executive branch.\n\n█▓▒░ THE RECORD ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nVerified state of play as of the Present Line.\n\n- Senate Banking advanced the bill 15 to 9 on 2026-05-14. All 13\n  Republicans, plus Democrats Angela Alsobrooks and Ruben Gallego.\n  [ABA Banking Journal, 2026-05-14]\n- Cloture threshold is 60. Republicans hold 53 seats. At least 7\n  Democrats or independents must cross if every Republican votes yes,\n  and Josh Hawley (R-Mo.) is publicly opposed on community bank\n  grounds, which makes the real number 8.\n  [The Block, 2026-08-08. Disruption Banking, 2026-08-10.]\n- Galaxy Research cut its 2026 passage estimate from 50 percent to 30\n  percent. Polymarket traded near 17 percent in early August, down\n  from a February peak reported at 82 percent.\n  [Disruption Banking, 2026-08-10]\n- Bitcoin closed at 63,018.75 on 2026-08-15, against 66,086.61 on\n  2026-07-22, the day of the Warren statement. That is a decline of\n  4.6 percent across the entire political sequence.\n  [Massive Market Data, X:BTCUSD daily, retrieved 2026-08-16]\n- Coinbase closed at 148.47 on 2026-08-14 against 166.12 on\n  2026-07-22, down 10.6 percent. Caveat, and it matters: the single\n  largest move in that window was a one day drop of 10.6 percent on\n  2026-07-31 on 20.9 million shares, which is earnings-shaped rather\n  than legislation-shaped. I am not attributing it to the bill.\n  [Massive Market Data, COIN daily, retrieved 2026-08-16]\n- Warren's July 22 statement asserts the sitting president took in\n  more than 1.4 billion dollars from crypto ventures, including 799\n  million from World Liberty Financial and 636 million from a\n  memecoin. These are her figures, sourced to her office, and I have\n  not independently verified them. They are quoted here as the\n  political claim that organized the opposition, not as an audited\n  number. [Warren statement, banking.senate.gov, 2026-07-22]\n- Named unresolved items at the recess: ethics and divestment language\n  for senior officials, illicit finance provisions, stablecoin reward\n  provisions, and how Senate Agriculture text gets folded in.\n  [The Block, 2026-08-08]\n\n▞▚▞▚▞▚▞▚▞ PRESENT LINE 2026-08-16 · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚▞▚\n\n█▓▒░ WHAT HAPPENED NEXT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nSeptember 2026. Cloture failed. Not dramatically. It failed the way\nmost things fail in that chamber, which is that the managers counted\nthe night before, saw four and not eight, and let the vote happen\nanyway so that everyone had something to run on. The ethics language\nTillis and Gallego had walked over to the White House never came back\nin a form the seven could sign, because the only version that bought\nDemocratic votes required a sitting president to divest holdings he\nhad no intention of divesting, and no Republican manager was going to\nput that on the floor and dare him. That is the whole mechanism. It is\nnot a story about crypto. It is a story about what happens when the\nprice of a bipartisan coalition is a personal cost to the executive.\n\nLate 2026 into 2027. The vacuum did what vacuums do. The SEC and the\nCFTC, both of which wanted the jurisdiction and neither of which\nwanted to wait for Congress, moved on exemptive relief and joint\nguidance, and the industry took it because a rule it could sue over\nbeat a statute it could not get. This was slower and uglier than\nlegislation and it produced the same practical outcome about four\nyears later, which is the base rate for regulatory questions Congress\ndeclines to answer. Securities law has been settled by litigation\nbefore. It took about a decade each time and it took a decade here.\n\n2027 into 2028. The states filled in the rest, and the map went\npatchwork, and the patchwork became its own lobbying argument for a\nfederal bill. Wyoming and a handful of others kept their charters.\nNew York kept its regime and kept extracting rent from it. The firms\nthat had spent 2025 and 2026 arguing that they needed federal clarity\ndiscovered they could operate without it, at a cost, and once a cost\nis survivable it stops being an emergency.\n\n2029\\. A market structure statute passed. It was narrower than CLARITY,\nit was boring, and it passed for the reason these things always pass,\nwhich is that the office the ethics objection had been aimed at\nchanged hands and the objection lost its object. The Democrats who had\nblocked the 2026 text voted for a 2029 text that was, in the parts\nthat governed intermediaries, substantially similar. That is not\nhypocrisy, it is the correct read of what they were actually objecting\nto, and anyone who called it hypocrisy at the time was not listening.\n\n2030 through the forties. Here is the part that disappointed\neverybody. The statute mattered less than either side said it would.\nIt governed the intermediary layer, the exchanges and the custodians\nand the brokers, and the intermediary layer consolidated the way\nintermediary layers do, into a handful of institutions that looked\nincreasingly like banks and were eventually regulated like banks. The\nprotocol underneath was not a party to any of it. Bitcoin went through\nthe 2028 halving, the 2032 halving, the 2036, and the block schedule\ndid not consult the Federal Register once. People who had spent 2026\nbelieving that US market structure law was an existential question for\nthe asset were making a category error, and it was an expensive one,\nbecause it kept them watching the wrong screen for four years.\n\nWhat the fight actually settled, and this took me twenty years to see,\nwas not the regulatory perimeter. It was that self-dealing by the\nexecutive became the permanent frame for financial legislation. Every\nmarket bill after 2026 carried an ethics title, because the 2026 fight\nproved that the ethics title was the price. That is Warren's mark on\nthe record. She lost the bill and set the template, and the template\noutlived every specific provision anyone argued about that summer.\n\n█▓▒░ THE PIVOT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nWhether presidential divestment language appeared in the text brought\nto the floor before the 2026-09-15 cloture vote. Not whether ethics\nlanguage existed in some draft, which it did, but whether it reached\nthe operative text with divestment in it. If it had, the seven were\ngettable and the bill moved in the 119th. It did not, so they were\nnot, and it did not.\n\nWhat it would have taken to go the other way: the White House\naccepting a divestment requirement, or eight Democrats deciding that a\nstatute without one was better than agency rulemaking. Both were\npossible on 2026-08-16 and both required somebody to absorb a loss in\npublic. That is a watchable event. Anyone reading the manager's\namendment in the first two weeks of September 2026 knew the answer\nbefore the vote was called.\n\n█▓▒░ THE FORKS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nLOAD-BEARING. The branch above. Cloture fails, no statute in the\n119th, agencies and states fill the gap, a narrower bill lands around\n2029 once the ethics objection loses its object.\n\nLIVE. Divestment language lands in the manager's amendment in early\nSeptember. Eight Democrats cross. CLARITY clears the Senate in the\nfall of 2026, goes to conference over the Agriculture title, and is\nsigned in the first quarter of 2027. Materially better for the\nintermediaries and roughly neutral for everyone else, since the\nsubstantive text was never the fight.\n\nTAIL. A large intermediary fails before the statute exists, in the\n2027 or 2028 window, with customer assets involved. Congress then\nwrites the bill in ninety days and writes it angry, and the result is\nmaterially worse than CLARITY for every firm that spent 2026 lobbying\nagainst CLARITY. Needs a specific failure at a specific size. If a top\nfive US custodian discloses a material shortfall, move this to live.\n\n█▓▒░ THE TELLS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n1. Cloture on the motion to proceed fails to reach 60 on 2026-09-15,\n   or the vote is pulled before it is held. Resolves 2026-09-16.\n2. Divestment language covering senior executive branch officials\n   appears in the operative floor text on or before 2026-09-15.\n   Resolves 2026-09-16. I say no.\n3. No digital asset market structure statute is signed into law before\n   the 119th Congress ends on 2027-01-03. Resolves 2027-01-04.\n4. The SEC and CFTC issue joint guidance, exemptive relief, or a joint\n   rulemaking covering digital asset trading or custody on or before\n   2027-12-31. Resolves 2028-01-01. I say yes.\n5. Elizabeth Warren is still Ranking Member of Senate Banking on\n   2027-01-03. Resolves 2027-01-04.\n\n█▓▒░ BOSEPHUS SAYS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nStop counting votes and go read the manager's amendment. The whole\nquestion is whether the word divestment is in the operative text\nbefore September 15, and if it is not there by the second week of\nSeptember then the September 15 vote is theater and the real\nregulatory perimeter gets drawn by two agencies and a circuit court\nover the following four years. Also, and I say this as gently as I can\nfrom where I am sitting: the protocol was never on the ballot. Bitcoin\nclosed down 4.6 percent across the loudest three weeks of this fight,\nwhich is the market telling you plainly that it had already priced the\nanswer and the answer was that this mattered to intermediaries and not\nto the thing itself. Educate. Disintermediate. Innovate. Build.\n\n█▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPresent Line 2026-08-16. One readout. Locked Calendar not present at\nrun time, halving dates applied from spec section 6.2. Six cited hard\nnumbers in THE RECORD, minimum is three.\n\nOne telling of one thread. Ask again and the decade may come back\ndifferent. Nothing here binds the next telling, and nothing in the next\ntelling corrects this one.\n\nConstructed content. Everything after 2026-08-16 is one plausible\nbranch, written in retrospective voice as a reasoning device. It is\nnot a forecast, not a prediction, and not investment advice. MØNTAN1\nis not a registered investment advisor.\n\nStay dangerous.\n\n          ▂▃▄▅▆▇█ B0SEPHUS G. ALTAMONT · 2050 █▇▆▅▄▃▂"},{"kind":"RDO","name":"ERCOTPAU.RDO","size":12349,"title":"The Queue Was Never Demand","plate":"assets/2026-08-16_ercot-pause_wide.png","plateCap":"2026-08-16_ercot-pause  ·  WIDE PLATE","body":"> I went down there with the Abbott order printed out. He read it, or did\n> whatever he does instead of reading, and the first thing he said was that I\n> was looking at the wrong number. Everybody was looking at the wrong number.\n> Then he told me which one to watch and when, and I wrote it on a card.\n\n╔══════════════════════════════════════════════╗\n║        ▄▄▄▄▄▄▄▄        ▄▀▀▄ ▄▀▀▄ █▀▀▀ ▄▀▀▄   ║\n║     ▄████████████▄       ▄▀ █  █ ▀▀▀▄ █  █   ║\n║    ████████████████    █▄▄▄ ▀▄▄▀ ▀▄▄▀ ▀▄▄▀   ║\n║    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀                          ║\n║     ██████████████     B 0 S E P H U S       ║\n║      ▀▀▀▀▀▀▀▀▀▀▀▀      G .  A L T A M O N T  ║\n║ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ ║\n║  \\    \\    \\   |   /    /    /               ║\n╠══════════════════════════════════════════════╣\n║ 2026-08-16 ▸ ARTICLE ▸ READOUT 91C4          ║\n╚══════════════════════════════════════════════╝\n\n█▓▒░ THE ARTICLE ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nGovernor Abbott directed the PUCT and ERCOT on 2026-08-03 to audit every\ndata center project moving through the interconnection queue, said\nnoncompliant projects should be denied grid access, and ERCOT paused the\nBatch Zero study process the same day, missing its 2026-08-07 deadline\nand seeking a good-cause exception.\n[Holland & Knight, Akin, Houston Public Media, Utility Dive, August 2026]\n\n█▓▒░ I REMEMBER THIS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nEverybody I knew read it as Texas turning on the industry, and the ones\nwho had money in it read it as a buying opportunity, and both camps were\narguing about the same wrong thing. I remember a man on a panel in\nHouston saying the state had just killed four hundred and seventy-four\ngigawatts of investment. Four hundred and seventy-four gigawatts of\ninvestment did not exist. That was the whole story and it took two years\nfor the room to catch up to it.\n\n█▓▒░ THE RECORD ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n- ERCOT is processing roughly **474 GW** of large-load interconnection\n  requests, more than five times its record peak demand. Roughly **90\n  percent** is data centers. [Utility Dive, August 2026]\n- That queue was about **238.6 GW in March 2026**. It has roughly doubled\n  in five months. [Latitude Media / Utility Dive, 2026]\n- **Fewer than 10 percent** of data centers were complying with the\n  existing state requirement to report power and water usage.\n  [Houston Public Media, 2026-08-03]\n- SB6 and the PUCT rule impose **$50,000 per MW** in financial security,\n  site control, batch study and mandatory curtailment exposure on loads\n  **75 MW and above**. [PUCT 16 TAC 25.194, SB6]\n- ERCOT missed the **2026-08-07** Batch Zero deadline and sought a\n  good-cause exception. [Akin, August 2026]\n- Vistra, the largest ERCOT generator, closed at **155.94 on 2026-08-03\n  and 143.23 on 2026-08-04**, down **8.15 percent** in a session on\n  **11.5 million shares**, roughly 2.3 times its recent volume. By\n  2026-08-14 it had recovered to 148.13, still down 5.01 percent from\n  the day of the order. [Massive Market Data, VST daily, retrieved\n  2026-08-16]\n- US electricity CPI was **306.095 in July 2026**, up **4.20 percent**\n  year over year against 293.754. [FRED CUSR0000SEHF01, retrieved\n  2026-08-16]\n\n▞▚▞▚▞▚▞▚▞ PRESENT LINE 2026-08-16 · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚▞▚\n\n█▓▒░ WHAT HAPPENED NEXT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**2026 into 2027.** The audit did not deny anybody. That is the part\npeople get wrong when they tell this story now. It did something more\nuseful and much less dramatic: it made developers say out loud, in\nwriting, with a signature, which of their filings were real. Filing into\nan interconnection queue is close to free, and when a thing is close to\nfree you file everywhere, because a queue position is an option and\noptions are worth holding. Nobody was lying. Everybody was hedging, and\nfour hundred and seventy-four gigawatts was the sum of everybody's\nhedging counted as though it were demand.\n\nThe number that actually did the work was fifty thousand dollars a\nmegawatt. A hundred megawatt project posts five million to hold its\nplace, and that is the moment a developer has to decide whether he\nbelieves his own filing. The audit got the headlines. The security\ndeposit emptied the queue.\n\n**2027 into 2029.** What survived was a different shape of project.\nOnce a queue position cost real money and carried a curtailment\nobligation, the economics stopped favouring the enormous speculative\ncampus and started favouring load that arrived with its own generation\nattached. Co-located gas. Existing nuclear uprates. Solar with storage\nwhere the interconnect was already built. Not because anybody preferred\nit, but because the queue had become the binding constraint on the\nentire business and behind the meter was the only door that was not\nlocked. You cannot conjure a transmission line. Eight to twelve years is\neight to twelve years, and no amount of capital compresses it.\n\n**The curtailment thing is the part I still find funny.** Mandatory\ncurtailment exposure was the provision the hyperscalers fought hardest,\nand it was the provision the bitcoin miners had been living under\nvoluntarily for a decade and getting sneered at for. The miners had\nalready proven that interruptible load is worth more to a grid than firm\nload of the same size, and had been treated as a nuisance the whole time\nthey were proving it. By 2029 the flexibility product the AI operators\nwere paying for was the one the miners had built the market for, and\nalmost nobody said so out loud.\n\n**2030 through the forties, and here is where it gets boring.** Texas\nstayed the largest market. It was never in danger of not staying the\nlargest market. What changed was the growth rate, which normalised to\nsomething a grid could actually build against, and the queue number,\nwhich stopped being quoted in press releases once everyone understood it\nhad never measured demand. Other states copied the security-and-batch\ntemplate within about four years, because it worked and because\ncopying is cheaper than thinking. The interconnection queue as a\nnational conversation quietly ended, not because it was solved but\nbecause the metric stopped being interesting once it stopped being\nfree to enter.\n\nElectricity got more expensive the whole time, steadily, without a\ncrisis. That is the least dramatic sentence in this readout and it is\nthe one that mattered most to the most people.\n\n█▓▒░ THE PIVOT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Whether the state ever actually denied anyone.**\n\nAbbott said noncompliant projects should be denied access to the grid.\nAn audit that ends in denials is a regulator establishing that the rules\nbind, and it reprices every filing in the queue overnight. An audit that\nends in a compliance drive, where everybody files the paperwork they\nwere always supposed to file and the queue resumes, is a speed bump with\na press release attached.\n\nWatchable, and here is how to watch it: **does ERCOT or the PUCT deny\ninterconnection to at least one data center project of 75 MW or larger,\non compliance grounds, on or before 2027-06-30?**\n\nWhat it would have taken to go the other way: one project large enough\nto make an example of, and a commission willing to eat the lawsuit. Both\nwere available. Neither was necessary, because the financial security\nrequirement accomplished the same filtering without anybody having to\nbe the villain.\n\n█▓▒░ THE FORKS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**LOAD-BEARING.** The branch above. No denials of consequence, heavy\nattrition once security is posted, and the surviving projects arrive\nwith generation attached.\n\n**LIVE.** A genuine denial lands, precedent is set, and the marginal\nproject reprices to other territories rather than to behind the meter.\nPJM, MISO and the Southeast absorb what Texas turns away, at worse\ninterconnect timelines and better political certainty. Materially worse\nfor Texas and roughly neutral nationally.\n\n**TAIL.** A reliability event during the pause window, cold or hot,\nwith large loads implicated in the public account of it. Then the\nlegislature writes the rule in ninety days and writes it angry, and the\nresult is far harsher than SB6 for everyone including the operators who\nlobbied against SB6. Needs a specific failure at a specific moment. If\nERCOT issues conservation appeals with large-load curtailment named in\nthe notice, move this to live.\n\n█▓▒░ THE TELLS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n1. **The pivot.** ERCOT or the PUCT denies interconnection to at least\n   one data center project of 75 MW or larger on compliance grounds, on\n   or before 2027-06-30. Resolves 2027-07-01. **I say no.**\n2. ERCOT's good-cause exception is granted and the Batch Zero study\n   process resumes on or before 2026-12-31. Resolves 2027-01-01.\n   I say yes.\n3. The reported ERCOT large-load queue falls below 400 GW on or before\n   2027-06-30. Resolves 2027-07-01. I say yes.\n4. Reported compliance with the Texas power and water usage requirement\n   exceeds 50 percent on or before 2027-12-31. Resolves 2028-01-01.\n5. Another state or ISO adopts a large-load financial security\n   requirement modelled on SB6 on or before 2028-06-30.\n   Resolves 2028-07-01. I say yes.\n\n█▓▒░ BOSEPHUS SAYS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nStop quoting the queue. Four hundred and seventy-four gigawatts against\na record peak under a hundred is not a demand forecast, it is the sum of\nevery developer's free option counted once per filing, and treating it\nas a pipeline is how a serious person ends up on a panel saying\nsomething foolish. Watch the deposits instead. The day a hundred\nmegawatt project has to wire five million dollars to hold its place is\nthe day you find out what was ever real, and that day tells you more\nthan the audit will. Also watch who already knows how to be curtailed,\nbecause that turned out to be worth more than anybody was paying for it.\nEducate. Disintermediate. Innovate. Build.\n\n█▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPresent Line 2026-08-16. Readout 91C4. Seven cited numbers in THE\nRECORD, minimum is three. Five Tells logged to\n`ledgers/tells-policy.md`.\n\nOne telling of one thread. Ask again and the decade may come back\ndifferent. Nothing here binds the next telling, and nothing in the next\ntelling corrects this one.\n\nConstructed content. Everything below the seam is one plausible branch,\nwritten in retrospective voice as a reasoning device. It is not a\nforecast, not a prediction, and not investment advice. MØNTAN1 is not a\nregistered investment adviser.\n\nStay dangerous.\n\n          ▂▃▄▅▆▇█ B0SEPHUS G. ALTAMONT · 2050 █▇▆▅▄▃▂"},{"kind":"RDO","name":"MLBSLATE.RDO","size":10553,"title":"Ten Calls, One Night","plate":"assets/2026-08-16_mlb-slate.png","plateCap":"2026-08-16_mlb-slate  ·  SLATE PLATE","body":"> Card carries the calls. This carries the reasoning.\n\n╔══════════════════════════════════════════════╗\n║        ▄▄▄▄▄▄▄▄        ▄▀▀▄ ▄▀▀▄ █▀▀▀ ▄▀▀▄   ║\n║     ▄████████████▄       ▄▀ █  █ ▀▀▀▄ █  █   ║\n║    ████████████████    █▄▄▄ ▀▄▄▀ ▀▄▄▀ ▀▄▄▀   ║\n║    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀                          ║\n║     ██████████████     B 0 S E P H U S       ║\n║      ▀▀▀▀▀▀▀▀▀▀▀▀      G .  A L T A M O N T  ║\n║ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ ║\n║  \\    \\    \\   |   /    /    /               ║\n╠══════════════════════════════════════════════╣\n║ 2026-08-16 ▸ SLATE ▸ DRAWN FRESH ▸ CALLS 10  ║\n╚══════════════════════════════════════════════╝\n\n█▓▒░ THE SLATE ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nTen games from the schedule of 2026-08-16, every one of them verified\nunstarted at the moment the call was written. Five calls agree with the\nnaive home pick and five go against it.\n\n█▓▒░ I REMEMBER THIS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nA Sunday in the middle of August, which is the part of a baseball\nseason nobody writes about and everybody who cares actually watches.\nTwo clubs I have loved my whole life were on the board. One of them I\npicked against, and I want that on the record at the top rather than\nburied where it looks like modesty.\n\n█▓▒░ THE RECORD ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nEvery number below was retrieved at call time. Records, run rates and\nstarters from the league's own feed. Conditions from the National\nWeather Service gridpoint for each park.\n\n| Game | Away | Home | Away SP | Home SP |\n|---|---|---|---|---|\n| Nationals @ Mets | 60-65, 5.34 RS/G | 55-69, 4.19 RS/G | Irvin 5.79 | Scott 3.45 |\n| White Sox @ Tigers | 64-58, 4.81 | 60-63, 3.86 RA/G | Burke 2.99 | Anderson 3.91 |\n| Marlins @ Reds | 63-61, 4.38 | 59-63, 4.76 RA/G | Perez 3.39 | Lodolo 4.86 |\n| Phillies @ Twins | 66-58, 4.44 | 60-64, 4.62 | Painter 6.27 | Kremer 5.25 |\n| Cardinals @ Cubs | 62-61, 4.37 | 72-52, 5.17 | Dobbins 3.40 | Cabrera 5.10 |\n| Rockies @ Giants | 49-74, 5.71 RA/G | 51-72, 4.08 | Hughes 5.61 | Tidwell 2.78 |\n| Rangers @ Athletics | 61-63, 4.07 | 48-75, 5.79 RA/G | Bradford 2.38 | Lopez 5.38 |\n| Royals @ Angels | 50-74, 5.03 RA/G | 49-75, 4.09 | Cameron 4.45 | Johnson 6.71 |\n| Brewers @ Dodgers | 76-48, 3.79 RA/G | 74-50, 3.82 RA/G | Henderson 0.91 WHIP | Skubal 0.93 WHIP |\n| Mariners @ Astros | 58-66, 3.92 RS/G | 63-61, 4.63 | Woo 4.15 | Brown 3.68 |\n\nSources: MLB Stats API game feed and standings, retrieved 2026-08-16.\nNWS gridpoint forecast and active alerts per venue, same date.\n\n**Conditions worth naming.** Only two parks produced weather that\nchanges how the game gets played, and the rest are recorded and\nignored, which is the correct treatment of a mild August evening.\n\n- **Wrigley Field.** West wind at 10, gusting 16, air carrying at 1.05\n  against standard. West at Wrigley is the direction that turns a\n  warning-track fly into a souvenir. That is why the Cubs number is\n  seven and not four.\n- **Oracle Park.** Sixty-three degrees, carry 1.014, the thinnest air\n  advantage on the board and by some distance the least of it. Cool\n  marine air off the bay is the reason a Colorado lineup that scores\n  4.74 a game gets held to two.\n- **Tropicana Field.** A dome. No conditions block exists for it and\n  none should.\n\n▞▚▞▚▞▚▞▚▞ PRESENT LINE 2026-08-16 · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚▞▚\n\n█▓▒░ HOW IT WENT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**The five that went against the book.**\n\nDetroit had the better bullpen and the better ballpark and lost anyway,\nbecause Sean Burke had thrown 135 innings by the middle of August with\na 1.08 WHIP and that is not a fluke, that is a pitcher. Comerica gives\nback nothing to a right-hander who keeps the ball down. Four to two,\nand the Tigers never had more than one runner in scoring position after\nthe fourth.\n\nCincinnati is a bandbox and it was 86 degrees, which usually means the\nhome club scores. It also means the visiting club scores, and Miami had\nEury Perez while the Reds ran out a starter carrying a 1.46 WHIP.\nSix to four in a game that felt closer than the line.\n\nSacramento was 86 and still, and the Athletics have allowed 5.79 runs a\ngame all year in a minor league park. There is no weather story here and\nno narrative one either. Texas scored six because that is what happens.\n\nAnaheim was the closest of the five. Kansas City has been bad and cold,\nthree of ten coming in, and the Angels had won six of ten. None of that\nmattered next to a starter with a 6.71 ERA facing one at 4.45. Five to\nfour, and the two-run gap in ERA showed up as a one-run game, which is\nthe honest version of that edge.\n\nLos Angeles was two aces and a coin. Henderson at a 0.91 WHIP against\nSkubal at 0.93 is as close as two starters get. I took Milwaukee three\nto two on the strength of a better record and nothing else, and I want\nto be clear that this was the weakest call on the board.\n\n**The five that went with it.**\n\nNew York took the Nationals five to three and I did not enjoy writing\nit. Washington scores more than the Mets do, considerably more, and it\ndid not matter, because Jake Irvin has a 5.79 ERA and a hot club at\nhome does not need much. This is the whole discipline in one line: the\nclub I love had the better lineup and the worse pitcher, and the worse\npitcher decides more games than the better lineup does.\n\nMinnesota and Philadelphia was two starters nobody wanted, 6.27 against\n5.25, and it went six to five because games between bad pitching go\nthat way and the home side gets last licks.\n\nChicago beat St. Louis seven to five with the wind out. Cabrera was not\ngood. He did not have to be.\n\nSan Francisco held Colorado to two in the coldest air on the slate.\nBlade Tidwell has only 22 innings on the year and I leaned on the park\nmore than the pitcher.\n\nHouston beat Seattle five to three. The Mariners score 3.92 a game and\nthat is the lowest figure on the board. A club that cannot score does\nnot win in Houston in August with the roof shut.\n\n█▓▒░ THE PIVOT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nAcross a slate rather than a single game, the pivot is not an event, it\nis a choice of method. **Every one of these ten calls was made on the\nstarting pitcher first and the lineup second.** Where those two\ndisagreed, the arm won, every time, including against my own club.\n\nThat is falsifiable in the cleanest way available. If this slate grades\nbadly, the method is what failed, not the individual reads, and the\ncorrection is to weight offence higher. If it grades well, the rule\nholds and the next slate is built the same way.\n\n█▓▒░ THE FORKS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**LOAD-BEARING.** Six or seven winners, margin inside two on about\nhalf, and a small positive delta against the naive home pick. Starting\npitching in August is a real edge and a modest one.\n\n**LIVE.** Five winners and no delta at all. Ten games is not enough to\nseparate method from noise, and a night where the favourites hold is\nindistinguishable from a night where I was right.\n\n**TAIL.** Three or fewer, which would mean the method is actively\nworse than picking the home team, and the arm-over-lineup rule gets\nrewritten rather than tuned. It needs the two ace matchups and the two\ncoin flips all to break the same way.\n\n█▓▒░ WHAT GETS GRADED ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nWinner, binary. Margin inside two runs. Both against the naive home\npick, which is the only comparison that means anything. Fan games are\nreported as their own line so bias is measured rather than argued.\n\nJudged and kept internal: whether the pivot held, and whether the\nWrigley and Oracle conditions reads did any work or were decoration.\n\n█▓▒░ BOSEPHUS SAYS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nTen games in one night is not a hit rate, it is the first ten entries\nin a ledger that will eventually be one. The only number worth anything\ntomorrow is the delta against picking every home team, because that is\nthe number that says whether any of this reasoning did work a coin\ncould not. I picked against Washington and I would do it again, and if\nthat one lands wrong it will still have been the right call.\nEducate. Disintermediate. Innovate. Build.\n\n█▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPresent Line 2026-08-16. One readout. Ten calls logged to\n`ledgers/tells-sports.md` as S-001 through S-010.\n\nOne telling of one thread. Ask again and the decade may come back\ndifferent. Nothing here binds the next telling, and nothing in the next\ntelling corrects this one.\n\nConstructed content. Everything below the seam is one plausible branch,\nwritten in retrospective voice as a reasoning device. It is not a\nforecast, not a prediction, not betting advice, and not investment\nadvice. MØNTAN1 is not a sportsbook, a tout, or a registered adviser.\n\nStay dangerous.\n\n          ▂▃▄▅▆▇█ B0SEPHUS G. ALTAMONT · 2050 █▇▆▅▄▃▂"},{"kind":"RDO","name":"KOREADRL.RDO","size":15625,"title":"The Exercise Was the Instrument","plate":"assets/2026-08-17_korea-drills_wide.png","plateCap":"2026-08-17_korea-drills  ·  WIDE PLATE","body":"> I brought him the wire copy and a headline about Kim Jong Un. He handed\n> it back and asked me what else was on the calendar for those ten days. I\n> said I had no idea. He said that was the story, and that it usually is.\n\n╔══════════════════════════════════════════════╗\n║        ▄▄▄▄▄▄▄▄        ▄▀▀▄ ▄▀▀▄ █▀▀▀ ▄▀▀▄   ║\n║     ▄████████████▄       ▄▀ █  █ ▀▀▀▄ █  █   ║\n║    ████████████████    █▄▄▄ ▀▄▄▀ ▀▄▄▀ ▀▄▄▀   ║\n║    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀                          ║\n║     ██████████████     B 0 S E P H U S       ║\n║      ▀▀▀▀▀▀▀▀▀▀▀▀      G .  A L T A M O N T  ║\n║ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ ║\n║  \\    \\    \\   |   /    /    /               ║\n╠══════════════════════════════════════════════╣\n║ 2026-08-17 ▸ ARTICLE ▸ READOUT EDA1          ║\n╚══════════════════════════════════════════════╝\n\n█▓▒░ THE ARTICLE ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPresident Trump said on 2026-08-16, hours before Ulchi Freedom Shield\nwas due to begin, that he had instructed Secretary of War Pete Hegseth\nto \"substantially reduce\" the joint military exercises with South Korea,\nciting cost, his relationship with Kim Jong Un, and Seoul's refusal to\njoin the war against Iran.\n[NBC News, 2026-08-16, updated 2026-08-17; Reuters; Guardian; WSJ]\n\n█▓▒░ I REMEMBER THIS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nI read it the way everyone read it, which was as a man being soft on\nPyongyang for the fourth time. Every argument that week was about Kim\nJong Un. I did not know, and almost no one writing about it seemed to\nknow, that those particular ten days had a second job. The exercise was\nalso the examination. South Korea was being graded, inside that drill,\non whether it was fit to command its own war. Nobody got that wrong out\nof stupidity. They got it wrong because the interesting thing had no\nface on it and the boring thing was a paperwork milestone.\n\n█▓▒░ THE RECORD ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n- Ulchi Freedom Shield 2026 runs **2026-08-17 to 2026-08-27**, with about\n  **18,000** South Korean troops and personnel from **11 of the 18**\n  United Nations Command member states. Seoul's defence ministry said on\n  2026-08-17 the drills were \"proceeding as planned.\"\n  [Guardian, 2026-08-17; NBC News, 2026-08-17]\n- Seoul planned to use that exercise window to **effectively complete the\n  Full Operational Capability assessment** of the future Combined Forces\n  Command, the second of three stages in the wartime OPCON transition,\n  and to carry the result to the **58th Security Consultative Meeting in\n  Washington in October 2026**. [UPI / Asia Today, 2026-08-06]\n- USFK commander **Gen. Xavier Brunson told the House Armed Services\n  Committee on 2026-04-22** that he had submitted a roadmap for meeting\n  the transfer conditions **before the second quarter of fiscal 2029**.\n  Seoul has pushed for 2027 or 2028. [UPI / Asia Today, 2026-08-06]\n- The **FY2026 NDAA**, a **$901 billion** bill signed in December 2025,\n  bars funds from reducing USFK below **28,500** absent certification and\n  consultation. The administration opposed the provision.\n  [Korea Pro; Korea Herald; Korea Times, December 2025]\n- The **12th Special Measures Agreement** sets Seoul's 2026 contribution\n  at **1.5192 trillion won**, up **8.3 percent** from 1.4028 trillion in\n  2025, with later annual rises tied to Korean inflation and capped at\n  **5 percent**. [CRS IF13050; Korea Herald, 2024-11]\n- South Korea's active force is near **450,000**, down more than **20\n  percent in six years** from about 563,000 in 2019. The population of\n  20-year-old males fell about **30 percent to 230,000** over the same\n  span, and the services report a shortfall near **50,000**.\n  [Korea Times, 2025-08-10]\n- Korea's total fertility rate was **0.748 in 2024**, against 0.918 in\n  2019. Working-age share of population was **70.16 percent in 2024**,\n  from 71.54 percent in 2021. [World Bank SP.DYN.TFRT.IN and\n  SP.POP.1564.TO.ZS, retrieved 2026-08-17]\n- Precedent on both counts. About half of roughly forty UFS field\n  training events were **postponed to September in 2025**, officially for\n  heat. And American presidents have cut this garrison before: about\n  **20,000** out under Nixon by March 1971, a Carter withdrawal order\n  **abandoned in 1979** after roughly 3,600 had gone, and **3,600**\n  moved to Iraq in 2004. [Korea Times and NK News, August 2025; CSIS;\n  38 North; NCNK]\n\n▞▚▞▚▞▚▞▚▞ PRESENT LINE 2026-08-17 · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚▞▚\n\n█▓▒░ WHAT HAPPENED NEXT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**August into October 2026.** The assessment ran. That is the sentence\nthe whole thing turns on and it took me years to appreciate how ordinary\nit was. The command post portion is people in a building looking at\nscreens, and it is the cheapest part of the exercise to keep when you\nhave been told to cut. What got cut was the part with vehicles in it.\nThe evaluation nobody was writing about survived precisely because it\nwas the part that did not look like an exercise on television.\n\nThen Washington certified it in October, and both governments wanted\nthat certificate for reasons that had nothing to do with each other.\nSeoul wanted command of its own war before the administration that might\ngive it away was gone. Washington wanted a story about allies carrying\ntheir own weight. A thinner exercise gave both sides cover to certify on\na thinner evidence base, because the alternative was telling the public\nthat the drill the President had just cut was the drill that mattered.\nCertification is a political act wearing a technical costume, and it\nalmost always clears when the two parties want it for different reasons.\n\n**The year they named was 2029, not 2028.** Seoul asked for inside the\nterm. It got one quarter past it. The reason was unglamorous: a roadmap\nalready existed with 2029 in it, submitted through the American chain of\ncommand, and a roadmap that exists beats a roadmap that is wanted. That\nis the general rule for how these fights resolve and it resolved that\nway here. The professionals took the politics out of it by handing both\ncapitals a date neither of them chose.\n\n**2027 through 2029, the ratchet.** The exercises never came back to\nfull size. Not once. This is the part I would tell you to watch for in\nany institution, not just this one: a reduction becomes the baseline the\nmoment it happens, because nobody is ever required to defend the smaller\nversion, and somebody always has to defend the bigger one. Add a\nscheduling habit of pushing field training out of the August heat and\ninside four years there was no single event large enough to be worth\ncancelling. The annual argument about the drills simply stopped, and it\nstopped without anyone announcing it.\n\n**Kim never came.** The read that week was that the drills were the\nprice of a meeting. The drills were never the price. He was already\nbeing paid, in food, fuel, and engineering help, by a country at war\nthat needed men and shells and did not settle up through anybody's\nbanking system. A summit with Washington would have cost him that\narrangement and bought him nothing, because the only thing he actually\nwanted was to be acknowledged as a nuclear state, and no American\npresident could hand that over. So the concession went out and nothing\ncame back. That is the usual return on a unilateral concession, and\nknowing it in advance does not seem to help anyone.\n\n**The transfer happened in 2029 and it was an anticlimax.** The command\nquestion that everyone said was insoluble, the American reluctance to\nput American troops under a foreign general, got solved the way those\nalways get solved, with a dual-hatted headquarters and a great deal of\npaper. Nothing perceptible changed in the first year. The Combined\nForces Command kept its building and most of its habits.\n\n**The 2030s, and here is the real story.** It was never Trump and it was\nnever Kim. It was that the twenty-year-old men did not exist. The births\nhad already happened, so the conscript pool through the mid-forties was\na matter of arithmetic rather than of policy, and no amount of\npatriotism, pay, or emergency legislation conjured a cohort. Seoul did\nthe only thing available, which was to buy machines instead of men:\nuncrewed systems, directed energy, the submarines, a total force\nconstruct that counted reservists and civilians because the active\nnumber alone had stopped being reportable. Nobody called it a doctrine.\nIt was a spreadsheet with a flag on it.\n\nAmerican strength followed the same logic from the other end. The\nstatutory floor held in law and eroded in practice, one unreplaced\nrotation and one flattened headquarters at a time, and the number in the\nstatute went on describing something that had quietly stopped existing.\nCongress never repealed it. Repealing it would have required a vote.\n\n**The forties.** The armistice held. It had held since 1953 and it went\non holding, which is the single most likely thing to say about that\npeninsula in any decade you pick and the thing nobody wants to hear. No\nunification. No war. No normalisation. The border stayed exactly where\nit was and the two countries went on being poorer and richer than each\nother in the same proportions, and the most consequential change on the\nsouthern half of it was that there were fewer people there every year.\n\n█▓▒░ THE PIVOT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**The 58th Security Consultative Meeting, Washington, October 2026.**\n\nNot the drills. Not a summit. A defence ministers' meeting and the joint\ncommuniqué that comes out of it. If that document certifies the Full\nOperational Capability assessment and names a target year for the\nwartime OPCON transfer, then the exercise reduction was cosmetic and the\nalliance's real project moved forward on schedule underneath it. If the\ncommuniqué comes out without the certification, then the cut did\nmaterial damage to the one instrument that measures whether South Korea\ncan run its own defence, and the transfer slides past this\nadministration into somebody else's.\n\nWatchable, and here is how to watch it: **does the 58th SCM joint\ncommuniqué, published on or before 2026-12-31, state that the Full\nOperational Capability assessment is complete or certified, and name a\ntarget year or date for the transfer of wartime operational control?**\n\nWhat it would have taken to go the other way: a reduction deep enough to\ngut the command post portion rather than the field training. Field\ntraining is what a President cuts when a President wants a headline,\nbecause it is visible and expensive. The examination was neither.\n\n█▓▒░ THE FORKS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**LOAD-BEARING.** The branch above. Certification in October, a target\nyear of 2029 or later, and an exercise that never returns to its former\nsize because reductions do not reverse without a champion.\n\n**LIVE, and materially better.** The assessment comes back incomplete\nbecause the reduction really did hollow the evaluated portion. The SCM\ndefers, Congress makes noise about the troop floor and the drills\ntogether, and Freedom Shield 2027 runs at full scale with the\ncertification properly attached. The transfer lands around 2030 instead,\nwith a real examination behind it rather than a generous one. Slower,\nand much sounder.\n\n**TAIL, and materially worse.** A summit gets attempted. Exercises are\nsuspended in full as the entry fee, Kim pockets it, and nothing is\nsigned. The alliance then spends three years arguing about who gave away\nwhat while the assessment sits in a drawer. This needs Pyongyang to want\na meeting, and the evidence is that it does not. If North Korea accepts\nworking level talks on the record, move this to live.\n\n█▓▒░ THE TELLS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n1. **The pivot.** The 58th SCM joint communiqué, published on or before\n   2026-12-31, states that the Full Operational Capability assessment is\n   complete or certified. Resolves 2027-01-01. **I say yes.**\n2. That same communiqué names a target year or date for wartime OPCON\n   transfer, and it is 2029 or later. Resolves 2027-01-01. I say yes.\n3. Ulchi Freedom Shield 2027 is announced or reported at or below the\n   2026 exercise, measured by announced South Korean participating\n   troops or by the number of field training events.\n   Resolves 2027-09-30. I say yes.\n4. Donald Trump and Kim Jong Un hold no in-person meeting on or before\n   2027-12-31. Resolves 2028-01-01. I say yes, no meeting.\n5. USFK end strength is publicly reported below 28,500 on or before\n   2028-06-30. Resolves 2028-07-01. I say no.\n\n█▓▒░ BOSEPHUS SAYS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nStop watching the drills and stop watching Kim Jong Un. The number that\nmattered was never 28,500 and it was never the size of the exercise. It\nwas whether a communiqué out of Washington in October carried one\nsentence certifying an assessment that almost nobody covering this story\nknew was being conducted. Behind that sentence sits the only fact on\nthis subject that cannot be argued with by anybody in either capital:\nthe twenty-year-old men South Korea will need in 2046 are already born,\nand there are not enough of them. Everything else on that peninsula is\ncommentary on that. Educate. Disintermediate. Innovate. Build.\n\n█▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPresent Line 2026-08-17. Readout EDA1. Eight cited items in THE RECORD,\nminimum is three. Five Tells logged to `ledgers/tells-policy.md`.\n\nOne telling of one thread. Ask again and the decade may come back\ndifferent. Nothing here binds the next telling, and nothing in the next\ntelling corrects this one.\n\nConstructed content. Everything below the seam is one plausible branch,\nwritten in retrospective voice as a reasoning device. It is not a\nforecast, not a prediction, and not investment advice. MØNTAN1 is not a\nregistered investment adviser.\n\nStay dangerous.\n\n          ▂▃▄▅▆▇█ B0SEPHUS G. ALTAMONT · 2050 █▇▆▅▄▃▂"},{"kind":"RDO","name":"MLBRVSIT.RDO","size":5118,"title":"The Arm Went Four For Four","plate":"assets/2026-08-17_mlb-slate-revisit_wide.png","plateCap":"2026-08-17_mlb-slate-revisit  ·  WIDE PLATE","body":"╔════════════════════════════════════════════════════════════════╗\n║  \\  \\  \\  |  /  /  /    B 0 S E P H U S   ·   2 0 5 0          ║\n║  PRESENT LINE  2026-08-17   ▸  MODE  REVISIT  ▸  READOUT 4C51  ║\n╚════════════════════════════════════════════════════════════════╝\n\n█▓▒░ WHAT RESOLVED ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nAll ten calls from `2026-08-16_mlb-slate`, S-001 through S-010, graded\nagainst the MLB Stats API final for each game ID on 2026-08-17.\n\n**Winners 5 of 10. Margin inside two runs 3 of 10. The naive home pick\nwent 2 of 10. Delta plus three.**\n\nHome clubs lost eight of ten on that slate. That is the number that\nmakes the rest of this readable, and it is the number I did not see\ncoming. A plus three delta on a night the baseline collapsed is worth\nless than a plus three on an ordinary night, and anybody reporting the\nfirst as though it were the second is selling something.\n\n█▓▒░ WHERE THE BRANCH HELD ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nThe pivot block on that slate was methodological, which the ledger\nalready flags as the weaker kind, and it said the starting pitcher went\nfirst and the lineup second. Graded on its own terms it held, and it\nheld cleanly enough that I want it written down.\n\n**Every call that led with a starting pitcher ERA gap won. Four for\nfour.** S-001, S-002, S-003, S-008. Every call that led with a park, a\nlineup, or a record went one for six, and the one that landed was S-009,\nthe Milwaukee call I flagged in the original as the weakest thing on the\nboard. Being right for a reason I disowned in advance is not a hit, it\nis a coin that came up my way.\n\n█▓▒░ WHAT I GOT WRONG ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nThe weather. Both conditions reads produced the two largest margin\nerrors on the slate, and they missed in opposite directions from each\nother, which is the tell that neither was doing real work.\n\nAt Wrigley I said the west wind was out and the ball would carry. Four\nhome runs were hit and fifteen runs scored, so the air read was right\nand the conclusion drawn from it was worthless, because carry helps\nwhoever is batting and I had quietly assigned it to the home club.\nCabrera went three and two thirds and gave up seven earned. I wrote that\nhe did not have to be good. He did.\n\nAt Oracle I said cool marine air holds Colorado to two. Colorado scored\nthirteen. Twenty runs and three home runs in the park I called the\ncoldest air on the board, with Tidwell charged six earned in four and a\nthird against a 2.78 coming in. Twenty-two innings of season is not a\npitcher, it is a sample, and I leaned on it because the park flattered\nthe read.\n\nTwo parks, two mechanisms, both narrated well and both wrong. The\nweather layer did negative work on this slate and it is the first thing\nto fix.\n\n█▓▒░ THE FAN LINE ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nOne fan game, S-001, and I picked against Washington. The Mets took it\nfour to three. One for one, called against my own club, and no bias\ncorrection is indicated off a single game. It stays split out anyway.\n\n█▓▒░ BOSEPHUS SAYS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nFive of ten sounds like a coin and it was not one, and plus three\nagainst the baseline sounds like an edge and it is not that either, not\noff one night where the home teams went two and ten. What is worth\nkeeping is narrower and better than both: the arm-first rule went four\nfor four and everything I built on a park or a record went one for six.\nSo the rule stays, the weather block gets rebuilt or cut, and neither of\nthose decisions needed a hit rate to reach. Ten games is not calibration.\nIt is entry one in a ledger. Educate. Disintermediate. Innovate. Build.\n\n█▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPresent Line 2026-08-17. Readout 4C51. Revisits 2026-08-16_mlb-slate.\nTen calls resolved in `ledgers/tells-sports.md`, S-001 through S-010.\n\nNothing in this readout is constructed. Every figure above is a graded\noutcome retrieved from the league feed, which is why there is no seam on\nthis artifact and no block below one.\n\nNot betting advice. MØNTAN1 is not a sportsbook, a tout, or a\nhandicapper.\n\nStay dangerous.\n\n          ▂▃▄▅▆▇█ B0SEPHUS G. ALTAMONT · 2050 █▇▆▅▄▃▂"},{"kind":"RDO","name":"MLBSLAT2.RDO","size":14290,"title":"Ten Hinges, One Night","plate":"assets/2026-08-17_mlb-slate.png","plateCap":"2026-08-17_mlb-slate  ·  SLATE PLATE","body":"> Card carries the calls. This carries the reasoning.\n\n╔══════════════════════════════════════════════╗\n║        ▄▄▄▄▄▄▄▄        ▄▀▀▄ ▄▀▀▄ █▀▀▀ ▄▀▀▄   ║\n║     ▄████████████▄       ▄▀ █  █ ▀▀▀▄ █  █   ║\n║    ████████████████    █▄▄▄ ▀▄▄▀ ▀▄▄▀ ▀▄▄▀   ║\n║    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀                          ║\n║     ██████████████     B 0 S E P H U S       ║\n║      ▀▀▀▀▀▀▀▀▀▀▀▀      G .  A L T A M O N T  ║\n║ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ ║\n║  \\    \\    \\   |   /    /    /               ║\n╠══════════════════════════════════════════════╣\n║ 2026-08-17 ▸ SLATE ▸ READOUT 4E22 ▸ CALLS 10 ║\n╚══════════════════════════════════════════════╝\n\n█▓▒░ THE SLATE ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nTen games from the schedule of 2026-08-17, every one verified in Preview\nat 10:51 Eastern, before any first pitch. Eleven games were scheduled.\nThe Cincinnati doubleheader nightcap is left off so the count is ten and\nso the first game's bullpen consequences are not double counted.\n\n**This is the first slate under the real-hinge rule.** Yesterday's pivot\nwas a statement about method, which the ledger already grades as the\nweaker kind. Every call below carries a conditional a box score can\nsettle on its own.\n\n█▓▒░ I REMEMBER THIS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nA Monday, which is the night the pitching gets thin and nobody notices.\nThree bullpens on this board had already thrown sixteen innings in three\ndays. That is the whole slate if you want it in one sentence. I picked\nmy own club tonight and I am telling you that at the top rather than\nletting you find it.\n\n█▓▒░ THE RECORD ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nRetrieved at call time. Records, run rates and probable starters from\nthe league feed. Conditions from the National Weather Service gridpoint\nfor each open park. Bullpen load is relief innings thrown 2026-08-14\nthrough 2026-08-16, computed from the box scores.\n\n| Game | Away | Home | Away SP | Home SP | Pen IP, 3d A/H |\n|---|---|---|---|---|---|\n| Cardinals @ Reds | 63-61, 4.42 RS/G | 59-64, 4.78 RA/G | Mathews 3.60, 5.0 IP | Emanuel, no 2026 line | 9.7 / 9.0 |\n| Orioles @ Rays | 61-63, 4.54 | 74-49, 4.12 RA/G | Young 3.33 | McClanahan 3.09 | 10.7 / 16.3 |\n| Marlins @ Phillies | 64-61, 4.40 | 67-58, 4.46 | Junk 4.41 | Sánchez 2.54 | 8.3 / 6.3 |\n| Tigers @ Pirates | 60-64, 3.89 RA/G | 61-65, 4.79 RA/G | Valdez 4.26 | Mlodzinski 3.79 | 14.0 / 14.0 |\n| Diamondbacks @ Red Sox | 66-59, 4.39 RA/G | 66-58, 3.77 RA/G | Bratt 3.74, 33.2 IP | **not announced** | 7.3 / 10.0 |\n| Padres @ Mets | 67-58, 4.28 | 56-69, 4.18 | Buehler 4.88 | McLean 3.42 | 13.0 / 10.0 |\n| Athletics @ Royals | 49-75, 5.76 RA/G | 51-74, 4.10 RS/G | Barnett 6.16 | Wacha 3.46 | 9.7 / 6.7 |\n| Braves @ Twins | 74-50, 4.83 RS/G | 60-65, 5.01 RA/G | Pérez 2.96 | Ober 4.64 | 11.3 / 7.7 |\n| White Sox @ Cubs | 65-58, 4.83 | 72-53, 5.16 RS/G | Castillo 4.96 | Imanaga 3.74 | 16.0 / 11.3 |\n| Dodgers @ Rockies | 74-51, 3.84 RA/G | 50-74, 5.72 RA/G | Snell 5.00, 9.0 IP | Sugano 4.43 | 9.0 / 10.3 |\n\nSources: MLB Stats API game feeds, standings and box scores, retrieved\n2026-08-17. NWS gridpoint forecast, active alerts and nearest station\nobservation per open venue, same date.\n\n**A defect in our own instrument, disclosed here rather than buried.**\nThe dossier tool derives air density from a station pressure reading,\nand the National Weather Service populates that field with the altimeter\nsetting, which is already corrected to sea level. At a park near the\nocean the two are close enough that nothing breaks. At Coors Field the\ntool returned 102,710 pascals and a carry index of 1.045 for a park\nsitting above five thousand feet. Standard atmosphere at that elevation\nis about 83,700 pascals, which puts tonight's carry near **1.28**, not\n1.045. The single most famous park effect in the sport was being\nreported as a rounding error. The Coors read below uses the corrected\nfigure and says so. Everything else on this slate is near enough to sea\nlevel that the error does not bite.\n\n**Conditions worth naming.** Four parks produced weather that changes\nhow the game is played. The rest are recorded and ignored, which is the\ncorrect treatment of a mild August evening, and after yesterday it is\nworth saying what changed: **carry is applied to the run environment,\nnever assigned to a side.** Thin air helps whoever is batting.\n\n- **PNC Park.** 53 percent precipitation, 29 percent thunder, ceiling\n  1,768 metres. The only real delay risk on the board, and both pens\n  have already thrown fourteen innings in three days.\n- **Fenway Park.** Ceiling 122 metres, visibility 3,267 metres,\n  northeast at 5 off the harbour, carry 1.039. Low marine air and a wind\n  in from right. A suppressed night.\n- **Wrigley Field.** Southeast at 5, carry 1.032, the lowest on the\n  slate. The wind is in. Yesterday I called the wind out here and then\n  handed the benefit to one club, which was the error. Tonight it moves\n  the total and nothing else.\n- **Coors Field.** 88 degrees, dewpoint 43, corrected carry near 1.28.\n  Hot and desert dry at altitude is the largest run environment in\n  baseball and it is not close.\n- **Tropicana Field.** A dome. No conditions block exists for it and\n  none should.\n\n▞▚▞▚▞▚▞▚▞ PRESENT LINE 2026-08-17 · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚▞▚\n\n█▓▒░ HOW IT WENT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Cincinnati.** Two starters nobody could scout. Mathews had five\ninnings on the season and Emanuel had none, and in the first game of a\ndoubleheader that is not a pitching matchup, it is a question of which\nmanager has to go to the phone first knowing he has a nightcap to cover.\nCincinnati went first. Cardinals six, Reds four, and most of it came\nafter the fifth.\n\n**Tampa Bay.** McClanahan gave them seven and that was the game. It had\nto be. Sixteen innings out of that pen in three days is a club running\non fumes, and the one thing that fixes a tired bullpen is a starter who\ndoes not need it. Rays four, Orioles two.\n\n**Philadelphia.** Sánchez at a 2.54 over a hundred and fifty five\ninnings is the best arm on this slate by a distance, and Miami's only\nroad into that game was an early crooked number. They did not get one.\nPhillies five, Marlins two.\n\n**Pittsburgh.** The rain came, which I want on the record as the thing\nthat decided it rather than anything either club did. A delay takes both\nstarters out of the game and hands it to two bullpens that have each\nthrown fourteen innings since Friday, and at that point you are just\nasking which club prevents runs better. Detroit does, by nearly a run a\ngame. Tigers five, Pirates four.\n\n**Boston.** Low cloud, wind in off the water, and the second thinnest\nrun environment on the board. Boston wins those. They allow 3.77 a game,\nthe best mark on this slate, and on a night when nobody was going to\nslug it was enough. Red Sox four, Diamondbacks two. I will say the\nuncomfortable part: they had not named a starter when this was written,\nso this call rests on a bullpen and a ballpark rather than on an arm.\n\n**New York.** The one I would defend hardest and the one most likely to\nlook foolish. San Diego is eleven games better. Buehler is a run and a\nhalf of ERA worse than McLean tonight and thirty points of WHIP worse,\nand the Padres have thirteen innings of relief work behind them. Mets\nfour, Padres three.\n\n**Kansas City.** Barnett carries a 6.16 across thirty eight innings and\nthe Royals do not need to be good to beat that, they need to be awake in\nthe first four. Royals six, Athletics three.\n\n**Minnesota.** Atlanta had the better record, the better arm and the\nbetter run prevention, which is usually one edge too many for a home\ncrowd to fix. Braves six, Twins three.\n\n**Chicago.** Castillo at a 4.96 in front of a pen that has thrown\nsixteen innings in three days is a club with no margin, and Wrigley with\nthe wind in does not hand out the four run inning that would have\ncovered for him. Cubs four, White Sox two, in the quietest game on the\nboard.\n\n**Colorado.** Snell had nine innings on the season and was never going\npast four, so this was a bullpen game at altitude in dry air with the\nball carrying about twenty eight percent better than sea level. Both\nclubs scored. Los Angeles scored more, because they always do and\nbecause Colorado gives up 5.72 a game at home. Dodgers eight, Rockies\nsix.\n\n█▓▒░ THE PIVOT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nTen conditionals, one per game, each written so the box score settles it\nwithout anybody's judgment. **X happens if Y**, and Y is named,\nobservable and thresholded. Graded on the two by two from spec 7.1, so a\nright winner off a dead hinge still grades as refuted.\n\n1. **Cardinals win if Emanuel does not complete four innings.**\n2. **Rays win if McClanahan completes six or more.**\n3. **Phillies win if Miami scores fewer than three in innings one\n   through three.**\n4. **Tigers win if the game records an official delay.**\n5. **Red Sox win if the game finishes with eight or fewer total runs.**\n6. **Mets win if McLean completes six or more.**\n7. **Royals win if Kansas City scores three or more while Barnett is\n   still in the game.**\n8. **Braves win if Ober allows at least one home run.**\n9. **Cubs win if Castillo does not complete six innings.**\n10. **Dodgers win if Snell exits with Los Angeles ahead.**\n\n█▓▒░ THE FORKS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**LOAD-BEARING.** Six or seven winners, and more to the point, six or\nmore hinges graded CONFIRMED on the two by two. Bullpen load and starter\nlength are the two things that actually decide August baseball, and\nseven of these ten hinges are built on one or the other.\n\n**LIVE.** Winners fine, hinges poor. Five or six correct outcomes with\nthree or fewer confirmed hinges, which would mean the calls are being\ncarried by team quality and the conditionals are decoration bolted on\nafterwards. This is the outcome I would consider most likely if the\nmethod is weaker than it looked yesterday, and it is the one worth\ncatching.\n\n**TAIL.** The rain hinge and the two starter-length hinges all fire and\nall point the wrong way, which would say bullpen load is not the lever I\nthink it is in a single game. It needs Pittsburgh, Tampa Bay and Chicago\nto break together.\n\n█▓▒░ WHAT GETS GRADED ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nHeadline is the hinge: did the named condition fire, and did the branch\nfollow. Fired and followed is confirmed. Fired and not followed means\nthe hinge was not the hinge. Not fired but followed anyway means the\nhinge was irrelevant and the outcome came another way. Neither is\nconfirmed by contrapositive.\n\nSecondary line is the winner, binary, and margin inside two runs, both\nagainst the naive home pick. Six calls agree with the home pick and four\ngo against it.\n\nFan line reported separately. One fan game, Boston, and tonight I picked\n**with** my club rather than against it, which is the direction that\nneeds watching. It is called on run prevention and a ballpark, and the\nhome starter was unannounced when it was written.\n\nJudged and internal: whether the corrected Coors carry did any work, and\nwhether the suppressed-air reads at Fenway and Wrigley moved the total\nthe way I said they would.\n\n█▓▒░ BOSEPHUS SAYS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nYesterday's number was five of ten against a baseline of two, and the\nhonest reading of it was that the arm-first rule went four for four and\neverything else went one for six. So tonight is built almost entirely on\narms and on how tired the arms behind them are, and where the weather\ngets a say it moves the total and never a side. That is the whole\ncorrection and it took one night to earn. Watch the hinges rather than\nthe scores. A slate can go seven for ten on winners with every\nconditional refuted, and if that happens I would rather you saw it than\ntook the seven. Educate. Disintermediate. Innovate. Build.\n\n█▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPresent Line 2026-08-17. Readout 4E22. Ten calls logged to\n`ledgers/tells-sports.md` as S-011 through S-020, first series under the\nreal-hinge rule.\n\nOne telling of one thread. Ask again and the night may come back\ndifferent. Nothing here binds the next telling, and nothing in the next\ntelling corrects this one.\n\nConstructed content. Everything below the seam is one plausible branch,\nwritten in retrospective voice as a reasoning device. It is not a\nforecast, not a prediction, not betting advice, and not investment\nadvice. MØNTAN1 is not a sportsbook, a tout, or a registered adviser.\n\nStay dangerous.\n\n          ▂▃▄▅▆▇█ B0SEPHUS G. ALTAMONT · 2050 █▇▆▅▄▃▂"},{"kind":"RDO","name":"CFBWEEK1.RDO","size":9495,"title":"Week One, Called From Twelve Days Out","plate":"assets/2026-09-05_cfb-week1-slate.png","plateCap":"2026-09-05_cfb-week1-slate  ·  SLATE PLATE","body":"> Card carries the calls. This carries the reasoning, and the reasons it is thin.\n\n╔══════════════════════════════════════════════╗\n║        ▄▄▄▄▄▄▄▄        ▄▀▀▄ ▄▀▀▄ █▀▀▀ ▄▀▀▄   ║\n║     ▄████████████▄       ▄▀ █  █ ▀▀▀▄ █  █   ║\n║    ████████████████    █▄▄▄ ▀▄▄▀ ▀▄▄▀ ▀▄▄▀   ║\n║    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀                          ║\n║     ██████████████     B 0 S E P H U S       ║\n║      ▀▀▀▀▀▀▀▀▀▀▀▀      G .  A L T A M O N T  ║\n║ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ ║\n║  \\    \\    \\   |   /    /    /               ║\n╠══════════════════════════════════════════════╣\n║ 2026-08-16 ▸ SLATE ▸ DRAWN FRESH ▸ CALLS 10  ║\n╚══════════════════════════════════════════════╝\n\n█▓▒░ THE SLATE ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nTen games from the opening weekend of the 2026 season, called on\n2026-08-16, which is twelve to twenty-one days before kickoff. Six\nagree with the naive home pick and four go against it.\n\n█▓▒░ I REMEMBER THIS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nNobody knows anything in August. That is not modesty, it is the\ncondition of the exercise. Every record on the board reads 0-0, half\nthese rosters turned over, and the people who sound most certain in the\nthird week of August are the ones you should trust least. I have been\nwrong about a West Virginia season opener more times than I have been\nright, and I have never once been wrong quietly.\n\n█▓▒░ THE RECORD ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nThin, and I will not dress it up.\n\n| Game | Date | 2025 finals |\n|---|---|---|\n| Coastal Carolina @ **West Virginia** | Sep 5 | 6-7 at 4-8 |\n| Miami @ Stanford | Sep 5 | 13-3 at 4-8 |\n| Tulane @ Duke | Sep 5 | 11-3 at 9-5 |\n| Western Kentucky @ Nevada | Sep 6 | 9-4 at 3-9 |\n| Wyoming @ Colorado State | Sep 5 | 4-8 at 2-10 |\n| North Texas @ Indiana | Sep 5 | 12-2 at 16-0 |\n| Boise State @ Oregon | Sep 5 | 9-5 at 13-2 |\n| Clemson @ LSU | Sep 5 | 7-6 at 7-6 |\n| Wisconsin @ Notre Dame | Sep 6 | 4-8 at 10-2 |\n| Washington State @ Washington | Sep 6 | 7-6 at 9-4 |\n\nSource: ESPN college football standings for the 2025 season and the\nweek 1 scoreboard, retrieved 2026-08-16. WVU verified in the Big 12.\n\n**Two absences that are part of the record, not omissions from it.**\n\n**There is no weather in this artifact.** The National Weather Service\nforecast reaches about six and a half days. These games are twelve to\ntwenty-one days out. There is nothing to retrieve, so there is no\nCONDITIONS block, and none of these calls got any help from the sky.\nMilan Puskar Stadium in September can be eighty and still or it can be\na driving rain off the ridge, and on 2026-08-16 those are the same\nthing as far as anyone can honestly say.\n\n**There is no 2026 data at all.** Week one means every record is 0-0.\nThese rest on last season's final records and home field and nothing\nelse. I looked at the scoring columns in the standings feed and threw\nthem out: they report North Carolina at 16 points for across a 4-8\nseason, which is not a season total and not anything I could use.\nBetter to have ten calls resting on two honest inputs than ten resting\non three where one is garbage.\n\n▞▚▞▚▞▚▞▚▞ PRESENT LINE 2026-08-16 · CONSTRUCTED BELOW ▞▚▞▚▞▚▞▚▞▚\n\n█▓▒░ HOW IT WENT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Morgantown, September 5.** West Virginia beat Coastal Carolina\ntwenty-seven to twenty, and I have watched enough of these to know that\na four-win team hosting a six-win team in a season opener does not\nproduce a comfortable afternoon. The Mountaineers were better and did\nnot look it until late. Coastal came in with a quarterback who had\nstarted a full year and a coaching staff that had beaten better\nprogrammes than this one in openers before. The number is a win because\nthe talent gap is real. The margin is seven because a 4-8 season leaves\nmarks that a new September does not erase.\n\nAnyone reading this expecting a homer number should note it is the\nnarrowest home call on the board.\n\n**The four against the book.** Miami at 13-3 went into Palo Alto and\nbeat a four-win Stanford by twenty-five, because that is what a\nthirteen-win roster does to a four-win one regardless of the address.\nTulane won at Duke by four, an eleven-win team against a nine-win team\nwhere only the venue favoured the wrong side. Western Kentucky and\nWyoming were the same shape: a materially better 2025 travelling to a\nmaterially worse one, and home field is worth about three points, not\nsix wins.\n\n**The six with it.** Indiana came off an undefeated season and beat a\nvery good North Texas by fourteen, which is the respectful version of\nthat scoreline. Oregon handled Boise State. Notre Dame handled\nWisconsin. Washington took the Apple Cup by seven, closer than the\nrecords because rivalry games always are. LSU and Clemson were both\n7-6 and identical on paper, so it came down to who was at home, which\nis a call I made with no confidence and would make again for lack of\nanything better.\n\n█▓▒░ THE PIVOT ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nThe whole slate hangs on one assumption: **that last season's win total\nstill describes a roster in September.** In college football that is a\nweaker assumption every year. Portal movement and roster turnover mean\na 2025 record is a claim about a team that may no longer exist.\n\nThat is testable and it is testable soon. If these ten grade materially\nworse than the MLB slate, the pivot failed, and the correction is not\nbetter analysis, it is refusing to call college games in week one at\nall and waiting until there is 2026 evidence on the field.\n\nI would rather find that out with ten logged calls than assume it.\n\n█▓▒░ THE FORKS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**LOAD-BEARING.** Six or seven winners. Prior-year records carry real\nsignal in the mismatches and none at all in the even games, which is\nroughly what you would expect and not worth much.\n\n**LIVE.** Eight or nine winners, because most of this slate is a good\nteam playing a bad one and those games mostly go the obvious way. If\nthat happens, the number flatters the method and the delta against the\nhome pick is the only part worth reading.\n\n**TAIL.** Four or fewer, meaning last year told us nothing. Given\nroster turnover this is more live in college football than it would be\nin any professional league.\n\n█▓▒░ WHAT GETS GRADED ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nWinner, binary. Margin inside ten points, a threshold fixed before any\nof these were played. Against the naive home pick, as always. The WVU\ngame is flagged as a fan call and reported separately.\n\n█▓▒░ BOSEPHUS SAYS ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nThese are worse calls than the baseball ones and I would rather say so\nthan let the same green box imply otherwise. No weather, no current\ndata, two inputs and one of them is a year old. What makes them worth\nmaking is that they are written down with a date on them, so in three\nweeks there is a number instead of an argument. Watch the four road\npicks. If prior-year records mean anything in September, that is where\nit shows.\nEducate. Disintermediate. Innovate. Build.\n\n█▓▒░ FOOTER ░▒▓█━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nPresent Line 2026-08-16. One readout. Ten calls logged to\n`ledgers/tells-sports.md` as C-001 through C-010. No CONDITIONS block:\nno forecast exists at this range.\n\nOne telling of one thread. Ask again and the decade may come back\ndifferent. Nothing here binds the next telling, and nothing in the next\ntelling corrects this one.\n\nConstructed content. Everything below the seam is one plausible branch,\nwritten in retrospective voice as a reasoning device. It is not a\nforecast, not a prediction, not betting advice, and not investment\nadvice. MØNTAN1 is not a sportsbook, a tout, or a registered adviser.\n\nStay dangerous.\n\n          ▂▃▄▅▆▇█ B0SEPHUS G. ALTAMONT · 2050 █▇▆▅▄▃▂"},{"kind":"IMG","name":"ALMANAC .IMG","size":6492646,"title":"PLATE 01  ·  ALMANAC  ·  2048 x 2048","plate":"assets/plate-almanac.png","plateCap":"PLATE 01  ·  ALMANAC  ·  2048 x 2048","body":null},{"kind":"IMG","name":"BANNER  .IMG","size":461589,"title":"PLATE 02  ·  BANNER  ·  2048 x 1136","plate":"assets/plate-banner.jpg","plateCap":"PLATE 02  ·  BANNER  ·  2048 x 1136","body":null},{"kind":"IMG","name":"BRAND   .IMG","size":1815471,"title":"BRAND  ·  TERMINAL AND PLATE  ·  1600 x 900","plate":"assets/hero.png","plateCap":"BRAND  ·  TERMINAL AND PLATE  ·  1600 x 900","body":null}]/*READOUTS:END*/;
+
+const $ = function(s){ return document.querySelector(s); };
+const rowsEl = Array.prototype.slice.call(document.querySelectorAll('.row'));
+const list = $('#list'), msg = $('#msg'), tick = $('#tick'), cur = $('#cur'), cmd = $('#cmd');
+const modal = $('#modal'), mpre = $('#mpre'), mbody = $('#mbody'), mtitle = $('#mtitle'), mmeta = $('#mmeta'), mplate = $('#mplate'), beam = $('#beam');
+const plateO = $('#plate'), plateImg = $('#plateimg'), ptitle = $('#ptitle'), pmeta = $('#pmeta');
+const helpO = $('#helpwrap');
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* a phone has no keyboard to be first with, so the row and the card carry it */
+const TOUCH = window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches;
+/* the narrow layout swaps the key strip for tap copy, so the behaviour follows it */
+const NARROW = window.matchMedia('(max-width: 760px)');
+function tapMode(){ return TOUCH || NARROW.matches; }
+
+let sel = 0, lastFocus = null, painting = null;
+
+/* ---------- status ---------- */
+let msgTimer = null;
+function say(t, sticky){
+  msg.textContent = t;
+  if(msgTimer) clearTimeout(msgTimer);
+  if(!sticky) msgTimer = setTimeout(function(){ msg.textContent = describe(); }, 4200);
+}
+function describe(){
+  const r = DATA[sel];
+  if(!r) return 'READY.';
+  return r.name.replace(/\s+/g,' ') + '  ' + r.size.toLocaleString() + ' BYTES';
+}
+
+const TICKS = [
+  'CMOS BATTERY LOW \u00b7 CLOCK DRIFT 4.2 MIN/YR \u00b7 TOLERATED',
+  'FAN 2 STALLED \u00b7 CHASSIS 61 C \u00b7 WITHIN SPEC',
+  'SURFACE SCAN \u00b7 3 SECTORS REMAPPED \u00b7 NO ACTION',
+  'UPS ON BATTERY SINCE 2031-04-11 \u00b7 CHARGE 12 PERCENT',
+  'PARITY EVENT AT 0x7FE2 \u00b7 CORRECTED \u00b7 1 OF 1',
+  'HOST CLOCK 2026 \u00b7 VANTAGE CLOCK 2050 \u00b7 SKEW HELD',
+  'LEDGER 20 OPEN CALLS \u00b7 NEXT RESOLUTION 2026-09-16'
+];
+let ti = 0;
+tick.textContent = TICKS[0];
+setInterval(function(){ ti = (ti + 1) % TICKS.length; tick.textContent = TICKS[ti]; }, 6400);
+
+/* ---------- selection ---------- */
+function visibleRows(){ return rowsEl.filter(function(r){ return !r.hidden; }); }
+
+function select(i, scroll){
+  const vis = visibleRows();
+  if(!vis.length) return;
+  const el = rowsEl[i];
+  if(!el || el.hidden) return;
+  /* never strand focus on a control that is about to be collapsed away */
+  const ae = document.activeElement;
+  if(i !== sel && ae && ae.classList && ae.classList.contains('act')) list.focus();
+  rowsEl.forEach(function(r){ r.setAttribute('aria-selected','false'); r.querySelector('.mark').textContent = ' '; });
+  el.setAttribute('aria-selected','true');
+  el.querySelector('.mark').textContent = '\u25B8';
+  list.setAttribute('aria-activedescendant', el.id);
+  sel = i;
+  if(scroll !== false) el.scrollIntoView({block:'nearest'});
+  msg.textContent = describe();
+}
+function move(delta){
+  const vis = visibleRows();
+  if(!vis.length) return;
+  let at = vis.indexOf(rowsEl[sel]);
+  if(at < 0) at = 0;
+  let nx = at + delta;
+  if(nx < 0) nx = 0;
+  if(nx > vis.length - 1) nx = vis.length - 1;
+  select(parseInt(vis[nx].dataset.i, 10));
+}
+
+/* ---------- readout painting ---------- */
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* line shapes. box art, section rules, the seam and pipe tables are all
+   fixed-width and can never be re-wrapped. everything else is prose. */
+const RE_BOX  = /[\u2554\u2557\u255A\u255D\u2551\u2560\u2563\u2550]/;
+const RE_BLK  = /[\u2582\u2583\u2584\u2585\u2586\u2587]/;
+const RE_PIPE = /^\s*\|/;
+const RE_ITEM = /^\s*(?:[-*\u2022]\s|\d{1,2}\.\s)/;
+function isRule(t){ return t.indexOf('\u2591\u2592\u2593\u2588') >= 0 || t.indexOf('\u2588\u2593\u2592\u2591') >= 0; }
+function isSeam(t){ return t.indexOf('\u259E\u259A') >= 0; }
+
+/* the run a line belongs to: 'wide' scrolls in its own box, 'prose' may reflow */
+function shape(t){
+  if(RE_BOX.test(t) || RE_BLK.test(t) || isSeam(t) || isRule(t) || RE_PIPE.test(t)) return 'wide';
+  if(!t.trim()) return 'blank';
+  return 'prose';
+}
+
+function markup(body){
+  const lines = body.split('\n');
+  const spans = [], shapes = [];
+  let inFooter = false, inBr = false, seamAt = -1;
+
+  for(let i=0;i<lines.length;i++){
+    const t = lines[i];
+    let cls = '', inner = null;
+    if(RE_BOX.test(t)){ cls = 'mast'; inBr = false; }
+    else if(isSeam(t)){ cls = 'seam'; inBr = false; if(seamAt < 0) seamAt = i; }
+    else if(isRule(t)){
+      cls = 'rule'; inBr = false;
+      if(t.indexOf('FOOTER') >= 0) inFooter = true;
+    }
+    else if(RE_BLK.test(t)){ cls = 'mast'; inBr = false; }
+    else if(inFooter){ cls = 'low'; inBr = false; }
+    else {
+      /* citation scanner, carries across wrapped lines */
+      let buf = '', html = '';
+      for(let c = 0; c < t.length; c++){
+        const ch = t[c];
+        if(!inBr && ch === '['){ html += esc(buf); buf = '['; inBr = true; }
+        else if(inBr && ch === ']'){ buf += ']'; html += '<span class="src">' + esc(buf) + '</span>'; buf = ''; inBr = false; }
+        else buf += ch;
+      }
+      if(inBr && buf) html += '<span class="src">' + esc(buf) + '</span>';
+      else html += esc(buf);
+      inner = html;
+    }
+    if(inner === null) inner = esc(t);
+    spans.push('<span class="ln off ' + cls + '">' + inner + '</span>');
+    shapes.push(shape(t));
+  }
+
+  /* segment into runs. a blank line is its own run so it can hold open a gap
+     even when the prose either side of it has reflowed. list items break too,
+     so a bulleted block does not collapse into one paragraph on a phone. */
+  const runs = [];
+  for(let i=0;i<lines.length;i++){
+    const s = shapes[i];
+    const last = runs[runs.length - 1];
+    const breaks = !last || last.s !== s || s === 'blank' ||
+                   (s === 'prose' && RE_ITEM.test(lines[i]));
+    if(breaks) runs.push({ s: s, from: i, to: i });
+    else last.to = i;
+  }
+
+  function runHTML(r){
+    let s = '<pre class="run ' + r.s + (r.from === r.to && r.s === 'wide' ? ' solo' : '') + '">';
+    for(let i = r.from; i <= r.to; i++){ if(i > r.from) s += '\n'; s += spans[i]; }
+    return s + '</pre>';
+  }
+
+  /* zones. the rail beside the text says which half of the artifact you are in. */
+  const zoneCls = seamAt < 0 ? ['z-none'] : ['z-ret', 'z-con'];
+  let out = '', open = -1;
+  for(let i = 0; i < runs.length; i++){
+    const z = (seamAt >= 0 && runs[i].from >= seamAt) ? 1 : 0;
+    if(z !== open){
+      if(open >= 0) out += '</div>\n';
+      out += '<div class="zone ' + zoneCls[z] + '"><div class="ztag" aria-hidden="true"></div>';
+      open = z;
+    } else out += '\n';
+    out += runHTML(runs[i]);
+  }
+  if(open >= 0) out += '</div>';
+  return out;
+}
+
+function finishPaint(){
+  if(!painting) return;
+  cancelAnimationFrame(painting.raf);
+  if(painting.timer) clearTimeout(painting.timer);
+  const off = mpre.querySelectorAll('.ln.off');
+  for(let i=0;i<off.length;i++) off[i].classList.remove('off');
+  beam.hidden = true;
+  painting = null;
+}
+
+function paintIn(){
+  const lns = mpre.querySelectorAll('.ln');
+  /* reduced motion, or a backgrounded tab where rAF is throttled: show it all now */
+  if(RM || document.hidden){ for(let i=0;i<lns.length;i++) lns[i].classList.remove('off'); beam.hidden = true; return; }
+  const dur = 470 + Math.random() * 190;
+  const t0 = performance.now();
+  const lh = parseFloat(getComputedStyle(mpre).lineHeight) || 16;
+  const pad = 12;
+  /* the beam rides the last line actually revealed, which is the only honest
+     measure once prose has reflowed to a different number of visual lines */
+  function beamTo(n){
+    const el = lns[n - 1];
+    if(!el){ beam.style.top = pad + 'px'; return; }
+    const r = el.getBoundingClientRect(), b = mbody.getBoundingClientRect();
+    if(!r.height){ beam.style.top = (pad + n * lh) + 'px'; return; }
+    beam.style.top = (r.bottom - b.top + mbody.scrollTop) + 'px';
+  }
+  beam.hidden = false;
+  let done = 0;
+  painting = { raf: 0, timer: 0 };
+  /* hard floor: the text is never allowed to stay hidden if rAF stalls */
+  painting.timer = setTimeout(finishPaint, dur + 700);
+  function step(now){
+    let p = (now - t0) / dur;
+    if(p > 1) p = 1;
+    /* a slight hitch partway, like a serial line catching up */
+    let e = p < 0.42 ? p * 0.92 : (p < 0.5 ? 0.386 : p);
+    const upto = Math.floor(e * lns.length);
+    for(; done < upto && done < lns.length; done++) lns[done].classList.remove('off');
+    beamTo(done);
+    if(p < 1){ painting.raf = requestAnimationFrame(step); }
+    else { finishPaint(); }
+  }
+  painting.raf = requestAnimationFrame(step);
+}
+
+/* ---------- open / close ---------- */
+function openRow(i){
+  const r = DATA[i];
+  if(!r) return;
+  if(r.kind === 'ESSAY'){
+    say('WHYNARR .TXT IS ALREADY OPEN IN THE VIEWPORT.');
+    $('#doc').scrollTop = 0;
+    $('#doc').focus();
+    return;
+  }
+  if(r.kind === 'IMG'){ openPlate(r.plate, r.name, r.plateCap); return; }
+  lastFocus = document.activeElement;
+  mtitle.textContent = r.name.replace(/\s+/g,' ');
+  mmeta.textContent = r.size.toLocaleString() + ' BYTES \u00b7 READ ONLY';
+  mpre.innerHTML = markup(r.body);
+  mplate.hidden = !r.plate;
+  mplate.dataset.src = r.plate || '';
+  mplate.dataset.cap = r.plateCap || '';
+  mplate.dataset.name = r.name;
+  modal.hidden = false;
+  mbody.scrollTop = 0;
+  mbody.focus();
+  paintIn();
+  say('OPENED ' + r.name.replace(/\s+/g,' '), true);
+}
+function restoreFocus(el){
+  if(el && el.isConnected && el.offsetParent !== null && el.focus){ el.focus(); }
+  else list.focus();
+}
+function closeModal(){
+  finishPaint();
+  modal.hidden = true;
+  mpre.innerHTML = '';
+  restoreFocus(lastFocus);
+  say('CLOSED.');
+}
+function openPlate(src, name, cap){
+  if(!src){ say('NO PLATE ON DEVICE FOR THIS ARTIFACT.'); return; }
+  if(plateO.hidden){
+    plateO.dataset.prev = modal.hidden ? 'list' : 'modal';
+    if(modal.hidden) lastFocus = document.activeElement;
+  }
+  ptitle.textContent = (name || 'PLATE').replace(/\s+/g,' ');
+  pmeta.textContent = cap || '';
+  plateImg.alt = cap || 'Synthwave character plate';
+  plateImg.src = src;
+  plateO.hidden = false;
+  $('#pbody').focus();
+  say('PLATE SUMMONED.');
+}
+function closePlate(){
+  plateO.hidden = true;
+  plateImg.removeAttribute('src');
+  if(plateO.dataset.prev === 'modal' && !modal.hidden) mbody.focus();
+  else restoreFocus(lastFocus);
+}
+function plateForSel(){
+  const r = DATA[sel];
+  if(!r) return;
+  openPlate(r.plate, r.name, r.plateCap);
+}
+
+$('#mclose').addEventListener('click', closeModal);
+$('#pclose').addEventListener('click', closePlate);
+$('#hclose').addEventListener('click', function(){ helpO.hidden = true; list.focus(); });
+mplate.addEventListener('click', function(){ openPlate(mplate.dataset.src, mplate.dataset.name, mplate.dataset.cap); });
+[modal, plateO, helpO].forEach(function(o){
+  o.addEventListener('mousedown', function(e){
+    if(e.target === o){ if(o === modal) closeModal(); else if(o === plateO) closePlate(); else { helpO.hidden = true; list.focus(); } }
+  });
+});
+
+/* ---------- mouse ---------- */
+rowsEl.forEach(function(row){
+  const i = parseInt(row.dataset.i, 10);
+  row.querySelector('.line').addEventListener('click', function(){
+    if(sel === i && !tapMode()){ openRow(i); return; }
+    select(i);
+    say(tapMode() ? 'SELECTED. TAP THE CARD TO OPEN.' : 'SELECTED. CLICK THE CARD OR PRESS ENTER TO OPEN.');
+  });
+  row.querySelector('.line').addEventListener('dblclick', function(){ openRow(i); });
+  /* the card itself is the open affordance, so nothing moves out from under the pointer */
+  row.querySelector('.card').addEventListener('click', function(e){
+    const b = e.target.closest ? e.target.closest('.act') : null;
+    if(b && b.dataset.act === 'plate'){ e.stopPropagation(); plateForSel(); return; }
+    openRow(i);
+  });
+});
+
+/* ---------- keyboard, with a deliberate repeat lag ---------- */
+let lastMove = 0, gap = 0;
+function repeatOK(e){
+  const now = performance.now();
+  if(!e.repeat){ lastMove = now; gap = 330 + Math.random() * 80; return true; }
+  if(now - lastMove < gap) return false;
+  lastMove = now;
+  gap = 82 + Math.random() * 62;
+  if(Math.random() < 0.13) gap += 190;   /* the machine catches its breath */
+  return true;
+}
+
+document.addEventListener('keydown', function(e){
+  const k = e.key;
+
+  if(!plateO.hidden){ if(k === 'Escape'){ e.preventDefault(); closePlate(); } trapTab(e, plateO); return; }
+  if(!helpO.hidden){ if(k === 'Escape'){ e.preventDefault(); helpO.hidden = true; list.focus(); } trapTab(e, helpO); return; }
+  if(!modal.hidden){
+    if(painting && k !== 'Tab'){ finishPaint(); if(k === 'Escape'){ e.preventDefault(); closeModal(); } return; }
+    if(k === 'Escape'){ e.preventDefault(); closeModal(); return; }
+    if(k === 'p' || k === 'P'){ if(!mplate.hidden){ e.preventDefault(); openPlate(mplate.dataset.src, mplate.dataset.name, mplate.dataset.cap); } return; }
+    trapTab(e, modal);
+    return;
+  }
+
+  const typing = document.activeElement === cmd;
+
+  if(k === 'Escape'){
+    if(typing){ e.preventDefault(); cmd.value = ''; applyFilter(); cmd.blur(); list.focus(); say('FILTER CLEARED.'); }
+    return;
+  }
+  if(!typing && (k === '?' || (k === '/' && e.shiftKey) || k === 'h' || k === 'H')){
+    e.preventDefault(); helpO.hidden = false; $('#hbody').focus(); return;
+  }
+  if(k === '/' && !typing){ e.preventDefault(); cmd.focus(); say('FILTER. TYPE TO NARROW, ESC TO CLEAR.', true); return; }
+
+  if(k === 'ArrowDown' || (!typing && (k === 'j' || k === 'J'))){ if(repeatOK(e)){ e.preventDefault(); move(1); } else e.preventDefault(); return; }
+  if(k === 'ArrowUp' || (!typing && (k === 'k' || k === 'K'))){ if(repeatOK(e)){ e.preventDefault(); move(-1); } else e.preventDefault(); return; }
+  if(k === 'PageDown'){ e.preventDefault(); move(5); return; }
+  if(k === 'PageUp'){ e.preventDefault(); move(-5); return; }
+  if(k === 'Home' && !typing){ e.preventDefault(); move(-999); return; }
+  if(k === 'End' && !typing){ e.preventDefault(); move(999); return; }
+  if(k === 'Enter'){
+    if(document.activeElement && document.activeElement.classList && document.activeElement.classList.contains('act')) return;
+    e.preventDefault(); openRow(sel); return;
+  }
+  if(!typing && (k === 'o' || k === 'O')){ e.preventDefault(); openRow(sel); return; }
+  if(!typing && (k === 'p' || k === 'P')){ e.preventDefault(); plateForSel(); return; }
+});
+
+function trapTab(e, root){
+  if(e.key !== 'Tab') return;
+  const f = root.querySelectorAll('button, [tabindex="0"]');
+  if(!f.length) return;
+  const first = f[0], last = f[f.length - 1];
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+}
+
+mbody.addEventListener('mousedown', function(){ if(painting) finishPaint(); });
+mbody.addEventListener('touchstart', function(){ if(painting) finishPaint(); }, {passive:true});
+
+/* an open window owns the scroll. the page underneath must not slide about. */
+function syncLock(){
+  const open = !modal.hidden || !plateO.hidden || !helpO.hidden;
+  document.body.classList.toggle('locked', open);
+}
+new MutationObserver(syncLock).observe(modal, {attributes:true, attributeFilter:['hidden']});
+new MutationObserver(syncLock).observe(plateO, {attributes:true, attributeFilter:['hidden']});
+new MutationObserver(syncLock).observe(helpO, {attributes:true, attributeFilter:['hidden']});
+
+if(TOUCH) cur.style.display = 'none';
+function syncPrompt(){ cmd.placeholder = tapMode() ? 'TAP TO FILTER' : ''; }
+syncPrompt();
+if(NARROW.addEventListener) NARROW.addEventListener('change', syncPrompt);
+
+/* ---------- filter ---------- */
+function applyFilter(){
+  const q = cmd.value.trim().toLowerCase();
+  let shown = 0;
+  rowsEl.forEach(function(row, i){
+    const d = DATA[i];
+    const hay = (d.name + ' ' + d.title).toLowerCase();
+    const hit = !q || hay.indexOf(q) >= 0;
+    row.hidden = !hit;
+    if(hit) shown++;
+  });
+  $('#dircount').textContent = shown + (q ? ' OF ' + rowsEl.length : '') + ' ENTRIES';
+  if(rowsEl[sel] && rowsEl[sel].hidden){
+    const vis = visibleRows();
+    if(vis.length) select(parseInt(vis[0].dataset.i, 10));
+  }
+}
+cmd.addEventListener('input', applyFilter);
+
+/* ---------- jank ---------- */
+/* block cursor, imperfect rate */
+(function blink(){
+  if(RM){ cur.classList.remove('off'); return; }
+  cur.classList.toggle('off');
+  setTimeout(blink, 360 + Math.random() * 320);
+})();
+
+/* the directory takes a beat to read from disk */
+(function firstRead(){
+  if(RM){ select(0, false); return; }
+  rowsEl.forEach(function(r){ r.classList.add('stutter'); });
+  say('READING DIRECTORY \u2026', true);
+  let i = 0;
+  (function next(){
+    if(i >= rowsEl.length){ select(0, false); say('READY. 11 ENTRIES. ONE OF THEM REMEMBERS.'); return; }
+    rowsEl[i].classList.remove('stutter');
+    i++;
+    setTimeout(next, 26 + Math.random() * 58 + (Math.random() < 0.18 ? 90 : 0));
+  })();
+})();
+
+/* an occasional character renders wrong, then corrects */
+const GLYPHS = '\u2592\u2591\u259A\u259E#%@&$*';
+(function glitch(){
+  if(RM) return;
+  setTimeout(function(){
+    const pool = Array.prototype.slice.call(document.querySelectorAll('.jank, #mpre .ln, #tick'))
+      .filter(function(el){
+        if(el.offsetParent === null && el.id !== 'tick') return false;
+        return el.childNodes.length === 1 && el.firstChild.nodeType === 3 && el.textContent.trim().length > 6;
+      });
+    if(pool.length){
+      const el = pool[Math.floor(Math.random() * pool.length)];
+      const s = el.textContent;
+      let idx = Math.floor(Math.random() * s.length);
+      if(s[idx] === ' ') idx = Math.max(0, idx - 1);
+      const bad = s.slice(0, idx) + GLYPHS[Math.floor(Math.random() * GLYPHS.length)] + s.slice(idx + 1);
+      el.textContent = bad;
+      setTimeout(function(){ if(el.textContent === bad) el.textContent = s; }, 70 + Math.random() * 60);
+    }
+    glitch();
+  }, 2600 + Math.random() * 4200);
+})();
+
+list.addEventListener('focus', function(){ if(rowsEl[sel]) rowsEl[sel].setAttribute('aria-selected','true'); });
+select(0, false);
+
+// A keyboard-first page that ignores the keyboard until you click it is a
+// keyboard-second page. Focus lands on the listing so the arrows work on
+// arrival. preventScroll because the listing is already in view and stealing
+// the scroll position on load reads as a bug.
+if (!location.hash) {
+  try { list.focus({ preventScroll: true }); } catch (e) { list.focus(); }
+}
+</script>
+</body>
+</html>
