@@ -119,6 +119,35 @@ section{min-height:0; display:flex; flex-direction:column}
 #essay h1{font-size:clamp(20px,2.4vw,29px); letter-spacing:.20em; color:var(--head); margin:0; text-transform:uppercase; font-weight:700}
 #essay .dek{color:var(--g); margin:8px 0 0; font-size:12.5px; letter-spacing:.04em}
 .erule{height:0; border-top:1px solid rgba(31,157,76,.40); margin:22px 0}
+
+/* Opening band: half plate, half text. The essay used to start as a wall of
+   type, and the one photographic thing on the page was buried behind [P].
+   Text sits left and the plate right, matching hero.png, and it matters which
+   way round: the operator has his back to us facing a screen on his left, so
+   with the plate on the right his attention runs INTO the column you are meant
+   to read. Flip it and he stares off the page. */
+.ehero{display:grid; grid-template-columns:1fr 1fr; gap:26px; align-items:center;
+       margin:0 0 26px}
+.ehero-text{min-width:0}
+.ehero-plate{margin:0; position:relative; min-width:0}
+.ehero-plate img{display:block; width:100%; aspect-ratio:1/1; object-fit:cover;
+       object-position:60% 50%; border:1px solid rgba(53,255,106,.28);
+       filter:saturate(.92) contrast(1.04)}
+/* The plate is a lit object in a dark room, so it gets a phosphor edge rather
+   than a drop shadow, and a scanline wash so it belongs to the same tube as
+   everything else instead of looking like a stock photo dropped in. */
+.ehero-plate::after{content:""; position:absolute; inset:0; pointer-events:none;
+       background:repeating-linear-gradient(180deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);
+       box-shadow:inset 0 0 40px rgba(53,255,106,.10)}
+.ehero-plate figcaption{color:var(--dim); font-size:9.5px; letter-spacing:.16em;
+       margin-top:8px; text-transform:uppercase}
+@media (max-width:900px){
+  .ehero{grid-template-columns:1fr; gap:18px}
+  /* Stacked, the plate leads. A square image above the headline reads as a
+     cover; below it reads as an afterthought. */
+  .ehero-plate{order:-1}
+  .ehero-plate img{aspect-ratio:16/10}
+}
 #essay p{margin:0 0 14px; font-size:13px; line-height:1.72}
 #essay .statement{color:var(--head); font-size:clamp(14px,1.5vw,17px); line-height:1.5; letter-spacing:.06em;
   text-transform:uppercase; margin:0 0 16px}
