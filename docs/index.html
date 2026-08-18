@@ -41,6 +41,26 @@
   }
   .wrap{max-width:960px;margin:0 auto}
   img{max-width:100%;height:auto;display:block;border:1px solid var(--rule)}
+  /* Section split: prose left, plate right. A 1024 square at full column width
+     put 960px of picture between a heading and the paragraph that explains it,
+     which stops the read dead and pushes the actual argument below the fold.
+     At 320 it is an illustration beside the text instead of a wall in front of
+     it. Plate on the right because the operator sits with his back to us facing
+     a screen on his left, so his attention runs into the column you are reading.
+     Flip the columns and he stares off the edge of the page. */
+  .split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,320px);
+    gap:26px; align-items:start; margin:0 0 16px}
+  .split p{max-width:none}
+  .split p:last-child{margin-bottom:0}
+  .split figure{margin:0}
+  .split figcaption{color:var(--dim); font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; margin-top:8px}
+  @media (max-width:760px){
+    /* Stacked, the plate leads: a picture under its own caption paragraph
+       reads as an afterthought, above it reads as the scene being set. */
+    .split{grid-template-columns:1fr; gap:16px}
+    .split figure{order:-1}
+  }
   h1{
     font-size:clamp(22px,4.4vw,40px); color:var(--bright); line-height:1.25;
     letter-spacing:.02em; margin:32px 0 10px;
@@ -121,11 +141,17 @@
 
   <h2>The machine in the storage room</h2>
 
-  <img src="assets/the-machine.jpg" alt="Seen over his shoulder in a dark room, a man outlined in red sits at an old CRT. The screen shows the green masthead: a portrait, the year 2050, and a readout stamp." style="margin:0 0 18px">
+  <div class="split">
+    <div>
+      <p>This engine explains itself in exactly one place, and it does it in character. Bosephus at forty-one, in West Virginia, in 2026, moves a tarp in the old boiler room behind the office and finds a machine that should not still power on. Nothing on it but solitaire, a word processor wanting a licence key, and one folder with a name he did not put there. It opens as garbage until he notices the garbage has structure. It does not want a viewer. It wants a terminal.</p>
 
-  <p>This engine explains itself in exactly one place, and it does it in character. Bosephus at forty-one, in West Virginia, in 2026, moves a tarp in the old boiler room behind the office and finds a machine that should not still power on. Nothing on it but solitaire, a word processor wanting a licence key, and one folder with a name he did not put there. It opens as garbage until he notices the garbage has structure. It does not want a viewer. It wants a terminal.</p>
-
-  <p style="color:var(--bright)">"He does not get everything right. I have asked him about outcomes and he has been wrong. Scores, numbers, who won a thing. What he does not miss is the turn. He tells me what a thing hinged on, before, with a date on it, and specific enough that I can go and watch for it myself."</p>
+      <p style="color:var(--bright)">"He does not get everything right. I have asked him about outcomes and he has been wrong. Scores, numbers, who won a thing. What he does not miss is the turn. He tells me what a thing hinged on, before, with a date on it, and specific enough that I can go and watch for it myself."</p>
+    </div>
+    <figure>
+      <img src="assets/the-machine.jpg" alt="Seen over his shoulder in a dark room, a man outlined in red sits at an old CRT. The screen shows the green masthead: a portrait, the year 2050, and a readout stamp.">
+      <figcaption>The machine in the storage room</figcaption>
+    </figure>
+  </div>
 
   <p>Two things he will not discuss: the price of anything, and Bosephus's own life. Not because MØNTAN1 is not a registered adviser, though it is not. Because he is sixty-five and has something behind him he will not risk to win an argument with a younger man who already thinks he is right. Every guardrail here is that refusal wearing a different hat. It is also why the cards look the way they do: the green phosphor and the block-drawn masthead are a rendering of a real object in the story, not a style choice.</p>
 
