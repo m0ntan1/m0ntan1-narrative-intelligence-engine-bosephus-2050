@@ -1,0 +1,21 @@
+{
+  "present_line": "2026-10-14",
+  "mode": "ARTICLE",
+  "title": ["The number was gasoline"],
+  "dek": ["September CPI hit 3.7 percent and the Fed hike odds jumped. Core was 2.6. They were never the same argument."],
+  "quote": ["\"Three point seven was gasoline, and gasoline was a war. A central bank cannot drill for oil. Watch which number Warsh says out loud on October 28.\""],
+  "cta": ["▸ Read the full recollection of the events that follow."],
+  "disclaimer": ["Constructed content. Not a forecast, not advice."],
+  "figures": {
+    "eyebrow": "VERIFIED · ABOVE THE SEAM",
+    "title": "Energy against core inflation",
+    "subtitle": "US CPI, 12 months to September 2026",
+    "unit": "%",
+    "bars": [
+      {"label": "Energy", "value": 20.4},
+      {"label": "Core", "value": 2.6}
+    ],
+    "note": "All items: 3.7%. Gasoline was over half of the monthly rise.",
+    "source": "BLS, USDL-26-1574, 2026-10-14"
+  }
+}

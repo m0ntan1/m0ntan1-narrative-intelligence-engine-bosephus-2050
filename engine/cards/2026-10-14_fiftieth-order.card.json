@@ -1,0 +1,37 @@
+{
+  "present_line": "2026-10-14",
+  "mode": "ARTICLE",
+  "title": [
+    "The fiftieth emergency"
+  ],
+  "dek": [
+    "Washington let PJM pull data centers onto backup power. Everyone read the weather. Read the docket number."
+  ],
+  "quote": [
+    "\"Fifty emergency orders by mid-October, against fourteen the year before, is not an emergency. It is a market design nobody voted on.\""
+  ],
+  "cta": [
+    "▸ Read the full recollection of the events that follow."
+  ],
+  "disclaimer": [
+    "Constructed content. Not a forecast, not advice."
+  ],
+  "figures": {
+    "eyebrow": "VERIFIED · ABOVE THE SEAM",
+    "title": "Federal emergency grid orders",
+    "subtitle": "DOE 202(c) orders, US, by year",
+    "unit": "orders",
+    "bars": [
+      {
+        "label": "2026 to Oct 12",
+        "value": 50
+      },
+      {
+        "label": "All of 2025",
+        "value": 14
+      }
+    ],
+    "note": "Numbered orders only. 13 of 2026's went to PJM.",
+    "source": "DOE CESER 202(c) order lists, retrieved 2026-10-14"
+  }
+}

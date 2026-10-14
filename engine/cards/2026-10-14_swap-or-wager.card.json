@@ -1,0 +1,21 @@
+{
+  "present_line": "2026-10-14",
+  "mode": "ARTICLE",
+  "title": ["Swap or wager"],
+  "dek": ["The CFTC wants to define a football game as a swap. Two circuits already said no, and forty attorneys general are waiting at the Supreme Court."],
+  "quote": ["\"Since 2024 an agency rule is a brief with a Federal Register number on it. Watch the order lists in January. The technology survives. The jurisdictional argument does not.\""],
+  "cta": ["▸ Read the full recollection of the events that follow."],
+  "disclaimer": ["Constructed content. Not a forecast, not advice."],
+  "figures": {
+    "eyebrow": "VERIFIED · ABOVE THE SEAM",
+    "title": "Prediction market volume, one Sunday",
+    "subtitle": "US, first Sunday of the 2026 NFL season",
+    "unit": "$B",
+    "bars": [
+      {"label": "All markets", "value": 3.3},
+      {"label": "NFL-related", "value": 1.8}
+    ],
+    "note": "The CFTC oversees it all with 543 employees.",
+    "source": "NFL amicus brief via ESPN, 2026-10-08"
+  }
+}
